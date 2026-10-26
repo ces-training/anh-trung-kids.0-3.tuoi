@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Vườn ươm 0–3 tuổi</title>
+<title>Vườn ươm 0–5 tuổi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -132,6 +132,7 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.0
 .t-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .them{margin-top:8px;padding:8px 10px;border-radius:12px;background:var(--yellow-soft);display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:14px}
 .them details,.them .them-play{flex-basis:100%}
+.mini.game{background:var(--red);color:#fff}
 .them .them-play{color:var(--muted);font-size:13px}
 .vpick{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;background:#fff}
 .vpick button{border:0;background:none;font:inherit;font-size:12px;font-weight:700;padding:3px 9px;color:var(--muted);cursor:pointer}
@@ -275,7 +276,7 @@ textarea{min-height:76px;resize:vertical}
 </style>
 
 <nav class="side" aria-label="Điều hướng chính">
-  <button class="sd-logo" data-go="home" aria-label="Về trang chủ"><img src="img/huou_huou1_a.webp" alt=""><span>Vườn ươm<br>0–3 tuổi</span></button>
+  <button class="sd-logo" data-go="home" aria-label="Về trang chủ"><img src="img/huou_huou1_a.webp" alt=""><span>Vườn ươm<br>0–5 tuổi</span></button>
   <div class="sd-kid"><span class="ava"><img class="svg" id="kidImg" src="img/be_tapdi.svg" alt=""></span><b>Mẹ bé Bông</b><small id="kidAge">19 tháng</small></div>
   <button class="sd-btn c1" data-go="home"><span class="sd-ic">🏠</span>Trang chủ</button>
   <button class="sd-btn c6" data-go="today"><span class="sd-ic">☀️</span>Hôm nay</button>
@@ -294,7 +295,11 @@ textarea{min-height:76px;resize:vertical}
 <script src="noi-dung.js" charset="utf-8"></script>
 <script src="dan-gian-them.js" charset="utf-8"></script>
 <script src="tho-ces.js" charset="utf-8"></script>
+<script src="khung-45.js" charset="utf-8"></script>
+<script src="noi-dung-45.js" charset="utf-8"></script>
 <script src="chuong-trinh.js" charset="utf-8"></script>
+<script src="chuong-trinh-45.js" charset="utf-8"></script>
+<script src="tro-choi.js" charset="utf-8"></script>
 <script>
 (function(){
 var CT=window.CT, LYR=CT.LYR, LYRA=CT.LYRA||{}, YT=CT.YT;
@@ -348,7 +353,7 @@ var SAMPLE_DAYS = [
   short:{choi:"Rót nước “mời ông uống trà”; chơi giả vờ về quê.", nn:null}}
 ];
 var SAMPLE_OBS=[["vi","Đọc tiếp tiếng cuối câu “Bà còng đi chợ trời mưa”"],["vi","Chỉ và gọi “ông”, “bà” khi xem ảnh"],["vi","Ghép 2 từ (“bà ơi”, “ông bế”)"],["td","Nối đúng 3 cặp hình – bóng"],["td","Xâu 3 vòng to vào dây"],["en","Vẫy tay khi nghe “bye-bye”"],["zh","Chỉ đúng ảnh khi nghe 奶奶, 爷爷"],["tc","Chào ông bà qua video"]];
-var MTAG={vi:["Tiếng Việt","var(--vi)"],td:["Tư duy · tay","var(--orange)"],en:["Tiếng Anh","var(--en)"],zh:["Tiếng Trung","var(--zh)"],tc:["Tình cảm","var(--pink)"]};
+var MTAG={vi:["Tiếng Việt","var(--vi)"],td:["Tư duy · tay","var(--orange)"],en:["Tiếng Anh","var(--en)"],zh:["Tiếng Trung","var(--zh)"],tc:["Tình cảm","var(--pink)"],xh:["Cảm xúc · xã hội","var(--pink)"],vd:["Vận động","var(--green)"]};
 var THU=["Thứ Hai","Thứ Ba","Thứ Tư","Thứ Năm","Thứ Sáu","Thứ Bảy","Chủ nhật"];
 var BG={home:"img/ls_home.webp",vuon:"img/bg_vuon.webp",park:"img/ls_park.webp"};
 var BABY={sosinh:"img/be_soSinh.svg",ngoi:"img/be_ngoi.svg",tapdi:"img/be_tapdi.svg"};
@@ -379,8 +384,25 @@ function getDays(g){
     return o; });
   return CT.days(g);
 }
+function dayTasks45(g,n,I,d){
+  var st=S.set, shortMode=st.nhip==="ngan", we=isWeekend(n), m=I.gd.min, list=[], wd=(n-1)%7, B=st.nn==="B";
+  var GN=function(type){ var x=TROCHOI.LIST[type]; return x?x.ic+" "+x.ten:"🎮 Trò chơi"; };
+  if(d.game&&d.game.mix){
+    list.push({k:"en",ic:"🏆",name:"Thử thách lớn · Anh + Trung",lang:"both",min:"15–20 phút",txt:(d.en&&d.en.t)||"Chơi chuỗi 3 trò liền, mẹ chấm sao. Bé được chọn 1 video yêu thích của tuần để xem lại.",game:{lang:"mix",name:"🏆 Chuỗi 3 trò"},video:d.enVideo,b:B&&d.en?d.en.b:null});
+    list.push({k:"doi",ic:"🎉",name:"Hoạt động đặc biệt",lang:"td",min:"20–30 phút",txt:(d.special?d.special+". ":"")+(d.doi||"")});
+  } else {
+    var enOff=shortMode&&!we&&(wd===1||wd===3), zhOff=shortMode&&!we&&(wd===0||wd===2||wd===4);
+    list.push({k:"en",ic:"🎬",name:"Tiếng Anh · video + trò chơi",lang:"en",min:m[0],txt:enOff?"Nhịp ngắn: hôm nay nghỉ tiếng Anh, chỉ nói 2 từ khi ăn, khi tắm.":(d.en&&d.en.t)||"",video:enOff?null:d.enVideo,game:enOff?null:{lang:"en",name:GN(d.game.en)},b:(!enOff&&B&&d.en)?d.en.b:null,off:enOff});
+    list.push({k:"zh",ic:"🐼",name:"Tiếng Trung · video + trò chơi",lang:"zh",min:m[1],txt:zhOff?"Nhịp ngắn: hôm nay nghỉ tiếng Trung, chỉ nói 1 từ khi chào.":(d.zh&&d.zh.t)||"",video:zhOff?null:d.zhVideo,game:zhOff?null:{lang:"zh",name:GN(d.game.zh)},b:(!zhOff&&B&&d.zh)?d.zh.b:null,off:zhOff});
+    var who=(st.cham==="ongba"&&!we&&d.ob)?"ongba":"me", doiOff=shortMode&&!we;
+    list.push({k:"doi",ic:"🧩",name:who==="ongba"?"Nhiệm vụ đời thực · ông bà làm":"Nhiệm vụ đời thực",lang:"td",min:m[2],txt:doiOff?"Để dành cho Thứ Bảy, Chủ nhật.":(who==="ongba"?d.ob:d.doi),off:doiOff});
+  }
+  list.push({k:"toi",ic:"🌙",name:"Tối · tiếng Việt",lang:"vi",min:d.diary?m[3]+" + 10 phút nhật ký":m[3],txt:d.toi,diary:d.diary,lyrs:d.lyrs||[],them:d.them||[]});
+  return list;
+}
 function dayTasks(g,n){
   var I=CT.info(g), d=getDays(g)[n-1], st=S.set, shortMode=st.nhip==="ngan", we=isWeekend(n), list=[], m=I.gd.min;
+  if(I.is45) return dayTasks45(g,n,I,d);
   list.push({k:"sang",ic:"🌅",name:"Sáng",min:m[0],lang:"vi",txt:d.sang,lyr:d.lyr,lyrs:d.lyrs||(d.lyr?[d.lyr]:[]),them:d.them||[]});
   var choiTxt=d.choi, nn=d.nn||{l:"none",t:""}, song=nn.song||null, nnTxt=nn.t, choiOff=false, nnOff=false, nnL=nn.l;
   if(shortMode){
@@ -401,6 +423,9 @@ function dayProgress(g,n){ var t=dayTasks(g,n).filter(function(x){return !x.off;
 function dayDone(g,n){ var p=dayProgress(g,n); return p[1]>0&&p[0]===p[1]; }
 function daysDoneCount(g){ var c=0; for(var i=1;i<=14;i++){ if(dayProgress(g,i)[0]>0) c++; } return c; }
 var GIONG={bac:"Hà Nội",nam:"Miền Nam",trung:"Miền Trung"};
+function dayKey(){ var d=new Date(); return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(); }
+function playMin(){ var p=(S.play||{})[dayKey()]||0; return Math.round(p/60); }
+function addPlay(sec){ var k=dayKey(), prev=(S.play||{})[k]||0; S.play={}; S.play[k]=prev+sec; save(); }
 function lyrTitle(k){ var i=String(k).indexOf(":"); return i>-1?String(k).slice(i+1):String(LYR[k]||"").split("\n")[0]; }
 function labelSet(){ var s=S.set; return (s.nhip==="du"?"Nhịp đủ":"Nhịp ngắn")+" · Bản "+s.nn+" · "+(s.cham==="me"?"Mẹ chăm":"Ông bà chăm")+" · Giọng "+(GIONG[s.giong]||GIONG.bac); }
 
@@ -440,7 +465,7 @@ function rHome(){
   '<div class="h2-grid">'+
    '<button class="ht big" style="--tc:var(--red)" data-go="today" data-g="'+g+'" data-day="'+S.today+'"><span class="ht-badge">'+p[0]+'/'+p[1]+' việc</span><span class="ht-img" style="background-image:url('+bgOf(g,S.today)+')">'+figs(g,S.today)+'</span><span class="ht-lb"><b>☀️ Hôm nay · Ngày '+S.today+'</b><small>'+esc(d.chuyen)+'</small></span></button>'+
    '<button class="ht big" style="--tc:var(--green-dark)" data-go="lich" data-g="'+g+'"><span class="ht-badge ok">'+daysDoneCount(g)+'/14 ngày</span><span class="ht-img" style="background-image:url('+(I.theme.bg==="home"?BG.vuon:BG[I.theme.bg])+')">'+figs(g)+'</span><span class="ht-lb"><b>🗓️ Lịch 14 ngày</b><small>'+esc(I.vong.vi[0].t)+' · '+esc(I.vong.vi[1].t)+'</small></span></button>'+
-   '<button class="ht sm" style="--tc:var(--purple)" data-go="ct"><span class="ht-img ic">🗺️</span><span class="ht-lb"><b>Chương trình</b><small>72 vòng · 0–36 tháng</small></span></button>'+
+   '<button class="ht sm" style="--tc:var(--purple)" data-go="ct"><span class="ht-img ic">🗺️</span><span class="ht-lb"><b>Chương trình</b><small>120 vòng · 0–5 tuổi</small></span></button>'+
    '<button class="ht sm" style="--tc:var(--orange)" data-go="tai" data-g="'+g+'"><span class="ht-img ic">📥</span><span class="ht-lb"><b>Tải học liệu</b><small>Phiếu in + audio</small></span></button>'+
    '<button class="ht sm" style="--tc:var(--pink)" data-go="nhatky" data-g="'+g+'"><span class="ht-img" style="background-image:url(img/ls_album.webp)"></span><span class="ht-lb"><b>Nhật ký vòng</b><small>'+(S.sent[g]?"Đã nộp":"Hạn: Chủ nhật tuần 2")+'</small></span></button>'+
    '<button class="ht sm" style="--tc:var(--blue)" data-go="huongdan" data-anchor="words"><span class="ht-img ic">🔤</span><span class="ht-lb"><b>Từ Anh – Trung</b><small>'+esc(I.vong.en.slice(0,2).join(" · "))+'</small></span></button>'+
@@ -452,7 +477,7 @@ function rToday(){
   var g=view.g, n=view.day, I=CT.info(g), d=getDays(g)[n-1], tasks=dayTasks(g,n), p=dayProgress(g,n);
   var html='<section class="screen pink"><div class="inner">'+topBar(g,'☀️ Ngày '+n+' · '+thu(n),'Chặng '+I.chang+' · Vòng '+I.vInChang+' · '+esc(I.vong.sub)+' · tuần '+(n<=7?1:2))+
   '<div class="q-body"><div class="q-stage" style="background-image:url('+bgOf(g,n)+')">'+
-   '<div class="q-plate" style="border-color:'+I.gd.color+'"><small>Câu chuyện nhỏ của ngày · mẹ nói bằng tiếng Việt cả ngày</small><h3>“'+esc(d.chuyen)+'”</h3><p>'+(S.set.nhip==="ngan"&&!isWeekend(n)?"Nhịp ngắn: hôm nay chỉ cần Sáng + Tối, khoảng 15 phút.":"Đã làm "+p[0]+"/"+p[1]+" việc.")+'</p></div>'+
+   '<div class="q-plate" style="border-color:'+I.gd.color+'"><small>Câu chuyện nhỏ của ngày · mẹ nói bằng tiếng Việt cả ngày</small><h3>“'+esc(d.chuyen)+'”</h3><p>'+(S.set.nhip==="ngan"&&!isWeekend(n)?(I.is45?"Nhịp ngắn: hôm nay 1 ngoại ngữ + Tối, khoảng 20 phút.":"Nhịp ngắn: hôm nay chỉ cần Sáng + Tối, khoảng 15 phút."):"Đã làm "+p[0]+"/"+p[1]+" việc.")+(I.is45?' · '+esc(d.fmt?d.fmt.ten:"")+' · trò chơi web hôm nay: '+playMin()+'/20 phút':'')+'</p></div>'+
    figs(g,n)+
    '<div class="q-nav"><button class="pill" data-day-step="-1" '+(n<=1?"disabled":"")+'>← Ngày '+(n>1?n-1:"")+'</button><button class="pill" data-day-step="1" '+(n>=14?"disabled":"")+'>Ngày '+(n<14?n+1:"")+' →</button></div>'+
   '</div><div class="q-side"><h3>Việc hôm nay</h3><p class="meta">'+labelSet()+' · <button class="mini" data-go="huongdan">Đổi</button></p><div class="tasks">';
@@ -464,28 +489,30 @@ function rToday(){
     var links='';
     if(t.song&&t.song.u) links+='<a class="mini" href="'+esc(t.song.u)+'" target="_blank" rel="noopener">▶ '+zh(t.song.t)+(/youtube\.com\/(channel|@)/.test(t.song.u)?' (tìm trên kênh)':'')+'</a>';
     else if(t.song&&t.song.t) links+='<span class="mini" style="background:var(--yellow-soft);color:var(--ink)">🎵 '+zh(t.song.t)+' (file trong gói)</span>';
-    if(t.k==="sang"&&t.lyrs&&t.lyrs.length) links+=t.lyrs.map(function(k){ return '<button class="mini" data-speak="'+k+'">🔈 '+(t.lyrs.length>1?esc(lyrTitle(k)):'Nghe thử')+' · '+(GIONG[S.set.giong]||GIONG.bac)+'</button>'; }).join("")+'<span class="vpick" role="group" aria-label="Chọn giọng đọc">'+["bac","nam","trung"].map(function(k){return '<button data-set="giong" data-v="'+k+'" aria-pressed="'+(S.set.giong===k)+'">'+GIONG[k]+'</button>';}).join("")+'</span>';
+    if((t.k==="sang"||t.k==="toi")&&t.lyrs&&t.lyrs.length) links+=t.lyrs.map(function(k){ return '<button class="mini" data-speak="'+k+'">🔈 '+(t.lyrs.length>1?esc(lyrTitle(k)):'Nghe thử')+' · '+(GIONG[S.set.giong]||GIONG.bac)+'</button>'; }).join("")+'<span class="vpick" role="group" aria-label="Chọn giọng đọc">'+["bac","nam","trung"].map(function(k){return '<button data-set="giong" data-v="'+k+'" aria-pressed="'+(S.set.giong===k)+'">'+GIONG[k]+'</button>';}).join("")+'</span>';
+    if(t.video&&t.video.u) links+='<a class="mini" href="'+esc(t.video.u)+'" target="_blank" rel="noopener">▶ '+zh(t.video.t)+(t.video.min?' · '+t.video.min+' phút':'')+(/youtube\.com\/(channel|@|playlist)|\/videos$/.test(t.video.u)?' (tìm trên kênh)':'')+'</a>';
+    if(t.game) links+='<button class="mini game" data-game="'+t.game.lang+'" data-g="'+g+'" data-day="'+n+'">🎮 '+esc(t.game.name)+'</button>';
     if(t.diary) links+='<button class="mini" data-go="nhatky" data-g="'+g+'">📒 Mở nhật ký</button>';
     if(links) html+='<div class="t-links">'+links+'</div>';
-    if(t.k==="sang"&&t.lyrs) t.lyrs.forEach(function(k){ html+='<details class="lyr"><summary>'+(t.lyrs.length>1?esc(lyrTitle(k))+' · ':'')+(LYRA[k]?'Lời thơ · '+esc(LYRA[k]):'Lời bài')+'</summary><div>'+esc(LYR[k])+'</div></details>'; });
-    if(t.k==="sang"&&t.them&&t.them.length) t.them.forEach(function(x){ var lb={dong_dao:"Đồng dao",ca_dao:"Ca dao",hat_ru:"Hát ru",cau_do:"Câu đố",ve:"Vè"}[x.type]||"Thơ"; html+='<div class="them"><span>📖 Bài thêm của tuần · '+lb+': <b>'+esc(x.t)+'</b>'+(x.author?' · '+esc(x.author):'')+'</span><button class="mini" data-speak="'+x.k+'">🔈 Nghe</button>'+(x.play?'<small class="them-play">'+esc(x.play)+'</small>':'')+'<details class="lyr"><summary>Lời bài</summary><div>'+esc(LYR[x.k])+(x.answer?'<br><br><i>Đáp án: '+esc(x.answer)+'</i>':'')+'</div></details></div>'; });
+    if((t.k==="sang"||t.k==="toi")&&t.lyrs) t.lyrs.forEach(function(k){ html+='<details class="lyr"><summary>'+(t.lyrs.length>1?esc(lyrTitle(k))+' · ':'')+(LYRA[k]?'Lời thơ · '+esc(LYRA[k]):'Lời bài')+'</summary><div>'+esc(LYR[k])+'</div></details>'; });
+    if((t.k==="sang"||t.k==="toi")&&t.them&&t.them.length) t.them.forEach(function(x){ var lb={dong_dao:"Đồng dao",ca_dao:"Ca dao",hat_ru:"Hát ru",cau_do:"Câu đố",ve:"Vè"}[x.type]||"Thơ"; html+='<div class="them"><span>📖 Bài thêm của tuần · '+lb+': <b>'+esc(x.t)+'</b>'+(x.author?' · '+esc(x.author):'')+'</span><button class="mini" data-speak="'+x.k+'">🔈 Nghe</button>'+(x.play?'<small class="them-play">'+esc(x.play)+'</small>':'')+'<details class="lyr"><summary>Lời bài</summary><div>'+esc(LYR[x.k])+(x.answer?'<br><br><i>Đáp án: '+esc(x.answer)+'</i>':'')+'</div></details></div>'; });
     html+='</div>'+(t.off?'<span></span>':'<button class="tick" data-tick="'+id+'" aria-pressed="'+done+'" aria-label="Đánh dấu đã làm: '+esc(t.name)+'">'+(done?"✓":"")+'</button>')+'</div>';
   });
-  html+='</div><p class="note">'+(I.gd.id===1?"Đặt bé nằm ngửa khi ngủ; chỉ nằm sấp khi bé thức và có mẹ ngồi cạnh.":"Luôn ngồi cạnh bé khi chơi; cất đồ nhỏ, đất nặn, dây ngay sau khi chơi.")+'</p></div></div></div></section>';
+  html+='</div><p class="note">'+(I.gd.id===1?"Đặt bé nằm ngửa khi ngủ; chỉ nằm sấp khi bé thức và có mẹ ngồi cạnh.":I.is45?"Mẹ xem video cùng bé, dừng video để hỏi và cho bé làm theo. Tổng màn hình (video + trò chơi) tối đa khoảng 45 phút/ngày, chia 2 buổi. Mở video qua YouTube Kids, tắt tự phát video tiếp theo.":"Luôn ngồi cạnh bé khi chơi; cất đồ nhỏ, đất nặn, dây ngay sau khi chơi.")+'</p></div></div></div></section>';
   return html;
 }
 
 function vongNav(g,go){
   return '<div class="vnav"><button class="pill" data-vstep="-1" data-to="'+go+'" '+(g<=1?"disabled":"")+'>← Vòng trước</button>'+
     (g!==S.vong?'<button class="pill red" data-gov="'+S.vong+'" data-to="'+go+'">Về vòng của bé</button>':'')+
-    '<button class="pill" data-vstep="1" data-to="'+go+'" '+(g>=72?"disabled":"")+'>Vòng sau →</button></div>';
+    '<button class="pill" data-vstep="1" data-to="'+go+'" '+(g>=CT.LAST?"disabled":"")+'>Vòng sau →</button></div>';
 }
 function rLich(){
   var g=view.g, I=CT.info(g), D=getDays(g), isCur=g===S.vong;
   var html='<section class="screen"><div class="inner">'+topBar(g,'🗓️ Lịch 14 ngày · '+esc(I.vong.sub),'Chặng '+I.chang+' ('+changRange(I.chang)+') · Vòng '+I.vInChang+' · bé khoảng '+months(g)+' tháng · chủ đề “'+esc(I.theme.ten)+'”')+vongNav(g,"lich")+(I.det&&I.det.note?'<div class="note">💡 '+esc(I.det.note)+'</div>':'');
   [1,2].forEach(function(w){
     var vi=I.vong.vi[w-1];
-    html+='<div class="week"><h3>Tuần '+w+'<small>'+(vi.ty==="r"?"Hát ru":vi.ty==="h"?"Bài hát":vi.ty==="t"?"Thơ":"Đồng dao")+': '+esc(vi.t)+' · Anh: '+esc(I.vong.en.join(", "))+(I.vong.zh.length?' · Trung: <span class="zh">'+I.vong.zh.map(function(z){return z[0];}).join("、")+'</span>':'')+'</small></h3><div class="days">';
+    html+='<div class="week"><h3>Tuần '+w+'<small>'+(I.is45?(vi.fmt?esc(vi.fmt.ten):""):(vi.ty==="r"?"Hát ru":vi.ty==="h"?"Bài hát":vi.ty==="t"?"Thơ":"Đồng dao")+': '+esc(vi.t))+' · Anh: '+esc(I.vong.en.join(", "))+(I.vong.zh.length?' · Trung: <span class="zh">'+I.vong.zh.map(function(z){return z[0];}).join("、")+'</span>':'')+'</small></h3><div class="days">';
     for(var i=0;i<7;i++){ var n=(w-1)*7+i+1, p=dayProgress(g,n), now=isCur&&n===S.today, cls="day"+(dayDone(g,n)?" done":"")+(now?" now":"")+(isWeekend(n)?" weekend":"");
       html+='<button class="ht '+cls+'" data-go="today" data-g="'+g+'" data-day="'+n+'">'+(dayDone(g,n)?'<span class="ht-badge ok">✓</span>':(now?'<span class="ht-badge">Hôm nay</span>':(p[0]?'<span class="ht-badge">'+p[0]+'/'+p[1]+'</span>':'')))+
        '<span class="ht-img">'+n+'<span>'+thu(n)+'</span></span><span class="ht-lb"><b>'+esc(D[n-1].chuyen)+'</b>'+(n===14?'<small>Nộp nhật ký</small>':'')+'</span></button>'; }
@@ -495,9 +522,9 @@ function rLich(){
 }
 
 function rCT(){
-  var html='<section class="screen"><div class="inner">'+topBar(S.vong,'🗺️ Chương trình 0–36 tháng','5 giai đoạn · 12 chặng (3 tháng) · 72 vòng (2 tuần) · 1.008 ngày')+
+  var html='<section class="screen"><div class="inner">'+topBar(S.vong,'🗺️ Chương trình 0–5 tuổi','0–3 tuổi: 5 giai đoạn, 72 vòng · 4–5 tuổi: 2 giai đoạn, 48 vòng · mỗi vòng 2 tuần')+
    '<div class="legend"><span><i style="--c:var(--red)"></i>Vòng bé đang học</span><span><i style="--c:var(--green)"></i>Đã nộp nhật ký</span><span><i style="--c:var(--line)"></i>Chưa tới</span></div>';
-  CT.GD.forEach(function(gd){
+  CT.allGD().forEach(function(gd){
     html+='<div class="gd-sec" style="--gc:'+gd.color+'"><div class="gd-head"><img src="'+BABY[gd.be]+'" alt=""><div><h3>Giai đoạn '+gd.id+' · '+gd.ten+'</h3><p>'+gd.tu+'–'+gd.den+' tháng · vòng '+gd.from+'–'+gd.to+' · ngoại ngữ mỗi tuần: '+
       gd.nn.filter(function(x){return x==="en"||x==="both";}).length+' buổi tiếng Anh, '+gd.nn.filter(function(x){return x==="zh"||x==="both";}).length+' buổi tiếng Trung</p></div></div><div class="chang-grid">';
     for(var c=Math.ceil(gd.from/6); c<=Math.ceil(gd.to/6); c++){
@@ -558,7 +585,8 @@ function rNhatKy(){
 function rHuongDan(){
   var s=S.set, I=CT.info(S.vong);
   function opt(group,val,title,desc){ return '<button class="opt" data-set="'+group+'" data-v="'+val+'" aria-pressed="'+(s[group]===val)+'"><b>'+title+'</b><small>'+desc+'</small></button>'; }
-  var ages=''; for(var a=0;a<36;a++) ages+='<option value="'+a+'"'+(a===S.age?" selected":"")+'>'+a+' tháng</option>';
+  var ages='<optgroup label="0–3 tuổi">'; for(var a=0;a<36;a++) ages+='<option value="'+a+'"'+(a===S.age?" selected":"")+'>'+a+' tháng</option>';
+  ages+='</optgroup><optgroup label="4–5 tuổi">'; for(a=48;a<72;a++) ages+='<option value="'+a+'"'+(a===S.age?" selected":"")+'>'+a+' tháng ('+Math.floor(a/12)+' tuổi'+(a%12?' '+(a%12)+' tháng':'')+')</option>'; ages+='</optgroup>';
   var words=I.vong.en.map(function(w){return '<div class="file" style="grid-template-columns:1fr"><b style="color:var(--en)">'+esc(w)+'</b></div>';}).join("")+
     I.vong.zh.map(function(z){return '<div class="file" style="grid-template-columns:1fr 1fr 1fr"><b class="zh" style="color:var(--zh)">'+z[0]+'</b><span>'+esc(z[1])+'</span><span>'+esc(z[2])+'</span></div>';}).join("");
   return '<section class="screen sky"><div class="inner">'+topBar(S.vong,'❓ Hướng dẫn','Tuổi của bé và phiên bản hợp với nhà mình · đổi lúc nào cũng được')+
@@ -600,11 +628,18 @@ document.addEventListener("click",function(e){
   var gv=e.target.closest("[data-gov]");
   if(gv){ view.g=+gv.getAttribute("data-gov"); view.name=gv.getAttribute("data-to")||"lich"; render(); return; }
   var vs=e.target.closest("[data-vstep]");
-  if(vs){ view.g=Math.min(72,Math.max(1,view.g+ +vs.getAttribute("data-vstep"))); view.name=vs.getAttribute("data-to")||"lich"; render(); return; }
+  if(vs){ view.g=CT.next(view.g,+vs.getAttribute("data-vstep")); view.name=vs.getAttribute("data-to")||"lich"; render(); return; }
   var st=e.target.closest("[data-day-step]");
   if(st){ view.day=Math.min(14,Math.max(1,view.day+ +st.getAttribute("data-day-step"))); render(); return; }
   var tk=e.target.closest("[data-tick]");
   if(tk){ var id=tk.getAttribute("data-tick"); S.done[id]=!S.done[id]; save(); render(); if(S.done[id]) toast(dayDone(view.g,view.day)?"Xong cả ngày "+view.day+"! Mẹ giỏi quá.":"Đã ghi nhận."); return; }
+  var gm=e.target.closest("[data-game]");
+  if(gm){ var gg=+gm.getAttribute("data-g"), gn=+gm.getAttribute("data-day"), gl=gm.getAttribute("data-game"), tk=gg+"-"+gn+"-"+(gl==="zh"?"zh":"en");
+    if(playMin()>=20&&!gm.dataset.again){ gm.dataset.again=1; toast("Hôm nay bé đã chơi trò chơi trên web 20 phút, cộng video là khoảng 45 phút màn hình. Cho bé nghỉ mắt, chơi ngoài đời nhé. Bấm lại lần nữa nếu mẹ vẫn muốn mở."); return; }
+    var fin=function(r){ addPlay(r.secs||0); if(!r.quit){ S.done[tk]=true; save(); toast("Bé được "+(r.stars||0)+" ⭐! Đã đánh dấu xong."); } render(); };
+    var cfg=CT45.gameCfg(gg,gn,gl==="mix"?"en":gl);
+    if(cfg.mix) TROCHOI.mix(cfg.mix,fin); else { cfg.onDone=fin; TROCHOI.open(cfg); }
+    return; }
   var sp=e.target.closest("[data-speak]");
   if(sp){ var k=sp.getAttribute("data-speak"); if(LYR[k]) speak(LYR[k]); else toast("Bài này là thơ hoặc bài hát có tác giả; lời và file đọc nằm trong gói học liệu."); return; }
   if(e.target.closest("[data-dl]")){ toast("Bản mẫu: file thật sẽ có khi CES soạn xong gói tuần."); return; }
@@ -615,7 +650,7 @@ document.addEventListener("click",function(e){
   if(e.target.id==="unsend"){ S.sent[view.g]=false; save(); render(); }
 });
 document.addEventListener("change",function(e){
-  if(e.target.id==="age"){ S.age=+e.target.value; S.vong=Math.min(72,S.age*2+1); S.today=1; for(var gg=S.vong; gg<=72; gg++) delete S.sent[gg]; view.g=S.vong; save(); render();
+  if(e.target.id==="age"){ S.age=+e.target.value; S.vong=Math.min(CT.LAST,S.age*2+1); S.today=1; for(var gg=S.vong; gg<=CT.LAST; gg++) delete S.sent[gg]; view.g=S.vong; save(); render();
     var I=CT.info(S.vong); toast("Bé "+S.age+" tháng · chặng "+I.chang+", vòng "+I.vInChang+": "+I.vong.sub); }
 });
 document.addEventListener("input",function(e){

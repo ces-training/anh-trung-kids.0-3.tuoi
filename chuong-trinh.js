@@ -321,5 +321,13 @@ function files(g,w){
   if(w===2) list.push(["PDF","var(--pink)","06_NhatKy.pdf","Mẫu nhật ký vòng (bản in)"]);
   return list;
 }
-return {GD:GD, TH:TH, LYR:LYR, LYRA:LYRA, YT:YT, info:info, days:days, files:files, zhFmt:zhFmt, TOTAL:72};
+/* 4–5 tuổi (vòng 97–144) do chuong-trinh-45.js lo */
+function X(g){ return window.CT45&&window.CT45.has(g)?window.CT45:null; }
+return {GD:GD, TH:TH, LYR:LYR, LYRA:LYRA, YT:YT,
+  info:function(g){ var x=X(g); return x?x.info(g):info(g); },
+  days:function(g){ var x=X(g); return x?x.days(g):days(g); },
+  files:function(g,w){ var x=X(g); return x?x.files(g,w):files(g,w); },
+  allGD:function(){ return GD.concat(window.CT45?window.CT45.GD:[]); },
+  next:function(g,step){ var n=g+step; if(n>72&&n<97) n=step>0?(window.CT45?97:72):72; return Math.max(1,Math.min(window.CT45?144:72,n)); },
+  zhFmt:zhFmt, TOTAL:72, LAST:144};
 })();

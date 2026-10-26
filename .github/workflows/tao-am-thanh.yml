@@ -22,22 +22,26 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 150
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
       - name: Cài ffmpeg (nếu thiếu)
         run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - name: Tạo âm thanh
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node tts/tao-am-thanh.mjs "${{ github.event.inputs.che_do }}"
+      - name: Báo kết quả
+        if: always()
+        run: |
+          [ -f tts/nhat-ky.txt ] && tail -n 9 tts/nhat-ky.txt | while IFS= read -r l; do echo "::notice title=TTS::$l"; done || echo "::warning title=TTS::Không có nhật ký"
       - name: Lưu file vào kho
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add am-thanh tts/giong-da-tao.json tts/nhat-ky.txt 2>/dev/null || true
+          for f in am-thanh tts/giong-da-tao.json tts/nhat-ky.txt; do [ -e "$f" ] && git add "$f"; done
           git diff --cached --quiet && exit 0
           git commit -m "Âm thanh Gemini: cập nhật"
           git pull --rebase origin main

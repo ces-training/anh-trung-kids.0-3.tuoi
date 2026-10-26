@@ -117,12 +117,14 @@ async function main() {
 
   if (mode === 'tat-ca') {
     let made = 0, fail = 0;
-    for (const [key, g] of Object.entries(CFG.giong)) {
-      const vid = (ids[key] || [])[g.chon]; if (!vid) { log(`Chưa có giọng ${key} số ${g.chon + 1}; chạy chế độ "mau" trước.`); continue; }
-      for (const [h, t] of texts) {
+    // Làm xen kẽ: mỗi bài lần lượt cả 3 giọng, để giọng nào cũng có dần, không giọng nào bị dồn cuối.
+    let stop = false;
+    for (const [h, t] of texts) { if (stop) break;
+      for (const [key, g] of Object.entries(CFG.giong)) {
+        const vid = (ids[key] || [])[g.chon]; if (!vid) { log(`Chưa có giọng ${key} số ${g.chon + 1}; chạy chế độ "mau" trước.`); continue; }
         const out = path.join(ROOT, `am-thanh/${key}/${h}.mp3`); if (fs.existsSync(out)) continue;
         try { const a = await speak(t, vid); toMp3(a.data, a.mime, out); made++; log(`${key} ${h} ✓ ${t.split('\n')[0]}`); }
-        catch (e) { fail++; log(`${key} ${h} LỖI: ${e.message}`); if (/Hết lượt|quota|RESOURCE_EXHAUSTED/i.test(e.message)) { log('Dừng vì hết hạn mức; chạy lại sẽ làm tiếp phần còn thiếu.'); break; } }
+        catch (e) { fail++; log(`${key} ${h} LỖI: ${e.message}`); if (/Hết lượt|quota|RESOURCE_EXHAUSTED/i.test(e.message)) { log('Dừng vì hết hạn mức; chạy lại sẽ làm tiếp phần còn thiếu.'); stop = true; break; } }
         await sleep(2500);
       }
     }

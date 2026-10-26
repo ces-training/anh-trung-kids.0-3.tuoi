@@ -1,2 +1,21 @@
-2026-10-26T03:08:12 Chế độ: mau. Số bài có lời để đọc: 45.
-2026-10-26T03:08:12 LỖI: Chưa có GEMINI_API_KEY trong Settings → Secrets and variables → Actions.
+2026-10-26T03:13:42 Chế độ: mau. Số bài có lời để đọc: 45.
+2026-10-26T03:13:42 Tạo giọng bac số 1…
+2026-10-26T03:14:04   đọc thử "Cái bống" bằng bac số 1
+2026-10-26T03:14:12 Tạo giọng bac số 2…
+2026-10-26T03:14:28   đọc thử "Cái bống" bằng bac số 2
+2026-10-26T03:14:37 Tạo giọng nam số 1…
+2026-10-26T03:14:51   đọc thử "Cái bống" bằng nam số 1
+2026-10-26T03:15:00 Tạo giọng nam số 2…
+2026-10-26T03:15:14   thử lại không kèm gender: 400: {
+  "error": {
+    "code": 400,
+    "message": "Generated voice prompt was flagged by safety policies.",
+    "status": "INVALID_ARGUMENT"
+  }
+}
+
+2026-10-26T03:15:34   đọc thử "Cái bống" bằng nam số 2
+2026-10-26T03:15:43 Tạo giọng trung số 1…
+2026-10-26T03:16:29   đọc thử "Cái bống" bằng trung số 1
+2026-10-26T03:16:39 Tạo giọng trung số 2…
+2026-10-26T03:17:02   đọc thử "Cái bống" bằng trung số 2

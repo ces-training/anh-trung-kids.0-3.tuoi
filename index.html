@@ -131,7 +131,8 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.0
 .t-main .b em{font-style:normal;font-weight:700;color:var(--muted);font-size:12px;display:block}
 .t-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .them{margin-top:8px;padding:8px 10px;border-radius:12px;background:var(--yellow-soft);display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:14px}
-.them details{flex-basis:100%}
+.them details,.them .them-play{flex-basis:100%}
+.them .them-play{color:var(--muted);font-size:13px}
 .vpick{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;background:#fff}
 .vpick button{border:0;background:none;font:inherit;font-size:12px;font-weight:700;padding:3px 9px;color:var(--muted);cursor:pointer}
 .vpick button[aria-pressed="true"]{background:var(--green,#2E9E5B);color:#fff}
@@ -291,6 +292,7 @@ textarea{min-height:76px;resize:vertical}
 <div class="toast" id="toast" hidden></div>
 
 <script src="noi-dung.js" charset="utf-8"></script>
+<script src="dan-gian-them.js" charset="utf-8"></script>
 <script src="tho-ces.js" charset="utf-8"></script>
 <script src="chuong-trinh.js" charset="utf-8"></script>
 <script>
@@ -466,7 +468,7 @@ function rToday(){
     if(t.diary) links+='<button class="mini" data-go="nhatky" data-g="'+g+'">📒 Mở nhật ký</button>';
     if(links) html+='<div class="t-links">'+links+'</div>';
     if(t.k==="sang"&&t.lyrs) t.lyrs.forEach(function(k){ html+='<details class="lyr"><summary>'+(t.lyrs.length>1?esc(lyrTitle(k))+' · ':'')+(LYRA[k]?'Lời thơ · '+esc(LYRA[k]):'Lời bài')+'</summary><div>'+esc(LYR[k])+'</div></details>'; });
-    if(t.k==="sang"&&t.them&&t.them.length) t.them.forEach(function(x){ html+='<div class="them"><span>📖 Bài thêm của tuần: <b>'+esc(x.t)+'</b>'+(x.author?' · '+esc(x.author):'')+'</span><button class="mini" data-speak="'+x.k+'">🔈 Nghe</button><details class="lyr"><summary>Lời thơ</summary><div>'+esc(LYR[x.k])+'</div></details></div>'; });
+    if(t.k==="sang"&&t.them&&t.them.length) t.them.forEach(function(x){ var lb={dong_dao:"Đồng dao",ca_dao:"Ca dao",hat_ru:"Hát ru",cau_do:"Câu đố",ve:"Vè"}[x.type]||"Thơ"; html+='<div class="them"><span>📖 Bài thêm của tuần · '+lb+': <b>'+esc(x.t)+'</b>'+(x.author?' · '+esc(x.author):'')+'</span><button class="mini" data-speak="'+x.k+'">🔈 Nghe</button>'+(x.play?'<small class="them-play">'+esc(x.play)+'</small>':'')+'<details class="lyr"><summary>Lời bài</summary><div>'+esc(LYR[x.k])+(x.answer?'<br><br><i>Đáp án: '+esc(x.answer)+'</i>':'')+'</div></details></div>'; });
     html+='</div>'+(t.off?'<span></span>':'<button class="tick" data-tick="'+id+'" aria-pressed="'+done+'" aria-label="Đánh dấu đã làm: '+esc(t.name)+'">'+(done?"✓":"")+'</button>')+'</div>';
   });
   html+='</div><p class="note">'+(I.gd.id===1?"Đặt bé nằm ngửa khi ngủ; chỉ nằm sấp khi bé thức và có mẹ ngồi cạnh.":"Luôn ngồi cạnh bé khi chơi; cất đồ nhỏ, đất nặn, dây ngay sau khi chơi.")+'</p></div></div></div></section>';

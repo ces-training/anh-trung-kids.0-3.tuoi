@@ -223,14 +223,15 @@ function lyrKey(g,title){ return "g"+g+":"+title; }
 /* lời thơ có tác giả do CES nhập (tho-ces.js, lấy từ Google Sheet) */
 var LYRA={};
 function normT(t){ return String(t||"").toLowerCase().replace(/[“”"'.,!?()]/g,"").replace(/\s+/g," ").trim(); }
-function thoMap(){ var m={}; (window.CT_THO||[]).forEach(function(r){ if(r&&r.t&&r.lyr) m[normT(r.t)]=r; }); return m; }
+function srcRows(){ return (window.CT_DG||[]).concat(window.CT_THO||[]); }
+function thoMap(){ var m={}; srcRows().forEach(function(r){ if(r&&r.t&&r.lyr) m[normT(r.t)]=r; }); return m; }
 function detVi(g,v){ var ty=TYMAP[v.type]||"t", lyr=v.lyr, au=v.author||null;
   if(!lyr){ var r=thoMap()[normT(v.t)]; if(r){ lyr=r.lyr; if(r.author) au=r.author; } }
   if(lyr){ LYR[lyrKey(g,v.t)]=lyr; if(au) LYRA[lyrKey(g,v.t)]=au; }
   return {t:v.t,k:lyr?lyrKey(g,v.t):null,ty:ty,author:au}; }
 function extras(g,w,D){ var have={}; if(D) D.weeks.forEach(function(wk){ (wk.vi||[]).forEach(function(x){ have[normT(x.t)]=1; }); });
-  return (window.CT_THO||[]).filter(function(r){ return r&&r.lyr&&+r.vong===g&&(+r.tuan||1)===w&&!have[normT(r.t)]; })
-    .map(function(r){ var k="x"+g+":"+r.t; LYR[k]=r.lyr; if(r.author) LYRA[k]=r.author; return {t:r.t,author:r.author||"",k:k}; }); }
+  return srcRows().filter(function(r){ return r&&r.lyr&&+r.vong===g&&(+r.tuan||1)===w&&!have[normT(r.t)]; })
+    .map(function(r){ var k="x"+g+":"+r.t; LYR[k]=r.lyr; if(r.author) LYRA[k]=r.author; return {t:r.t,author:r.author||"",k:k,type:r.type||"tho",play:r.play||"",answer:r.answer||""}; }); }
 function info(g){
   var t=Math.floor((g-1)/4), th=TH[t], vo=th.v[(g-1)%4], gd=gdOf(g), D=det(g);
   if(D){ vo={sub:D.sub||vo.sub, vi:[detVi(g,D.weeks[0].vi[0]),detVi(g,(D.weeks[1].vi[0]||D.weeks[0].vi[0]))], en:(D.en&&D.en.words)||vo.en, zh:(D.zh&&D.zh.words)||[]}; }

@@ -130,6 +130,8 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.0
 .t-main .b{margin-top:6px;background:var(--yellow-soft);border-radius:10px;padding:6px 10px;font-size:14px}
 .t-main .b em{font-style:normal;font-weight:700;color:var(--muted);font-size:12px;display:block}
 .t-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.them{margin-top:8px;padding:8px 10px;border-radius:12px;background:var(--yellow-soft);display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:14px}
+.them details{flex-basis:100%}
 .vpick{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;background:#fff}
 .vpick button{border:0;background:none;font:inherit;font-size:12px;font-weight:700;padding:3px 9px;color:var(--muted);cursor:pointer}
 .vpick button[aria-pressed="true"]{background:var(--green,#2E9E5B);color:#fff}
@@ -289,10 +291,11 @@ textarea{min-height:76px;resize:vertical}
 <div class="toast" id="toast" hidden></div>
 
 <script src="noi-dung.js" charset="utf-8"></script>
+<script src="tho-ces.js" charset="utf-8"></script>
 <script src="chuong-trinh.js" charset="utf-8"></script>
 <script>
 (function(){
-var CT=window.CT, LYR=CT.LYR, YT=CT.YT;
+var CT=window.CT, LYR=CT.LYR, LYRA=CT.LYRA||{}, YT=CT.YT;
 /* ======================= VÒNG MẪU SOẠN TAY: C07-V3 (vòng 39) ======================= */
 var SAMPLE_DAYS = [
  {chuyen:"Đây là bà nội, đây là bà ngoại", sang:"Đồng dao Bà còng đi chợ: đọc 2 lần, ngón tay mẹ “đi” trên tay bé.", lyr:"bacong",
@@ -376,7 +379,7 @@ function getDays(g){
 }
 function dayTasks(g,n){
   var I=CT.info(g), d=getDays(g)[n-1], st=S.set, shortMode=st.nhip==="ngan", we=isWeekend(n), list=[], m=I.gd.min;
-  list.push({k:"sang",ic:"🌅",name:"Sáng",min:m[0],lang:"vi",txt:d.sang,lyr:d.lyr});
+  list.push({k:"sang",ic:"🌅",name:"Sáng",min:m[0],lang:"vi",txt:d.sang,lyr:d.lyr,lyrs:d.lyrs||(d.lyr?[d.lyr]:[]),them:d.them||[]});
   var choiTxt=d.choi, nn=d.nn||{l:"none",t:""}, song=nn.song||null, nnTxt=nn.t, choiOff=false, nnOff=false, nnL=nn.l;
   if(shortMode){
     if(!we){ choiOff=true; nnOff=true; }
@@ -396,6 +399,7 @@ function dayProgress(g,n){ var t=dayTasks(g,n).filter(function(x){return !x.off;
 function dayDone(g,n){ var p=dayProgress(g,n); return p[1]>0&&p[0]===p[1]; }
 function daysDoneCount(g){ var c=0; for(var i=1;i<=14;i++){ if(dayProgress(g,i)[0]>0) c++; } return c; }
 var GIONG={bac:"Hà Nội",nam:"Miền Nam",trung:"Miền Trung"};
+function lyrTitle(k){ var i=String(k).indexOf(":"); return i>-1?String(k).slice(i+1):String(LYR[k]||"").split("\n")[0]; }
 function labelSet(){ var s=S.set; return (s.nhip==="du"?"Nhịp đủ":"Nhịp ngắn")+" · Bản "+s.nn+" · "+(s.cham==="me"?"Mẹ chăm":"Ông bà chăm")+" · Giọng "+(GIONG[s.giong]||GIONG.bac); }
 
 /* ======================= HÌNH ======================= */
@@ -458,10 +462,11 @@ function rToday(){
     var links='';
     if(t.song&&t.song.u) links+='<a class="mini" href="'+esc(t.song.u)+'" target="_blank" rel="noopener">▶ '+zh(t.song.t)+(/youtube\.com\/(channel|@)/.test(t.song.u)?' (tìm trên kênh)':'')+'</a>';
     else if(t.song&&t.song.t) links+='<span class="mini" style="background:var(--yellow-soft);color:var(--ink)">🎵 '+zh(t.song.t)+' (file trong gói)</span>';
-    if(t.k==="sang"&&t.lyr) links+='<button class="mini" data-speak="'+t.lyr+'">🔈 Nghe thử · '+(GIONG[S.set.giong]||GIONG.bac)+'</button><span class="vpick" role="group" aria-label="Chọn giọng đọc">'+["bac","nam","trung"].map(function(k){return '<button data-set="giong" data-v="'+k+'" aria-pressed="'+(S.set.giong===k)+'">'+GIONG[k]+'</button>';}).join("")+'</span>';
+    if(t.k==="sang"&&t.lyrs&&t.lyrs.length) links+=t.lyrs.map(function(k){ return '<button class="mini" data-speak="'+k+'">🔈 '+(t.lyrs.length>1?esc(lyrTitle(k)):'Nghe thử')+' · '+(GIONG[S.set.giong]||GIONG.bac)+'</button>'; }).join("")+'<span class="vpick" role="group" aria-label="Chọn giọng đọc">'+["bac","nam","trung"].map(function(k){return '<button data-set="giong" data-v="'+k+'" aria-pressed="'+(S.set.giong===k)+'">'+GIONG[k]+'</button>';}).join("")+'</span>';
     if(t.diary) links+='<button class="mini" data-go="nhatky" data-g="'+g+'">📒 Mở nhật ký</button>';
     if(links) html+='<div class="t-links">'+links+'</div>';
-    if(t.k==="sang"&&t.lyr) html+='<details class="lyr"><summary>Lời đồng dao</summary><div>'+esc(LYR[t.lyr])+'</div></details>';
+    if(t.k==="sang"&&t.lyrs) t.lyrs.forEach(function(k){ html+='<details class="lyr"><summary>'+(t.lyrs.length>1?esc(lyrTitle(k))+' · ':'')+(LYRA[k]?'Lời thơ · '+esc(LYRA[k]):'Lời bài')+'</summary><div>'+esc(LYR[k])+'</div></details>'; });
+    if(t.k==="sang"&&t.them&&t.them.length) t.them.forEach(function(x){ html+='<div class="them"><span>📖 Bài thêm của tuần: <b>'+esc(x.t)+'</b>'+(x.author?' · '+esc(x.author):'')+'</span><button class="mini" data-speak="'+x.k+'">🔈 Nghe</button><details class="lyr"><summary>Lời thơ</summary><div>'+esc(LYR[x.k])+'</div></details></div>'; });
     html+='</div>'+(t.off?'<span></span>':'<button class="tick" data-tick="'+id+'" aria-pressed="'+done+'" aria-label="Đánh dấu đã làm: '+esc(t.name)+'">'+(done?"✓":"")+'</button>')+'</div>';
   });
   html+='</div><p class="note">'+(I.gd.id===1?"Đặt bé nằm ngửa khi ngủ; chỉ nằm sấp khi bé thức và có mẹ ngồi cạnh.":"Luôn ngồi cạnh bé khi chơi; cất đồ nhỏ, đất nặn, dây ngay sau khi chơi.")+'</p></div></div></div></section>';

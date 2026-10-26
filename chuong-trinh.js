@@ -220,7 +220,17 @@ function gdOf(g){ for(var i=0;i<GD.length;i++){ if(g>=GD[i].from&&g<=GD[i].to) r
 var TYMAP={dong_dao:"d",ca_dao:"d",ve:"d",cau_do:"d",hat_ru:"r",tho:"t",bai_hat:"h"};
 function det(g){ var D=window.CT_DETAIL; return D&&D[g]&&D[g].days&&D[g].days.length===14?D[g]:null; }
 function lyrKey(g,title){ return "g"+g+":"+title; }
-function detVi(g,v){ var ty=TYMAP[v.type]||"t"; if(v.lyr){ LYR[lyrKey(g,v.t)]=v.lyr; } return {t:v.t,k:v.lyr?lyrKey(g,v.t):null,ty:ty,author:v.author||null}; }
+/* lời thơ có tác giả do CES nhập (tho-ces.js, lấy từ Google Sheet) */
+var LYRA={};
+function normT(t){ return String(t||"").toLowerCase().replace(/[“”"'.,!?()]/g,"").replace(/\s+/g," ").trim(); }
+function thoMap(){ var m={}; (window.CT_THO||[]).forEach(function(r){ if(r&&r.t&&r.lyr) m[normT(r.t)]=r; }); return m; }
+function detVi(g,v){ var ty=TYMAP[v.type]||"t", lyr=v.lyr, au=v.author||null;
+  if(!lyr){ var r=thoMap()[normT(v.t)]; if(r){ lyr=r.lyr; if(r.author) au=r.author; } }
+  if(lyr){ LYR[lyrKey(g,v.t)]=lyr; if(au) LYRA[lyrKey(g,v.t)]=au; }
+  return {t:v.t,k:lyr?lyrKey(g,v.t):null,ty:ty,author:au}; }
+function extras(g,w,D){ var have={}; if(D) D.weeks.forEach(function(wk){ (wk.vi||[]).forEach(function(x){ have[normT(x.t)]=1; }); });
+  return (window.CT_THO||[]).filter(function(r){ return r&&r.lyr&&+r.vong===g&&(+r.tuan||1)===w&&!have[normT(r.t)]; })
+    .map(function(r){ var k="x"+g+":"+r.t; LYR[k]=r.lyr; if(r.author) LYRA[k]=r.author; return {t:r.t,author:r.author||"",k:k}; }); }
 function info(g){
   var t=Math.floor((g-1)/4), th=TH[t], vo=th.v[(g-1)%4], gd=gdOf(g), D=det(g);
   if(D){ vo={sub:D.sub||vo.sub, vi:[detVi(g,D.weeks[0].vi[0]),detVi(g,(D.weeks[1].vi[0]||D.weeks[0].vi[0]))], en:(D.en&&D.en.words)||vo.en, zh:(D.zh&&D.zh.words)||[]}; }
@@ -232,6 +242,12 @@ function detDays(g,D){
     var o={}; for(var k in d) o[k]=d[k];
     o.w=i<7?1:2; o.wd=i%7; o.diary=i===13||!!d.diary;
     o.lyr=(d.lyr&&LYR[lyrKey(g,d.lyr)])?lyrKey(g,d.lyr):null;
+    var sang=String(d.sang||""), cand=((D.weeks[o.w-1]||{}).vi||[]).concat((D.weeks[2-o.w]||{}).vi||[]), lyrs=o.lyr?[o.lyr]:[];
+    cand.map(function(c){ return {c:c,i:sang.indexOf(c.t)}; }).filter(function(x){ return x.i>-1; }).sort(function(a,b){ return a.i-b.i; })
+      .forEach(function(x){ var kk=lyrKey(g,x.c.t); if(LYR[kk]&&lyrs.indexOf(kk)<0){ lyrs.push(kk); sang=sang.split(x.c.t+" (lời trong gói học liệu)").join(x.c.t); } });
+    var pos=function(k){ var t=k.slice(k.indexOf(":")+1), i=sang.indexOf(t); return i<0?1e9:i; };
+    lyrs.sort(function(a,b){ return pos(a)-pos(b); }); o.lyrs=lyrs; o.lyr=lyrs[0]||null; o.sang=sang;
+    o.them=extras(g,o.w,D);
     if(!o.nn) o.nn={l:"none",t:"Nghỉ. Chỉ gắn 1–2 từ khi tắm, khi ăn."};
     if(o.short&&o.short.nn===undefined) o.short.nn=null;
     return o; });
@@ -304,5 +320,5 @@ function files(g,w){
   if(w===2) list.push(["PDF","var(--pink)","06_NhatKy.pdf","Mẫu nhật ký vòng (bản in)"]);
   return list;
 }
-return {GD:GD, TH:TH, LYR:LYR, YT:YT, info:info, days:days, files:files, zhFmt:zhFmt, TOTAL:72};
+return {GD:GD, TH:TH, LYR:LYR, LYRA:LYRA, YT:YT, info:info, days:days, files:files, zhFmt:zhFmt, TOTAL:72};
 })();

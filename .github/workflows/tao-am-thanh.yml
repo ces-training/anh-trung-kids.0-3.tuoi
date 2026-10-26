@@ -30,6 +30,8 @@ jobs:
           node-version: 22
       - name: Cài ffmpeg (nếu thiếu)
         run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - name: Lấy lời thơ từ bảng CES
+        run: node tts/nhap-tho.mjs || echo "::warning title=Thơ CES::Không lấy được bảng, giữ bản cũ"
       - name: Tạo âm thanh
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -43,7 +45,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for f in am-thanh tts/giong-da-tao.json tts/nhat-ky.txt; do [ -e "$f" ] && git add "$f"; done
+          for f in am-thanh tho-ces.js tts/nhap-tho-bao-cao.txt tts/giong-da-tao.json tts/nhat-ky.txt; do [ -e "$f" ] && git add "$f"; done
           git diff --cached --quiet && exit 0
           git commit -m "Âm thanh Gemini: cập nhật"
           git pull --rebase origin main

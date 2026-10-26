@@ -1,0 +1,1 @@
+window.CT_THO = [];

@@ -130,6 +130,9 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.0
 .t-main .b{margin-top:6px;background:var(--yellow-soft);border-radius:10px;padding:6px 10px;font-size:14px}
 .t-main .b em{font-style:normal;font-weight:700;color:var(--muted);font-size:12px;display:block}
 .t-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.vpick{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;background:#fff}
+.vpick button{border:0;background:none;font:inherit;font-size:12px;font-weight:700;padding:3px 9px;color:var(--muted);cursor:pointer}
+.vpick button[aria-pressed="true"]{background:var(--green,#2E9E5B);color:#fff}
 .mini{border:0;border-radius:999px;padding:3px 12px;font-weight:700;font-size:13px;background:var(--sky-bg);color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;gap:4px}
 .tick{width:44px;height:44px;border-radius:50%;border:4px solid var(--line);background:var(--white);font-size:22px;display:grid;place-items:center;flex:none}
 .task.done .tick{background:var(--green);border-color:var(--green);color:var(--white)}
@@ -305,8 +308,8 @@ var SAMPLE_DAYS = [
   choi:"Nặn đất: lăn viên to, ấn dẹt thành “bánh”, xếp vào đĩa.", nn:{l:"zh",t:"爷爷 yéye, 奶奶 nǎinai: chỉ ảnh ông bà nội theo audio A3.",b:"奶奶在哪儿？Nǎinai zài nǎr?"},
   toi:"Truyện; hát ru.", ob:"Nặn “bánh” bằng đất nặn hoặc bột mì."},
  {chuyen:"Bữa cơm nhà bà", sang:"Ôn 2 bài, bé đọc tiếp tiếng cuối.", lyr:"bacong",
-  choi:"Xúc thìa: chuyển bông gòn hoặc xốp cắt to từ bát này sang bát kia.", nn:{l:"en",t:"Vỗ tay, dậm chân cùng mẹ.",yt:"happy",b:"Give grandma a hug."},
-  toi:"Album; hát ru.", ob:"Cho bé xúc bông gòn từ bát này sang bát kia."},
+  choi:"Xúc thìa: chuyển 3–4 quả bóng nhựa to từ bát này sang bát kia.", nn:{l:"en",t:"Vỗ tay, dậm chân cùng mẹ.",yt:"happy",b:"Give grandma a hug."},
+  toi:"Album; hát ru.", ob:"Cho bé xúc bóng nhựa to từ bát này sang bát kia."},
  {chuyen:"Gọi điện cho ông bà", sang:"Gọi video: bé “đọc” Bà còng cho ông bà nghe.", lyr:"bacong",
   choi:"Xé giấy màu, dán thành “vườn rau của bà” để khoe ông bà lần gọi sau.", nn:{l:"both",t:"Nói bye-bye và 再见 khi tắt máy; ôn grandma, 奶奶.",b:"Let's call grandma. · 我们给外婆打电话。"},
   toi:"Truyện; hát ru.",
@@ -347,9 +350,10 @@ var BABY={sosinh:"img/be_soSinh.svg",ngoi:"img/be_ngoi.svg",tapdi:"img/be_tapdi.
 
 /* ======================= TRẠNG THÁI ======================= */
 var KEY="vuon-uom-ct-v2";
-var S={age:19,vong:39,today:5,set:{nhip:"du",nn:"A",cham:"me"},done:{},diary:{},sent:{}};
+var S={age:19,vong:39,today:5,set:{nhip:"du",nn:"A",cham:"me",giong:"bac"},done:{},diary:{},sent:{}};
 (function seed(){ for(var d=1;d<=4;d++){ ["sang","choi","nn","toi"].forEach(function(k){ if(!(d===3&&k==="nn")) S.done["39-"+d+"-"+k]=true; }); } for(var g=1;g<39;g++) S.sent[g]=true; })();
 try{ var raw=localStorage.getItem(KEY); if(raw){ var o=JSON.parse(raw); if(o&&o.set&&o.vong) S=o; } }catch(e){}
+if(!S.set.giong) S.set.giong="bac";
 function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
 
 var view={name:"home",g:S.vong,day:S.today,anchor:null};
@@ -391,7 +395,8 @@ function dayTasks(g,n){
 function dayProgress(g,n){ var t=dayTasks(g,n).filter(function(x){return !x.off;}); var c=t.filter(function(x){return S.done[g+"-"+n+"-"+x.k];}).length; return [c,t.length]; }
 function dayDone(g,n){ var p=dayProgress(g,n); return p[1]>0&&p[0]===p[1]; }
 function daysDoneCount(g){ var c=0; for(var i=1;i<=14;i++){ if(dayProgress(g,i)[0]>0) c++; } return c; }
-function labelSet(){ var s=S.set; return (s.nhip==="du"?"Nhịp đủ":"Nhịp ngắn")+" · Bản "+s.nn+" · "+(s.cham==="me"?"Mẹ chăm":"Ông bà chăm"); }
+var GIONG={bac:"Hà Nội",nam:"Miền Nam",trung:"Miền Trung"};
+function labelSet(){ var s=S.set; return (s.nhip==="du"?"Nhịp đủ":"Nhịp ngắn")+" · Bản "+s.nn+" · "+(s.cham==="me"?"Mẹ chăm":"Ông bà chăm")+" · Giọng "+(GIONG[s.giong]||GIONG.bac); }
 
 /* ======================= HÌNH ======================= */
 function figs(g,n){
@@ -453,13 +458,13 @@ function rToday(){
     var links='';
     if(t.song&&t.song.u) links+='<a class="mini" href="'+esc(t.song.u)+'" target="_blank" rel="noopener">▶ '+zh(t.song.t)+(/youtube\.com\/(channel|@)/.test(t.song.u)?' (tìm trên kênh)':'')+'</a>';
     else if(t.song&&t.song.t) links+='<span class="mini" style="background:var(--yellow-soft);color:var(--ink)">🎵 '+zh(t.song.t)+' (file trong gói)</span>';
-    if(t.k==="sang"&&t.lyr) links+='<button class="mini" data-speak="'+t.lyr+'">🔈 Nghe thử</button>';
+    if(t.k==="sang"&&t.lyr) links+='<button class="mini" data-speak="'+t.lyr+'">🔈 Nghe thử · '+(GIONG[S.set.giong]||GIONG.bac)+'</button><span class="vpick" role="group" aria-label="Chọn giọng đọc">'+["bac","nam","trung"].map(function(k){return '<button data-set="giong" data-v="'+k+'" aria-pressed="'+(S.set.giong===k)+'">'+GIONG[k]+'</button>';}).join("")+'</span>';
     if(t.diary) links+='<button class="mini" data-go="nhatky" data-g="'+g+'">📒 Mở nhật ký</button>';
     if(links) html+='<div class="t-links">'+links+'</div>';
     if(t.k==="sang"&&t.lyr) html+='<details class="lyr"><summary>Lời đồng dao</summary><div>'+esc(LYR[t.lyr])+'</div></details>';
     html+='</div>'+(t.off?'<span></span>':'<button class="tick" data-tick="'+id+'" aria-pressed="'+done+'" aria-label="Đánh dấu đã làm: '+esc(t.name)+'">'+(done?"✓":"")+'</button>')+'</div>';
   });
-  html+='</div><p class="note">'+(I.gd.id===1?"Đặt bé nằm ngửa khi ngủ; chỉ nằm sấp khi bé thức và có mẹ ngồi cạnh.":"Luôn ngồi cạnh bé khi chơi; cất đồ nhỏ, đất nặn, bông gòn, dây ngay sau khi chơi.")+'</p></div></div></div></section>';
+  html+='</div><p class="note">'+(I.gd.id===1?"Đặt bé nằm ngửa khi ngủ; chỉ nằm sấp khi bé thức và có mẹ ngồi cạnh.":"Luôn ngồi cạnh bé khi chơi; cất đồ nhỏ, đất nặn, dây ngay sau khi chơi.")+'</p></div></div></div></section>';
   return html;
 }
 
@@ -556,6 +561,7 @@ function rHuongDan(){
    '<div class="q"><span class="ql">Mỗi ngày mẹ có bao nhiêu thời gian?</span><div class="seg">'+opt("nhip","du","Nhịp đủ","30–40 phút/ngày, đủ 4 khung")+opt("nhip","ngan","Nhịp ngắn","15 phút ngày thường, chơi bù cuối tuần")+'</div></div>'+
    '<div class="q"><span class="ql">Mẹ có nói được tiếng Anh hoặc tiếng Trung?</span><div class="seg">'+opt("nn","A","Bản A","Chưa nói được: bấm phát, làm động tác theo")+opt("nn","B","Bản B","Nói được: thêm câu ngắn để tự nói với con")+'</div></div>'+
    '<div class="q"><span class="ql">Ban ngày ai chăm bé?</span><div class="seg">'+opt("cham","me","Mẹ","Mẹ làm cả 4 khung")+opt("cham","ongba","Ông bà / người giúp việc","Họ làm khung Chơi; mẹ giữ Sáng và Tối")+'</div></div>'+
+   '<div class="q"><span class="ql">Giọng đọc đồng dao cho bé nghe</span><div class="seg">'+opt("giong","bac","Hà Nội","Nhẹ nhàng, thân thiết")+opt("giong","nam","Miền Nam","Ngọt ngào")+opt("giong","trung","Miền Trung","Mộc mạc")+'</div></div>'+
    '<button class="pill red" data-go="today">Xem việc hôm nay →</button></div>'+
   '<div style="display:flex;flex-direction:column;gap:16px;min-width:0"><div class="panel" id="words"><h3>Từ Anh – Trung của vòng này</h3><p class="sub">'+esc(I.vong.sub)+'</p><div class="files">'+words+
    '</div>'+(I.gd.id===1?'<p class="note">Giai đoạn 0–6 tháng chưa cần tiếng Trung. Tiếng Anh chỉ là bài ru, bật nhỏ khi bế bé.</p>':'')+'</div>'+
@@ -593,7 +599,7 @@ document.addEventListener("click",function(e){
   var tk=e.target.closest("[data-tick]");
   if(tk){ var id=tk.getAttribute("data-tick"); S.done[id]=!S.done[id]; save(); render(); if(S.done[id]) toast(dayDone(view.g,view.day)?"Xong cả ngày "+view.day+"! Mẹ giỏi quá.":"Đã ghi nhận."); return; }
   var sp=e.target.closest("[data-speak]");
-  if(sp){ var k=sp.getAttribute("data-speak"); if(LYR[k]) speak(LYR[k]); else toast("Bài này là thơ hoặc bài hát có tác giả; bản thật dùng file do cô CES thu."); return; }
+  if(sp){ var k=sp.getAttribute("data-speak"); if(LYR[k]) speak(LYR[k]); else toast("Bài này là thơ hoặc bài hát có tác giả; lời và file đọc nằm trong gói học liệu."); return; }
   if(e.target.closest("[data-dl]")){ toast("Bản mẫu: file thật sẽ có khi CES soạn xong gói tuần."); return; }
   var ch=e.target.closest("[data-obs]");
   if(ch){ var dia=S.diary[view.g]||(S.diary[view.g]={obs:{}}); dia.obs[ch.getAttribute("data-obs")]=ch.getAttribute("data-v"); save(); ch.parentNode.querySelectorAll(".chip").forEach(function(c){ c.setAttribute("aria-pressed", c===ch); }); return; }
@@ -613,13 +619,24 @@ document.addEventListener("submit",function(e){
     if(n<obs.length){ toast("Mẹ chọn giúp "+(obs.length-n)+" câu quan sát còn trống nhé."); return; }
     S.sent[view.g]=true; save(); render(); toast("Đã nộp. Cô sẽ phản hồi trong 3 ngày làm việc."); }
 });
-function speak(text){
+function amKey(t){ t=String(t).trim(); var h=0x811c9dc5; for(var i=0;i<t.length;i++){ h^=t.charCodeAt(i); h=Math.imul(h,0x01000193)>>>0; } return ("0000000"+h.toString(16)).slice(-8); }
+var AM=null;
+function speakMay(text,msg){
   try{
     if(!("speechSynthesis" in window)) throw 0;
     speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(text); u.lang="vi-VN"; u.rate=.8;
     var v=speechSynthesis.getVoices().filter(function(x){return /^vi/i.test(x.lang);})[0]; if(v) u.voice=v;
-    speechSynthesis.speak(u); toast(v?"Đang đọc bằng giọng máy. Bản thật do cô CES thu.":"Máy này chưa có giọng tiếng Việt; bản thật dùng file do cô CES thu.");
-  }catch(err){ toast("Trình duyệt không đọc được. Bản thật dùng file audio do cô CES thu."); }
+    speechSynthesis.speak(u); toast(v?msg:"Máy này chưa có giọng tiếng Việt, và giọng "+(GIONG[S.set.giong]||"")+" chưa sẵn sàng.");
+  }catch(err){ toast("Trình duyệt không đọc được. Mẹ thử lại sau nhé."); }
+}
+function speak(text){
+  var g=S.set.giong||"bac", src="am-thanh/"+g+"/"+amKey(text)+".mp3";
+  try{ if("speechSynthesis" in window) speechSynthesis.cancel(); }catch(e){}
+  if(AM){ AM.pause(); AM.onerror=null; }
+  AM=new Audio(src); var started=false;
+  AM.onplaying=function(){ started=true; };
+  AM.onerror=function(){ if(!started) speakMay(text,"Giọng "+(GIONG[g]||"")+" đang được chuẩn bị; tạm đọc bằng giọng máy."); };
+  var p=AM.play(); if(p&&p.then) p.then(function(){ toast("🔈 Giọng "+(GIONG[g]||"")); }).catch(function(e){ if(e&&e.name==="NotAllowedError") toast("Mẹ bấm lại một lần nữa để nghe nhé."); });
 }
 render();
 })();

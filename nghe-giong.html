@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chọn giọng đọc</title>
+<style>
+:root{--red:#E3262E;--yellow:#FFC72C;--cream:#FFFBF0;--ink:#3A2A1A;--muted:#7A6A58;--line:#F0E2C0;--green:#2E9E5B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:24px 16px 48px}
+h1{color:var(--red);margin:0 0 4px;font-size:28px}
+p.sub{color:var(--muted);margin:0 0 20px}
+section{background:#fff;border:2px solid var(--line);border-radius:18px;padding:16px;margin-bottom:16px}
+h2{margin:0 0 10px;font-size:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.card{border:1.5px dashed var(--line);border-radius:14px;padding:12px}
+.card b{display:block;margin-bottom:6px}
+.card small{display:block;color:var(--muted);margin:6px 0 2px}
+audio{width:100%}
+.miss{color:var(--muted);font-size:14px;font-style:italic}
+a{color:var(--red);font-weight:700}
+</style>
+</head>
+<body>
+<main>
+<h1>Chọn giọng đọc đồng dao</h1>
+<p class="sub">Mỗi miền có 2 giọng do Gemini tạo. Chị nghe bài “Cái bống”, chọn giọng ưng nhất cho từng miền, rồi báo lại (ví dụ: Bắc 1, Nam 2, Trung 1). Sau đó toàn bộ bài trên web sẽ được đọc bằng các giọng đã chọn. <a href="./">← Về trang chính</a></p>
+<div id="list"></div>
+</main>
+<script>
+var MIEN=[["bac","Hà Nội · nhẹ nhàng, thân thiết"],["nam","Miền Nam · ngọt ngào"],["trung","Miền Trung · mộc mạc"]];
+var html="";
+MIEN.forEach(function(m){
+  html+='<section><h2>'+m[1]+'</h2><div class="grid">';
+  [1,2].forEach(function(i){
+    html+='<div class="card"><b>Giọng '+(m[0]==="bac"?"Bắc":m[0]==="nam"?"Nam":"Trung")+' '+i+'</b>'+
+      '<small>Đọc “Cái bống”</small><audio controls preload="none" src="am-thanh/mau/'+m[0]+'-'+i+'-cai-bong.mp3"></audio>'+
+      '<small>Giọng tự giới thiệu</small><audio controls preload="none" src="am-thanh/mau/'+m[0]+'-'+i+'-gioi-thieu.mp3"></audio></div>';
+  });
+  html+='</div></section>';
+});
+document.getElementById("list").innerHTML=html;
+document.querySelectorAll("audio").forEach(function(a){
+  fetch(a.getAttribute("src"),{method:"HEAD"}).then(function(r){ if(!r.ok) throw 0; }).catch(function(){
+    var s=document.createElement("div"); s.className="miss"; s.textContent="Chưa có file — đang chờ tạo."; a.replaceWith(s);
+  });
+});
+</script>
+</body>
+</html>

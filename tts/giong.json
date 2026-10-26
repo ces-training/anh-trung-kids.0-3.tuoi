@@ -1,0 +1,30 @@
+{
+  "model": "gemini-3.8-flash-tts",
+  "phong_cach": "Đọc chậm, nhẹ nhàng, ngắt nhịp rõ theo từng câu, như mẹ đọc đồng dao cho em bé nghe. Vui, ấm, không kịch.",
+  "giong": {
+    "bac": {
+      "ten": "Hà Nội · nhẹ nhàng, thân thiết",
+      "chon": 0,
+      "mo_ta": [
+        "Giọng nữ Việt Nam khoảng 30 tuổi, giọng Hà Nội chuẩn (miền Bắc), phát âm rõ dấu thanh, phân biệt rõ l/n, tr/ch. Nhẹ nhàng, ấm áp, thân thiết như người mẹ trẻ đọc thơ cho con nhỏ. A warm, gentle young Vietnamese mother with a standard Hanoi (Northern Vietnamese) accent.",
+        "Giọng nữ miền Bắc, người Hà Nội, khoảng 35 tuổi, trong và mềm, nói chậm, dịu dàng, mỉm cười khi nói, như cô giáo mầm non kể chuyện. A soft, clear, kindly Northern Vietnamese (Hanoi) female voice, like a kindergarten teacher."
+      ]
+    },
+    "nam": {
+      "ten": "Miền Nam · ngọt ngào",
+      "chon": 0,
+      "mo_ta": [
+        "Giọng nữ Việt Nam khoảng 30 tuổi, giọng Sài Gòn (miền Nam) tự nhiên, ngọt ngào, trìu mến, êm dịu như người mẹ miền Nam ru con. A sweet, affectionate young Vietnamese mother with a natural Saigon (Southern Vietnamese) accent.",
+        "Giọng nữ miền Tây Nam Bộ, khoảng 35 tuổi, ngọt, mềm, chân thành, nói chậm và thương mến. A tender, sweet Southern Vietnamese (Mekong Delta) female voice."
+      ]
+    },
+    "trung": {
+      "ten": "Miền Trung · mộc mạc",
+      "chon": 0,
+      "mo_ta": [
+        "Giọng nữ Việt Nam khoảng 35 tuổi, giọng Huế (miền Trung) nhẹ, mộc mạc, chân chất, ấm áp, đọc chậm rõ ràng để bé dễ nghe. A homely, warm Central Vietnamese (Hue) female voice with a gentle, mild Hue accent, slow and clear.",
+        "Giọng nữ miền Trung (Quảng Nam – Đà Nẵng hoặc Nghệ Tĩnh nhẹ), mộc mạc, hiền hậu, như bà, như mẹ ở quê đọc đồng dao. A rustic, kind Central Vietnamese female voice, soft regional accent, unhurried."
+      ]
+    }
+  }
+}

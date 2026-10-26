@@ -1,0 +1,44 @@
+name: Tạo âm thanh Gemini
+
+on:
+  workflow_dispatch:
+    inputs:
+      che_do:
+        description: "mau (nghe thử giọng) hoặc tat-ca (đọc toàn bộ)"
+        default: "mau"
+  push:
+    branches: [main]
+    paths: ["tts/lenh.txt"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tao-am-thanh
+  cancel-in-progress: false
+
+jobs:
+  tao:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Cài ffmpeg (nếu thiếu)
+        run: which ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - name: Tạo âm thanh
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node tts/tao-am-thanh.mjs "${{ github.event.inputs.che_do }}"
+      - name: Lưu file vào kho
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add am-thanh tts/giong-da-tao.json tts/nhat-ky.txt 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -m "Âm thanh Gemini: cập nhật"
+          git pull --rebase origin main
+          git push origin HEAD:main

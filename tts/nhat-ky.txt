@@ -1,0 +1,2 @@
+2026-10-26T03:08:12 Chế độ: mau. Số bài có lời để đọc: 45.
+2026-10-26T03:08:12 LỖI: Chưa có GEMINI_API_KEY trong Settings → Secrets and variables → Actions.

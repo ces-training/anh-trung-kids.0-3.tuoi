@@ -37,12 +37,13 @@ function pickVoice(lang){ var want=lang==="zh"?/^zh(-|_)?(CN|Hans)?/i:/^en(-|_)?
   return vs[0]||null; }
 function hasVoice(lang){ loadVoices(); return !!pickVoice(lang); }
 /* Máy không có giọng tiếng Anh/Trung: hiện bong bóng chữ (kèm pinyin) để mẹ đọc to giúp bé. */
+var PY={"在哪里？":"在哪里？ zài nǎlǐ?","谁不见了？":"谁不见了？ shéi bú jiàn le?","找一找！":"找一找！ zhǎo yi zhǎo!","太棒了！":"太棒了！ tài bàng le!","真棒！":"真棒！ zhēn bàng!","对了！":"对了！ duì le!","很好！":"很好！ hěn hǎo!","老师说，":"老师说 lǎoshī shuō, "};
 function bubble(text){ var ov=document.querySelector(".tc-ov"); if(!ov) return; var b=ov.querySelector(".tc-bub"); if(!b){ b=el("div","tc-bub"); ov.appendChild(b); }
   b.textContent="🗣 "+text; b.classList.remove("on"); void b.offsetWidth; b.classList.add("on"); }
 function say(text, lang, rate, display){
   return new Promise(function(res){
     try{
-      if(!hasVoice(lang)){ bubble(display||text); return setTimeout(res, 900+String(display||text).length*90); }
+      if(!hasVoice(lang)){ var shown=display||PY[text]||(lang==="zh"?String(text).replace(/^老师说，/,"老师说 (lǎoshī shuō), "):text); bubble(shown); return setTimeout(res, 900+String(display||text).length*90); }
       speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(text);
       u.lang=lang==="zh"?"zh-CN":"en-US"; var v=pickVoice(lang); if(v) u.voice=v; u.rate=rate||(lang==="zh"?.8:.85);
       var done=false, fin=function(){ if(!done){ done=true; res(); } };
@@ -232,7 +233,8 @@ function gDemSo(F,cfg){
     var opts=shuffle([n].concat(shuffle([1,2,3,4,5,6,7,8,9,10].filter(function(x){ return x!==n&&x<=max; })).slice(0,Math.min(nOpt(cfg.level)-1,max-1))));
     var objs=opts.map(function(v){ return {pic:String(v),say:F.lang==="zh"?NUM.zh[v]:NUM.en[v],vi:String(v)}; }), right=objs[opts.indexOf(n)];
     F.main.appendChild(choiceGrid(F,right,objs,done,{afterRight:function(){ return say(F.lang==="zh"?(NUM.zh[n]+"个"):(NUM.en[n]),F.lang); }}));
-    F.replay=function(){ say(q,F.lang); }; setTimeout(F.replay,250);
+    var qd=F.lang==="zh"?q+" (jǐ gè "+String(it.show||"").split(" ").slice(1).join(" ")+"?)":q;
+    F.replay=function(){ say(q,F.lang,null,qd); }; setTimeout(F.replay,250);
   });
 }
 /* ---------- 7. Bé làm theo ---------- */
@@ -247,7 +249,8 @@ function gLamTheo(F,cfg){
     F.main.appendChild(el("p","tc-note",useActs?"Bé làm động tác. Mẹ làm cùng cho vui!":"Bé chỉ vào đồ vật thật trong nhà hoặc tranh trong sách."));
     var row=el("div","tc-row"), ok=el("button","tc-btn green","✓ Bé làm rồi"); row.appendChild(ok); F.main.appendChild(row);
     ok.onclick=function(ev){ ok.disabled=true; F.star(ev.clientX-30,ev.clientY-60); setTimeout(next,700); };
-    F.replay=function(){ say(c,F.lang); }; setTimeout(F.replay,250); }
+    var disp=F.lang==="zh"?(c.replace(it.say, it.show||it.say)):c;
+    F.replay=function(){ say(c,F.lang,null,disp); }; setTimeout(F.replay,250); }
   next();
 }
 /* ---------- 8. Xếp thứ tự ---------- */

@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vườn ươm 0–3 tuổi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Bố cục: theo web Little Language Explorers — thanh nút vàng bên trái, nền sọc, ô tranh viền dày,
+   màn "Hôm nay" chia sân khấu tranh (trái) + danh sách việc (phải). Một giao diện sáng duy nhất, như web gốc. */
+:root{color-scheme:light;
+  --red:#E3262E; --red-dark:#B8141C; --yellow:#FFC72C; --yellow-soft:#FFF4CC; --yellow-deep:#E9A900;
+  --cream:#FFFBF0; --ink:#3A2A1A; --muted:#7A6A58; --white:#fff; --line:#F0E2C0;
+  --green:#3BB273; --green-dark:#2E9E5B; --teal:#1FA5A0; --blue:#2F6FD6; --purple:#7B5CD6; --orange:#F28C00; --pink:#E3487A;
+  --stripe-bg:#FFF6DB; --stripe:#FFE7A6; --pink-bg:#FFE9F1; --pink-stripe:#FFD3E2; --sky-bg:#E6F4FB; --sky-stripe:#CBE9F7;
+  --en:#2F6FD6; --zh:#E3262E; --vi:#3BB273;
+  --shadow:0 6px 0 rgba(58,42,26,.14);
+  --f-display:'Baloo 2','Noto Sans SC',system-ui,sans-serif;
+  --f-body:'Be Vietnam Pro','Noto Sans SC',system-ui,sans-serif;
+  --f-zh:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --side:96px; --gap:16px;
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{font-family:var(--f-body);background:var(--cream);color:var(--ink);font-size:16px;line-height:1.45;-webkit-tap-highlight-color:transparent}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+a{color:inherit}
+.zh{font-family:var(--f-zh)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.05}
+
+/* ---------- thanh bên trái ---------- */
+.side{position:fixed;left:0;top:0;bottom:0;width:calc(var(--side) + env(safe-area-inset-left,0px));z-index:40;
+  background:linear-gradient(180deg,#FFD84D,var(--yellow));border-right:4px solid var(--yellow-deep);
+  display:flex;flex-direction:column;align-items:center;gap:8px;overflow-y:auto;
+  padding:max(10px,env(safe-area-inset-top,0px)) 6px 10px max(6px,env(safe-area-inset-left,0px))}
+.sd-logo{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--red-dark);font-family:var(--f-display);font-weight:800;font-size:11px;line-height:1.05;text-align:center;border:0;background:none;padding:0}
+.sd-logo img{width:56px;height:56px;object-fit:cover;object-position:top;background:var(--white);border-radius:50%;border:3px solid var(--red);box-shadow:0 3px 0 rgba(0,0,0,.15)}
+.sd-logo span{margin-top:3px}
+.sd-kid{width:100%;border:3px solid var(--white);background:var(--white);border-radius:16px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;box-shadow:0 4px 0 rgba(0,0,0,.15);text-align:center}
+.sd-kid .ava{width:44px;height:44px;border-radius:50%;background:var(--yellow-soft);overflow:hidden;position:relative}
+.sd-kid .ava img{position:absolute;left:50%;top:6%;height:190%;width:auto;max-width:none;transform:translateX(-50%)}
+.sd-kid b{font-family:var(--f-display);font-size:12px;line-height:1.1}
+.sd-kid small{font-size:10.5px;font-weight:700;color:var(--muted);background:var(--yellow-soft);border-radius:999px;padding:1px 7px}
+.sd-btn{width:100%;border:0;border-radius:16px;padding:7px 2px;display:flex;flex-direction:column;align-items:center;gap:1px;color:var(--white);
+  font-family:var(--f-display);font-weight:800;font-size:12px;line-height:1.1;box-shadow:0 4px 0 rgba(0,0,0,.2);background:var(--b);transition:transform .12s}
+.sd-btn:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.2)}
+.sd-btn[aria-current="page"]{outline:3px solid var(--white);outline-offset:-3px}
+.sd-ic{font-size:26px;line-height:1}
+.c1{--b:var(--blue)}.c2{--b:var(--green)}.c3{--b:var(--purple)}.c4{--b:var(--orange)}.c5{--b:var(--pink)}.c6{--b:var(--red)}
+
+/* ---------- khung màn chính ---------- */
+#app{margin-left:calc(var(--side) + env(safe-area-inset-left,0px));min-height:100vh}
+.screen{min-height:100vh;padding-block:16px 96px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:var(--gap);
+  background:var(--stripe-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M0 80L80 0' stroke='%23FFE7A6' stroke-width='18'/%3E%3C/svg%3E")}
+.screen.pink{background-color:var(--pink-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M0 80L80 0' stroke='%23FFD3E2' stroke-width='18'/%3E%3C/svg%3E")}
+.screen.sky{background-color:var(--sky-bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M0 80L80 0' stroke='%23CBE9F7' stroke-width='18'/%3E%3C/svg%3E")}
+.inner{width:100%;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:var(--gap)}
+
+/* tiêu đề màn */
+.q-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.q-back{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--white);font-size:26px;border:0;box-shadow:0 4px 0 rgba(0,0,0,.15);flex:none}
+.q-top h2{font-size:clamp(24px,3.6vw,34px);color:var(--red-dark);text-shadow:0 3px 0 var(--white);min-width:0}
+.q-top h2 small{display:block;font-size:15px;color:var(--muted);text-shadow:none;font-weight:700;margin-top:4px}
+.q-wallet{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.q-wallet span{background:var(--white);border-radius:14px;padding:4px 12px;display:flex;flex-direction:column;align-items:center;line-height:1.1;box-shadow:0 3px 0 rgba(0,0,0,.12);font-variant-numeric:tabular-nums}
+.q-wallet small{font-size:11px;font-weight:700;color:var(--muted)}
+.q-wallet b{font-family:var(--f-display);font-size:19px}
+.q-wallet .hl{background:var(--yellow)}
+.q-wallet .hl small{color:#6B4A00}
+
+/* ---------- ô tranh (dùng chung) ---------- */
+.ht{position:relative;display:flex;flex-direction:column;border:5px solid var(--tc);border-radius:22px;background:var(--white);overflow:hidden;color:var(--ink);padding:0;
+  box-shadow:0 6px 0 rgba(58,42,26,.18);text-align:left;transition:transform .15s;min-height:0;min-width:0}
+.ht:hover{transform:translateY(-3px)}
+.ht:active{transform:translateY(1px)}
+.ht-img{flex:1;min-height:150px;background:var(--yellow-soft) center/cover no-repeat;position:relative}
+.ht-img.ic{display:grid;place-items:center;font-size:58px}
+.ht-lb{background:var(--tc);color:var(--white);padding:7px 12px;display:flex;flex-direction:column;line-height:1.15}
+.ht-lb b{font-family:var(--f-display);font-size:21px;text-shadow:0 2px 0 rgba(0,0,0,.15)}
+.ht-lb small{font-size:13px;font-weight:600;opacity:.95}
+.ht-badge{position:absolute;top:8px;right:8px;background:var(--white);border-radius:999px;padding:2px 10px;font-family:var(--f-display);font-weight:800;font-size:15px;box-shadow:0 3px 0 rgba(0,0,0,.15);z-index:2}
+.ht-badge.ok{background:var(--green);color:var(--white)}
+.figs{position:absolute;inset:auto 0 0 0;height:78%;display:flex;justify-content:center;align-items:flex-end;gap:2%}
+.figs img{height:100%;width:auto;max-width:30%;object-fit:contain;filter:drop-shadow(0 6px 3px rgba(0,0,0,.15))}
+.figs img.kid{height:74%}
+
+/* trang chủ */
+.h2-top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.h2-kick{background:var(--red);color:var(--white);border-radius:999px;padding:3px 14px;font-family:var(--f-display);font-weight:800;font-size:15px}
+.h2-top h1{font-size:clamp(26px,4.2vw,40px);color:var(--red-dark);text-shadow:0 3px 0 var(--white)}
+.h2-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:var(--gap)}
+.h2-grid .big{grid-column:span 5;min-height:340px}
+.h2-grid .sm{grid-column:span 2;min-height:230px}
+.hello{background:var(--white);border-radius:22px;padding:14px 16px;display:flex;gap:14px;align-items:center;box-shadow:var(--shadow);border:4px solid var(--line)}
+.hello img{width:64px;height:auto;max-height:96px;object-fit:contain;flex:none}
+.hello p{margin:0;max-width:70ch}
+.hello b{font-family:var(--f-display);font-size:18px;color:var(--red-dark)}
+
+/* màn hôm nay */
+.q-body{display:flex;gap:var(--gap);align-items:stretch}
+.q-stage{position:relative;flex:1.3;min-width:0;min-height:520px;border:5px solid var(--white);border-radius:24px;background:#E3F5D2 center/cover no-repeat;overflow:hidden;box-shadow:0 6px 0 rgba(58,42,26,.15)}
+.q-plate{position:absolute;left:14px;top:14px;right:14px;max-width:440px;background:var(--white);border:4px solid var(--green);border-radius:20px;padding:10px 14px;box-shadow:0 4px 0 rgba(0,0,0,.1);z-index:2}
+.q-plate small{font-weight:700;color:var(--muted);font-size:13px}
+.q-plate h3{font-size:24px;color:var(--ink);margin-top:2px}
+.q-plate p{margin:6px 0 0;font-size:14px;color:var(--muted)}
+.q-stage .figs{height:62%}
+.q-nav{position:absolute;left:14px;right:14px;bottom:14px;display:flex;justify-content:space-between;gap:8px;z-index:3}
+.pill{border:0;border-radius:999px;padding:8px 16px;font-family:var(--f-display);font-weight:800;font-size:16px;background:var(--white);color:var(--ink);box-shadow:0 4px 0 rgba(0,0,0,.15)}
+.pill.red{background:var(--red);color:var(--white);box-shadow:0 4px 0 var(--red-dark)}
+.pill.green{background:var(--green);color:var(--white);box-shadow:0 4px 0 var(--green-dark)}
+.pill:disabled{opacity:.45;cursor:default}
+.q-side{flex:1;min-width:0;background:var(--white);border-radius:24px;padding:14px;box-shadow:0 6px 0 rgba(58,42,26,.12);display:flex;flex-direction:column;gap:10px}
+.q-side h3{font-size:22px}
+.q-side .meta{font-size:13px;color:var(--muted);margin:-4px 0 2px}
+.tasks{display:flex;flex-direction:column;gap:10px}
+.task{border:4px solid var(--line);border-radius:18px;background:#FFFCF3;padding:10px 12px;display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:start}
+.task.done{border-color:var(--green);background:#F1FBF4}
+.task.off{opacity:.6;border-style:dashed}
+.t-ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:26px;background:var(--yellow-soft)}
+.t-main{min-width:0}
+.t-head{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+.t-head b{font-family:var(--f-display);font-size:19px}
+.mins{font-size:12px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.lang{font-size:11.5px;font-weight:800;border-radius:999px;padding:1px 8px;color:var(--white);background:var(--c)}
+.t-main p{margin:3px 0 0;font-size:15px}
+.t-main .b{margin-top:6px;background:var(--yellow-soft);border-radius:10px;padding:6px 10px;font-size:14px}
+.t-main .b em{font-style:normal;font-weight:700;color:var(--muted);font-size:12px;display:block}
+.t-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.mini{border:0;border-radius:999px;padding:3px 12px;font-weight:700;font-size:13px;background:var(--sky-bg);color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.tick{width:44px;height:44px;border-radius:50%;border:4px solid var(--line);background:var(--white);font-size:22px;display:grid;place-items:center;flex:none}
+.task.done .tick{background:var(--green);border-color:var(--green);color:var(--white)}
+details.lyr{margin-top:6px;font-size:14px}
+details.lyr summary{cursor:pointer;font-weight:700;color:var(--green-dark)}
+details.lyr div{white-space:pre-line;padding:6px 10px;border-left:4px solid var(--green);margin-top:4px;background:#F6FBF4;border-radius:0 10px 10px 0}
+.note{font-size:13px;color:var(--muted);margin:0}
+
+/* lịch 14 ngày */
+.week{display:flex;flex-direction:column;gap:10px}
+.week h3{font-size:22px;color:var(--ink);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.week h3 small{font-family:var(--f-body);font-size:13px;color:var(--muted);font-weight:600}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+.day{--tc:var(--teal);min-height:178px}
+.day .ht-img{min-height:92px;display:grid;place-items:center;font-family:var(--f-display);font-size:44px;font-weight:800;color:var(--ink);background:var(--yellow-soft)}
+.day .ht-img span{font-size:13px;font-weight:700;color:var(--muted);margin-top:-14px}
+.day .ht-lb b{font-size:15px;line-height:1.15}
+.day .ht-lb small{font-size:11.5px}
+.day.done{--tc:var(--green-dark)}
+.day.now{--tc:var(--red);animation:glow 1.6s ease-in-out infinite}
+.day.weekend .ht-img{background:#FFE9F1}
+@keyframes glow{0%,100%{box-shadow:0 6px 0 rgba(58,42,26,.18),0 0 0 0 rgba(227,38,46,0)}50%{box-shadow:0 6px 0 rgba(58,42,26,.18),0 0 0 7px rgba(227,38,46,.3)}}
+
+/* bảng chung (tải, nhật ký, hướng dẫn) */
+.panel{background:var(--white);border-radius:24px;padding:16px;box-shadow:0 6px 0 rgba(58,42,26,.12);display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel h3{font-size:22px}
+.panel .sub{margin:-6px 0 0;color:var(--muted);font-size:14px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);align-items:start}
+.files{display:flex;flex-direction:column;gap:8px}
+.file{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;border:3px solid var(--line);border-radius:16px;padding:8px 10px;background:#FFFCF3}
+.ftype{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:12px;color:var(--white);background:var(--c)}
+.file b{font-size:15px;display:block;word-break:break-word}
+.file small{color:var(--muted);font-size:13px}
+.lock-msg{background:var(--yellow-soft);border:3px dashed var(--yellow-deep);border-radius:16px;padding:10px 12px;font-size:14px}
+
+/* nhật ký */
+.q{border-top:2px dashed var(--line);padding-top:10px;display:flex;flex-direction:column;gap:6px}
+.q:first-of-type{border-top:0;padding-top:0}
+.q label,.q .ql{font-weight:700;font-size:15px}
+.q .tag{font-size:11.5px;font-weight:800;border-radius:999px;padding:1px 8px;color:var(--white);background:var(--c);margin-right:6px;vertical-align:1px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:3px solid var(--line);background:var(--white);border-radius:999px;padding:4px 12px;font-weight:700;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--white)}
+.chip.mid[aria-pressed="true"]{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+.chip.no[aria-pressed="true"]{background:#F6F0E2;border-color:#D9CBB0;color:var(--ink)}
+select,textarea{border:3px solid var(--line);border-radius:12px;padding:8px 10px;background:var(--white);width:100%;max-width:100%}
+textarea{min-height:76px;resize:vertical}
+.bar{height:16px;border-radius:999px;background:#F6F0E2;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--green);border-radius:999px}
+.big-ok{text-align:center;padding:18px;border:4px solid var(--green);border-radius:20px;background:#F1FBF4}
+.big-ok b{font-family:var(--f-display);font-size:24px;color:var(--green-dark)}
+
+/* hướng dẫn */
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.opt{flex:1 1 200px;text-align:left;border:4px solid var(--line);background:#FFFCF3;border-radius:18px;padding:10px 12px}
+.opt b{font-family:var(--f-display);font-size:18px;display:block}
+.opt small{color:var(--muted);font-size:13px}
+.opt[aria-pressed="true"]{border-color:var(--red);background:#FFF1F1}
+.steps{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.steps li{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start}
+.steps li i{font-style:normal;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;color:var(--white);background:var(--c)}
+
+/* dải dưới */
+.ribbon{position:fixed;left:calc(50% + var(--side)/2);transform:translateX(-50%);bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:30;display:flex;align-items:center;gap:8px;
+  background:var(--yellow);border:3px solid var(--white);border-radius:999px;padding:5px 14px 5px 6px;box-shadow:0 4px 0 rgba(0,0,0,.18);font-weight:700;font-size:14px;white-space:nowrap;max-width:calc(100vw - var(--side) - 32px)}
+.ribbon .brand{background:var(--red);color:var(--white);border-radius:999px;padding:2px 10px;font-family:var(--f-display);font-weight:800}
+.ribbon .txt{overflow:hidden;text-overflow:ellipsis}
+.ribbon button{border:0;background:none;color:var(--red-dark);font-weight:800;padding:0}
+.demo-tag{position:fixed;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:35;background:var(--ink);color:var(--white);font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px;opacity:.85}
+.toast{position:fixed;left:calc(50% + var(--side)/2);transform:translateX(-50%);bottom:76px;z-index:60;background:var(--ink);color:var(--white);border-radius:14px;padding:10px 16px;font-weight:600;font-size:14px;max-width:min(520px,calc(100vw - 40px));box-shadow:0 6px 18px rgba(0,0,0,.25)}
+
+/* ---------- điện thoại ---------- */
+@media (max-width:900px){
+  .h2-grid{grid-template-columns:repeat(2,1fr)}
+  .h2-grid .big,.h2-grid .sm{grid-column:span 1}
+  .h2-grid .big{grid-column:span 2;min-height:260px}
+  .days{grid-template-columns:repeat(4,1fr)}
+  .q-body,.cols{flex-direction:column;display:flex}
+  .q-stage{min-height:400px;flex:none}
+}
+@media (max-width:640px){
+  :root{--side:0px}
+  .side{top:auto;bottom:0;left:0;right:0;width:100%;height:auto;flex-direction:row;border-right:0;border-top:4px solid var(--yellow-deep);
+    padding:6px max(6px,env(safe-area-inset-right,0px)) max(6px,env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px));overflow-x:auto;gap:5px}
+  .sd-logo,.sd-kid{display:none}
+  .sd-btn{min-width:62px;flex:1;font-size:10.5px;padding:5px 2px}
+  .sd-ic{font-size:21px}
+  #app{margin-left:0}
+  .screen{padding-block:14px 150px}
+  .days{grid-template-columns:repeat(2,1fr)}
+  .ribbon{left:50%;bottom:calc(70px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 24px);font-size:12.5px}
+  .toast{left:50%;bottom:132px}
+  .q-wallet{margin-left:0;width:100%}
+  .q-wallet span{flex:1}
+  .q-stage{min-height:340px}
+  .q-plate h3{font-size:20px}
+  .task{grid-template-columns:40px 1fr auto}
+  .t-ic{width:40px;height:40px;font-size:22px}
+  .h2-grid .sm{min-height:180px}
+  .sd-btn{min-width:52px;font-size:10px}
+  .demo-tag{display:none}
+  .q-plate{padding:8px 12px}
+  .q-plate small,.q-plate p{display:none}
+  .q-stage .figs{height:58%}
+  .q-wallet b{font-size:16px}
+  .hello img{width:48px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ---------- bổ sung: em bé theo tuổi, bản đồ chương trình ---------- */
+.figs img.lie{height:34%;max-width:44%}
+.figs img.sit{height:42%;max-width:34%}
+.figs img.walk{height:54%;max-width:28%}
+.figs img.walk.s{height:46%}
+.figs img.pet{height:36%;max-width:26%}
+.sd-kid .ava img.svg{position:static;height:100%;width:100%;transform:none;object-fit:contain;padding:3px}
+.gd-sec{display:flex;flex-direction:column;gap:12px;background:var(--white);border-radius:24px;padding:14px;box-shadow:0 6px 0 rgba(58,42,26,.12);border:5px solid var(--gc)}
+.gd-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.gd-head img{height:64px;width:auto}
+.gd-head h3{font-size:24px;color:var(--gc)}
+.gd-head p{margin:0;color:var(--muted);font-size:14px;max-width:70ch}
+.chang-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.chang{border:3px solid var(--line);border-radius:18px;padding:10px;background:#FFFCF3;display:flex;flex-direction:column;gap:8px;min-width:0}
+.chang b.ct{font-family:var(--f-display);font-size:17px}
+.chang b.ct small{font-family:var(--f-body);font-weight:600;color:var(--muted);font-size:12.5px;margin-left:6px}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.vt{border:3px solid var(--line);background:var(--white);border-radius:14px;padding:6px 8px;text-align:left;display:flex;flex-direction:column;gap:1px;min-width:0}
+.vt i{font-style:normal;font-size:11px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+.vt b{font-size:13px;line-height:1.2}
+.vt small{font-size:11px;color:var(--muted);line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vt.cur{border-color:var(--red);background:#FFF1F1;box-shadow:0 0 0 3px rgba(227,38,46,.18)}
+.vt.ok{border-color:var(--green);background:#F1FBF4}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.legend i{width:14px;height:14px;border-radius:4px;border:3px solid var(--c);display:inline-block}
+.vnav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+@media (max-width:640px){ .vgrid{grid-template-columns:repeat(2,1fr)} .chang-grid{grid-template-columns:1fr} }
+</style>
+
+<nav class="side" aria-label="Điều hướng chính">
+  <button class="sd-logo" data-go="home" aria-label="Về trang chủ"><img src="img/huou_huou1_a.webp" alt=""><span>Vườn ươm<br>0–3 tuổi</span></button>
+  <div class="sd-kid"><span class="ava"><img class="svg" id="kidImg" src="img/be_tapdi.svg" alt=""></span><b>Mẹ bé Bông</b><small id="kidAge">19 tháng</small></div>
+  <button class="sd-btn c1" data-go="home"><span class="sd-ic">🏠</span>Trang chủ</button>
+  <button class="sd-btn c6" data-go="today"><span class="sd-ic">☀️</span>Hôm nay</button>
+  <button class="sd-btn c2" data-go="lich"><span class="sd-ic">🗓️</span>Lịch vòng</button>
+  <button class="sd-btn c3" data-go="ct"><span class="sd-ic">🗺️</span>Chương trình</button>
+  <button class="sd-btn c4" data-go="tai"><span class="sd-ic">📥</span>Tải học liệu</button>
+  <button class="sd-btn c5" data-go="nhatky"><span class="sd-ic">📒</span>Nhật ký</button>
+  <button class="sd-btn c1" data-go="huongdan" style="--b:#0E8F8A"><span class="sd-ic">❓</span>Hướng dẫn</button>
+</nav>
+
+<div class="demo-tag">Bản mẫu</div>
+<main id="app" aria-live="polite"></main>
+<div class="ribbon" role="note"><span class="brand">Anh-Trung-Kids</span><span class="txt">Nộp nhật ký đều 2 tuần/lần · dùng miễn phí</span><button data-go="huongdan" data-anchor="rule">Xem quy tắc →</button></div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="noi-dung.js" charset="utf-8"></script>
+<script src="chuong-trinh.js" charset="utf-8"></script>
+<script>
+(function(){
+var CT=window.CT, LYR=CT.LYR, YT=CT.YT;
+/* ======================= VÒNG MẪU SOẠN TAY: C07-V3 (vòng 39) ======================= */
+var SAMPLE_DAYS = [
+ {chuyen:"Đây là bà nội, đây là bà ngoại", sang:"Đồng dao Bà còng đi chợ: đọc 2 lần, ngón tay mẹ “đi” trên tay bé.", lyr:"bacong",
+  choi:"Xem 4–6 ảnh ông bà. Mẹ gọi tên, rồi hỏi “Bà đâu?” để bé chỉ.", nn:{l:"en",t:"Mẹ ôm bé ở câu “I love you”. Từ mới: grandma.",yt:"ska",b:"Where's grandma?"},
+  toi:"Album ảnh: kể 1 chuyện thật “Ngày mẹ còn bé, bà…”. Hát ru “À ơi”.", ob:"Cho bé xem ảnh ông bà, hỏi “Bà đâu?” để bé chỉ."},
+ {chuyen:"Đồ của ông bà", sang:"Bà còng: mẹ ngừng ở tiếng cuối để bé nói “còng”.", lyr:"bacong",
+  choi:"Phiếu 02 tuần 1: nối hình với bóng (kính, gậy, quạt, nón). Làm 3 cặp là đủ.", nn:{l:"zh",t:"你好 nǐ hǎo, 再见 zàijiàn: chào búp bê “奶奶” theo audio A3.",b:"跟爷爷说你好。Gēn yéye shuō nǐ hǎo."},
+  toi:"Truyện tranh bé thích; hát ru.", ob:"Cùng bé làm phiếu nối hình với bóng."},
+ {chuyen:"Bà thích màu đỏ", sang:"Thơ Bà và cháu (lời trong gói); ôn Bà còng.", lyr:"bacong",
+  choi:"Chia 4 khăn đỏ, vàng vào 2 rổ: “Khăn đỏ của bà ở đâu?”", nn:{l:"en",t:"Làm động tác theo bài hát. Từ mới: grandpa.",yt:"open",b:"Say hello to grandpa!"},
+  toi:"Album ảnh ông; hát ru.", ob:"Chia khăn đỏ, khăn vàng vào 2 rổ."},
+ {chuyen:"Làm bánh biếu ông bà", sang:"Bà còng + Bà và cháu.", lyr:"bacong",
+  choi:"Nặn đất: lăn viên to, ấn dẹt thành “bánh”, xếp vào đĩa.", nn:{l:"zh",t:"爷爷 yéye, 奶奶 nǎinai: chỉ ảnh ông bà nội theo audio A3.",b:"奶奶在哪儿？Nǎinai zài nǎr?"},
+  toi:"Truyện; hát ru.", ob:"Nặn “bánh” bằng đất nặn hoặc bột mì."},
+ {chuyen:"Bữa cơm nhà bà", sang:"Ôn 2 bài, bé đọc tiếp tiếng cuối.", lyr:"bacong",
+  choi:"Xúc thìa: chuyển bông gòn hoặc xốp cắt to từ bát này sang bát kia.", nn:{l:"en",t:"Vỗ tay, dậm chân cùng mẹ.",yt:"happy",b:"Give grandma a hug."},
+  toi:"Album; hát ru.", ob:"Cho bé xúc bông gòn từ bát này sang bát kia."},
+ {chuyen:"Gọi điện cho ông bà", sang:"Gọi video: bé “đọc” Bà còng cho ông bà nghe.", lyr:"bacong",
+  choi:"Xé giấy màu, dán thành “vườn rau của bà” để khoe ông bà lần gọi sau.", nn:{l:"both",t:"Nói bye-bye và 再见 khi tắt máy; ôn grandma, 奶奶.",b:"Let's call grandma. · 我们给外婆打电话。"},
+  toi:"Truyện; hát ru.",
+  short:{choi:"Nối hình với bóng (phiếu 02); gọi video ông bà, bé “đọc” Bà còng.", nn:"Skidamarink + 你好, 再见.", yt:"ska"}},
+ {chuyen:"Đi chợ như bà còng", sang:"Ôn Bà còng trên đường đi.", lyr:"bacong",
+  choi:"Đi chợ hoặc siêu thị thật: gọi tên tôm, tép, rau; bé cầm 1 bó rau.", nn:{l:"none",t:"Nghỉ. Chỉ gắn 1–2 từ khi tắm, khi ăn."},
+  toi:"Hát ru tiếng Việt.",
+  short:{choi:"Chia khăn 2 màu hoặc nặn bánh; đi chợ cùng bé.", nn:"Open Shut Them.", yt:"open"}},
+ {chuyen:"Quê nội ở xa, phải đi xe", sang:"Đồng dao Dung dăng dung dẻ: nắm tay bé đung đưa, đến “ngồi xệp xuống đây” thì cùng ngồi.", lyr:"dungdang",
+  choi:"To – nhỏ: nón to/nón nhỏ, quạt to/quạt nhỏ. “Đưa mẹ cái to.”", nn:{l:"en",t:"Ôn bye-bye.",yt:"alli",b:"Wave bye-bye!"},
+  toi:"Ảnh nhà ông bà, kể “Nhà bà có sân, có gà…”; hát ru.", ob:"Đưa bé đồ to, đồ nhỏ, hỏi “Cái nào to?”"},
+ {chuyen:"Con vật nhà bà", sang:"Dung dăng dung dẻ.", lyr:"dungdang", pets:true,
+  choi:"Phiếu 02 tuần 2: nối hình với bóng (gà, chó, mèo, trâu); bắt chước tiếng kêu.", nn:{l:"zh",t:"外公 wàigōng, 外婆 wàipó (ông bà ngoại), so với 爷爷, 奶奶 (ông bà nội).",b:"抱抱奶奶。Bàobao nǎinai."},
+  toi:"Truyện con vật; hát ru.", ob:"Làm phiếu nối bóng con vật, bắt chước tiếng gà, chó, mèo."},
+ {chuyen:"Làm quà tặng bà", sang:"Thơ Thăm nhà bà, chỉ đọc khổ đầu.", lyr:"dungdang",
+  choi:"Xâu vòng to vào dây thành “vòng tặng bà”. 3 vòng là đủ.", nn:{l:"en",t:"Ôn bài hát. Từ mới: hug.",yt:"ska",b:"Give grandma a hug."},
+  toi:"Album; hát ru.", ob:"Giúp bé xâu 3 vòng to vào dây."},
+ {chuyen:"Mời ông uống trà", sang:"Dung dăng + Bà còng.", lyr:"dungdang",
+  choi:"Rót nước nguội từ cốc sang chậu, trải khăn bên dưới.", nn:{l:"zh",t:"抱抱 bàobao: nói khi ôm bé; ôn 爷爷, 奶奶.",b:"抱抱奶奶。Bàobao nǎinai."},
+  toi:"Truyện; hát ru.", ob:"Cho bé rót nước nguội từ cốc sang chậu."},
+ {chuyen:"Album nhà mình", sang:"Thăm nhà bà (khổ đầu).", lyr:"dungdang",
+  choi:"Bé tự lật từng trang album, chỉ ông, bà, bố, mẹ, bé.", nn:{l:"en",t:"Ôn grandma, grandpa, hug; bài này dùng trước giờ ngủ.",yt:"sleep",b:"Where's grandma?"},
+  toi:"Album; hát ru.", ob:"Cùng bé lật album, kể 1 chuyện ngày xưa."},
+ {chuyen:"Về quê (đi thật hoặc chơi giả vờ)", sang:"Bé đọc tiếp 2 bài đồng dao.", lyr:"dungdang",
+  choi:"Giả vờ: xếp ghế làm xe, chở búp bê về thăm bà, mang “vòng tặng bà”.", nn:{l:"both",t:"Ôn grandma, grandpa, 奶奶, 爷爷, 外婆, 外公."},
+  toi:"Truyện; hát ru.",
+  short:{choi:"Nối bóng con vật (phiếu 02 tuần 2); xâu vòng tặng bà.", nn:"See You Later, Alligator.", yt:"alli"}},
+ {chuyen:"Kể lại cho bố nghe", sang:"Bé chọn bài thích nhất.", lyr:"dungdang",
+  choi:"Chơi lại trò bé thích nhất trong 2 tuần.", nn:{l:"none",t:"Nghỉ."},
+  toi:"Hát ru. Sau khi bé ngủ, mẹ điền nhật ký vòng (10 phút, hạn 21:00).", diary:true,
+  short:{choi:"Rót nước “mời ông uống trà”; chơi giả vờ về quê.", nn:null}}
+];
+var SAMPLE_OBS=[["vi","Đọc tiếp tiếng cuối câu “Bà còng đi chợ trời mưa”"],["vi","Chỉ và gọi “ông”, “bà” khi xem ảnh"],["vi","Ghép 2 từ (“bà ơi”, “ông bế”)"],["td","Nối đúng 3 cặp hình – bóng"],["td","Xâu 3 vòng to vào dây"],["en","Vẫy tay khi nghe “bye-bye”"],["zh","Chỉ đúng ảnh khi nghe 奶奶, 爷爷"],["tc","Chào ông bà qua video"]];
+var MTAG={vi:["Tiếng Việt","var(--vi)"],td:["Tư duy · tay","var(--orange)"],en:["Tiếng Anh","var(--en)"],zh:["Tiếng Trung","var(--zh)"],tc:["Tình cảm","var(--pink)"]};
+var THU=["Thứ Hai","Thứ Ba","Thứ Tư","Thứ Năm","Thứ Sáu","Thứ Bảy","Chủ nhật"];
+var BG={home:"img/ls_home.webp",vuon:"img/bg_vuon.webp",park:"img/ls_park.webp"};
+var BABY={sosinh:"img/be_soSinh.svg",ngoi:"img/be_ngoi.svg",tapdi:"img/be_tapdi.svg"};
+
+/* ======================= TRẠNG THÁI ======================= */
+var KEY="vuon-uom-ct-v2";
+var S={age:19,vong:39,today:5,set:{nhip:"du",nn:"A",cham:"me"},done:{},diary:{},sent:{}};
+(function seed(){ for(var d=1;d<=4;d++){ ["sang","choi","nn","toi"].forEach(function(k){ if(!(d===3&&k==="nn")) S.done["39-"+d+"-"+k]=true; }); } for(var g=1;g<39;g++) S.sent[g]=true; })();
+try{ var raw=localStorage.getItem(KEY); if(raw){ var o=JSON.parse(raw); if(o&&o.set&&o.vong) S=o; } }catch(e){}
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
+
+var view={name:"home",g:S.vong,day:S.today,anchor:null};
+var app=document.getElementById("app");
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function zh(s){ return esc(s).replace(/([㐀-鿿　-〿！-？]+)/g,'<span class="zh">$1</span>'); }
+function toast(msg){ var t=document.getElementById("toast"); t.textContent=msg; t.hidden=false; clearTimeout(toast._t); toast._t=setTimeout(function(){t.hidden=true;},2800); }
+function thu(n){ return THU[(n-1)%7]; }
+function isWeekend(n){ return (n-1)%7>=5; }
+function months(g){ return Math.floor((g-1)/2); }
+function changRange(c){ return ((c-1)*3)+"–"+(c*3)+" tháng"; }
+
+/* ngày của vòng: bản mẫu soạn tay cho vòng 39, còn lại sinh từ chương trình */
+function getDays(g){
+  if(g===39) return SAMPLE_DAYS.map(function(d,i){ var o=Object.assign({},d); o.w=i<7?1:2; o.wd=i%7;
+    if(o.nn&&o.nn.yt){ o.nn=Object.assign({},o.nn,{song:YT[o.nn.yt]}); }
+    if(o.short&&o.short.yt){ o.short=Object.assign({},o.short,{u:YT[o.short.yt].u}); }
+    return o; });
+  return CT.days(g);
+}
+function dayTasks(g,n){
+  var I=CT.info(g), d=getDays(g)[n-1], st=S.set, shortMode=st.nhip==="ngan", we=isWeekend(n), list=[], m=I.gd.min;
+  list.push({k:"sang",ic:"🌅",name:"Sáng",min:m[0],lang:"vi",txt:d.sang,lyr:d.lyr});
+  var choiTxt=d.choi, nn=d.nn||{l:"none",t:""}, song=nn.song||null, nnTxt=nn.t, choiOff=false, nnOff=false, nnL=nn.l;
+  if(shortMode){
+    if(!we){ choiOff=true; nnOff=true; }
+    else if(d.short){ choiTxt=d.short.choi; if(d.short.nn===null){ nnTxt="Nghỉ."; nnL="none"; song=null; } else { nnTxt="Bài hát của tuần: "+d.short.nn+"."; song={t:d.short.nn,u:d.short.u||""}; if(nnL==="none") nnL="en"; } }
+  }
+  var who=(st.cham==="ongba"&&!we&&d.ob)?"ongba":"me";
+  list.push({k:"choi",ic:"🧩",name:who==="ongba"?"Chơi · ông bà làm ban ngày":"Chơi",min:shortMode&&we?"30–40 phút cả buổi":m[1],lang:"td",
+    txt:choiOff?"Để dành cho Thứ Bảy, Chủ nhật.":(who==="ongba"?d.ob:choiTxt),off:choiOff});
+  var words=I.vong.en.slice(0,2).join(", ")+(I.vong.zh.length?", "+I.vong.zh[0][0]:"");
+  list.push({k:"nn",ic:nnL==="zh"?"🐼":(nnL==="both"?"🌏":"🎵"),name:"Ngoại ngữ",min:nnL==="none"?"":m[2],lang:nnL,
+    txt:nnOff?"Để dành cho cuối tuần. Lúc tắm, ăn: "+words+".":nnTxt,
+    song:nnOff?null:song, b:(st.nn==="B"&&!nnOff&&nn.b&&nnL!=="none")?nn.b:null, off:nnOff||nnL==="none"});
+  list.push({k:"toi",ic:"🌙",name:"Tối",min:d.diary?m[3]+" + 10 phút nhật ký":m[3],lang:"vi",txt:d.toi,diary:d.diary});
+  return list;
+}
+function dayProgress(g,n){ var t=dayTasks(g,n).filter(function(x){return !x.off;}); var c=t.filter(function(x){return S.done[g+"-"+n+"-"+x.k];}).length; return [c,t.length]; }
+function dayDone(g,n){ var p=dayProgress(g,n); return p[1]>0&&p[0]===p[1]; }
+function daysDoneCount(g){ var c=0; for(var i=1;i<=14;i++){ if(dayProgress(g,i)[0]>0) c++; } return c; }
+function labelSet(){ var s=S.set; return (s.nhip==="du"?"Nhịp đủ":"Nhịp ngắn")+" · Bản "+s.nn+" · "+(s.cham==="me"?"Mẹ chăm":"Ông bà chăm"); }
+
+/* ======================= HÌNH ======================= */
+function figs(g,n){
+  var I=CT.info(g), be=I.gd.be, x=I.theme.x, d=n?getDays(g)[n-1]:null;
+  var baby='<img class="'+(be==="sosinh"?"lie":be==="ngoi"?"sit":"walk"+(I.gd.id===3?" s":""))+'" src="'+BABY[be]+'" alt="Bé">';
+  var me='<img src="img/fam_bong_me_a.webp" alt="Mẹ">', ong='<img src="img/fam_bong_ong_a.webp" alt="Ông">', ba='<img src="img/fam_bong_ba_a.webp" alt="Bà">';
+  var cun='<img class="pet" src="img/pets_cun_ngoi_a.webp" alt="Cún">', meo='<img class="pet" src="img/pets_meo_ngoi_a.webp" alt="Mèo">';
+  var inner;
+  if(d&&d.pets) inner=ba+baby+cun+meo;
+  else if(x==="ongba") inner=ong+baby+ba;
+  else if(x==="pets") inner=me+baby+cun+meo;
+  else inner=me+baby;
+  return '<div class="figs">'+inner+'</div>';
+}
+function bgOf(g,n){ var I=CT.info(g); if(g===39) return n&&n>7?BG.vuon:BG.home; return BG[I.theme.bg]||BG.home; }
+
+/* ======================= KHUNG CHUNG ======================= */
+function wallet(g){
+  var I=CT.info(g), isCur=g===S.vong, left=14-S.today, sent=!!S.sent[g];
+  return '<div class="q-wallet"><span><small>Chặng '+I.chang+'</small><b>Vòng '+I.vInChang+'/6</b></span>'+
+   '<span><small>Ngày</small><b>'+(isCur?S.today:"–")+'/14</b></span>'+
+   '<span class="hl"><small>Nộp nhật ký (CN)</small><b>'+(sent?"Đã nộp ✓":(isCur?"còn "+left+" ngày":(g>S.vong?"chưa tới":"–")))+'</b></span></div>';
+}
+function topBar(g,title,sub){
+  return '<div class="q-top"><button class="q-back" data-go="home" aria-label="Về trang chủ">←</button><h2>'+title+(sub?'<small>'+sub+'</small>':'')+'</h2>'+wallet(g)+'</div>';
+}
+
+/* ======================= MÀN HÌNH ======================= */
+function rHome(){
+  var g=S.vong, I=CT.info(g), p=dayProgress(g,S.today), d=getDays(g)[S.today-1];
+  var shortDay=S.set.nhip==="ngan"&&!isWeekend(S.today);
+  return '<section class="screen sky"><div class="inner">'+
+  '<div class="h2-top"><span class="h2-kick" style="background:'+I.gd.color+'">Giai đoạn '+I.gd.id+' · '+I.gd.ten+' · '+I.gd.tu+'–'+I.gd.den+' tháng</span><h1>Vòng '+I.vInChang+': '+esc(I.vong.sub)+'</h1></div>'+
+  '<div class="hello"><img src="img/huou_huou1_a.webp" alt=""><p><b>Chào mẹ bé Bông!</b><br>Bé '+S.age+' tháng, đang ở chặng '+I.chang+' (chủ đề “'+esc(I.theme.ten)+'”). Hôm nay là ngày '+S.today+' ('+thu(S.today)+'): 4 việc nhỏ, khoảng '+(shortDay?"15":"30–40")+' phút, mẹ làm cùng con lúc nào tiện trong ngày.</p></div>'+
+  '<div class="h2-grid">'+
+   '<button class="ht big" style="--tc:var(--red)" data-go="today" data-g="'+g+'" data-day="'+S.today+'"><span class="ht-badge">'+p[0]+'/'+p[1]+' việc</span><span class="ht-img" style="background-image:url('+bgOf(g,S.today)+')">'+figs(g,S.today)+'</span><span class="ht-lb"><b>☀️ Hôm nay · Ngày '+S.today+'</b><small>'+esc(d.chuyen)+'</small></span></button>'+
+   '<button class="ht big" style="--tc:var(--green-dark)" data-go="lich" data-g="'+g+'"><span class="ht-badge ok">'+daysDoneCount(g)+'/14 ngày</span><span class="ht-img" style="background-image:url('+(I.theme.bg==="home"?BG.vuon:BG[I.theme.bg])+')">'+figs(g)+'</span><span class="ht-lb"><b>🗓️ Lịch 14 ngày</b><small>'+esc(I.vong.vi[0].t)+' · '+esc(I.vong.vi[1].t)+'</small></span></button>'+
+   '<button class="ht sm" style="--tc:var(--purple)" data-go="ct"><span class="ht-img ic">🗺️</span><span class="ht-lb"><b>Chương trình</b><small>72 vòng · 0–36 tháng</small></span></button>'+
+   '<button class="ht sm" style="--tc:var(--orange)" data-go="tai" data-g="'+g+'"><span class="ht-img ic">📥</span><span class="ht-lb"><b>Tải học liệu</b><small>Phiếu in + audio</small></span></button>'+
+   '<button class="ht sm" style="--tc:var(--pink)" data-go="nhatky" data-g="'+g+'"><span class="ht-img" style="background-image:url(img/ls_album.webp)"></span><span class="ht-lb"><b>Nhật ký vòng</b><small>'+(S.sent[g]?"Đã nộp":"Hạn: Chủ nhật tuần 2")+'</small></span></button>'+
+   '<button class="ht sm" style="--tc:var(--blue)" data-go="huongdan" data-anchor="words"><span class="ht-img ic">🔤</span><span class="ht-lb"><b>Từ Anh – Trung</b><small>'+esc(I.vong.en.slice(0,2).join(" · "))+'</small></span></button>'+
+   '<button class="ht sm" style="--tc:var(--teal)" data-go="huongdan"><span class="ht-img ic">⚙️</span><span class="ht-lb"><b>Tuổi & phiên bản</b><small>'+labelSet()+'</small></span></button>'+
+  '</div></div></section>';
+}
+
+function rToday(){
+  var g=view.g, n=view.day, I=CT.info(g), d=getDays(g)[n-1], tasks=dayTasks(g,n), p=dayProgress(g,n);
+  var html='<section class="screen pink"><div class="inner">'+topBar(g,'☀️ Ngày '+n+' · '+thu(n),'Chặng '+I.chang+' · Vòng '+I.vInChang+' · '+esc(I.vong.sub)+' · tuần '+(n<=7?1:2))+
+  '<div class="q-body"><div class="q-stage" style="background-image:url('+bgOf(g,n)+')">'+
+   '<div class="q-plate" style="border-color:'+I.gd.color+'"><small>Câu chuyện nhỏ của ngày · mẹ nói bằng tiếng Việt cả ngày</small><h3>“'+esc(d.chuyen)+'”</h3><p>'+(S.set.nhip==="ngan"&&!isWeekend(n)?"Nhịp ngắn: hôm nay chỉ cần Sáng + Tối, khoảng 15 phút.":"Đã làm "+p[0]+"/"+p[1]+" việc.")+'</p></div>'+
+   figs(g,n)+
+   '<div class="q-nav"><button class="pill" data-day-step="-1" '+(n<=1?"disabled":"")+'>← Ngày '+(n>1?n-1:"")+'</button><button class="pill" data-day-step="1" '+(n>=14?"disabled":"")+'>Ngày '+(n<14?n+1:"")+' →</button></div>'+
+  '</div><div class="q-side"><h3>Việc hôm nay</h3><p class="meta">'+labelSet()+' · <button class="mini" data-go="huongdan">Đổi</button></p><div class="tasks">';
+  tasks.forEach(function(t){
+    var id=g+"-"+n+"-"+t.k, done=!!S.done[id];
+    var lang=t.lang==="en"?'<span class="lang" style="--c:var(--en)">Anh</span>':t.lang==="zh"?'<span class="lang" style="--c:var(--zh)">Trung</span>':t.lang==="both"?'<span class="lang" style="--c:var(--purple)">Anh + Trung</span>':t.lang==="vi"?'<span class="lang" style="--c:var(--vi)">Việt</span>':t.lang==="td"?'<span class="lang" style="--c:var(--orange)">Tư duy · tay</span>':'';
+    html+='<div class="task'+(done?" done":"")+(t.off?" off":"")+'"><span class="t-ic">'+t.ic+'</span><div class="t-main"><div class="t-head"><b>'+esc(t.name)+'</b>'+lang+(t.min?'<span class="mins">'+t.min+'</span>':'')+'</div><p>'+zh(t.txt)+'</p>';
+    if(t.b) html+='<div class="b"><em>Bản B · câu mẹ tự nói</em>'+zh(t.b)+'</div>';
+    var links='';
+    if(t.song&&t.song.u) links+='<a class="mini" href="'+esc(t.song.u)+'" target="_blank" rel="noopener">▶ '+zh(t.song.t)+(/youtube\.com\/(channel|@)/.test(t.song.u)?' (tìm trên kênh)':'')+'</a>';
+    else if(t.song&&t.song.t) links+='<span class="mini" style="background:var(--yellow-soft);color:var(--ink)">🎵 '+zh(t.song.t)+' (file trong gói)</span>';
+    if(t.k==="sang"&&t.lyr) links+='<button class="mini" data-speak="'+t.lyr+'">🔈 Nghe thử</button>';
+    if(t.diary) links+='<button class="mini" data-go="nhatky" data-g="'+g+'">📒 Mở nhật ký</button>';
+    if(links) html+='<div class="t-links">'+links+'</div>';
+    if(t.k==="sang"&&t.lyr) html+='<details class="lyr"><summary>Lời đồng dao</summary><div>'+esc(LYR[t.lyr])+'</div></details>';
+    html+='</div>'+(t.off?'<span></span>':'<button class="tick" data-tick="'+id+'" aria-pressed="'+done+'" aria-label="Đánh dấu đã làm: '+esc(t.name)+'">'+(done?"✓":"")+'</button>')+'</div>';
+  });
+  html+='</div><p class="note">'+(I.gd.id===1?"Đặt bé nằm ngửa khi ngủ; chỉ nằm sấp khi bé thức và có mẹ ngồi cạnh.":"Luôn ngồi cạnh bé khi chơi; cất đồ nhỏ, đất nặn, bông gòn, dây ngay sau khi chơi.")+'</p></div></div></div></section>';
+  return html;
+}
+
+function vongNav(g,go){
+  return '<div class="vnav"><button class="pill" data-vstep="-1" data-to="'+go+'" '+(g<=1?"disabled":"")+'>← Vòng trước</button>'+
+    (g!==S.vong?'<button class="pill red" data-gov="'+S.vong+'" data-to="'+go+'">Về vòng của bé</button>':'')+
+    '<button class="pill" data-vstep="1" data-to="'+go+'" '+(g>=72?"disabled":"")+'>Vòng sau →</button></div>';
+}
+function rLich(){
+  var g=view.g, I=CT.info(g), D=getDays(g), isCur=g===S.vong;
+  var html='<section class="screen"><div class="inner">'+topBar(g,'🗓️ Lịch 14 ngày · '+esc(I.vong.sub),'Chặng '+I.chang+' ('+changRange(I.chang)+') · Vòng '+I.vInChang+' · bé khoảng '+months(g)+' tháng · chủ đề “'+esc(I.theme.ten)+'”')+vongNav(g,"lich")+(I.det&&I.det.note?'<div class="note">💡 '+esc(I.det.note)+'</div>':'');
+  [1,2].forEach(function(w){
+    var vi=I.vong.vi[w-1];
+    html+='<div class="week"><h3>Tuần '+w+'<small>'+(vi.ty==="r"?"Hát ru":vi.ty==="h"?"Bài hát":vi.ty==="t"?"Thơ":"Đồng dao")+': '+esc(vi.t)+' · Anh: '+esc(I.vong.en.join(", "))+(I.vong.zh.length?' · Trung: <span class="zh">'+I.vong.zh.map(function(z){return z[0];}).join("、")+'</span>':'')+'</small></h3><div class="days">';
+    for(var i=0;i<7;i++){ var n=(w-1)*7+i+1, p=dayProgress(g,n), now=isCur&&n===S.today, cls="day"+(dayDone(g,n)?" done":"")+(now?" now":"")+(isWeekend(n)?" weekend":"");
+      html+='<button class="ht '+cls+'" data-go="today" data-g="'+g+'" data-day="'+n+'">'+(dayDone(g,n)?'<span class="ht-badge ok">✓</span>':(now?'<span class="ht-badge">Hôm nay</span>':(p[0]?'<span class="ht-badge">'+p[0]+'/'+p[1]+'</span>':'')))+
+       '<span class="ht-img">'+n+'<span>'+thu(n)+'</span></span><span class="ht-lb"><b>'+esc(D[n-1].chuyen)+'</b>'+(n===14?'<small>Nộp nhật ký</small>':'')+'</span></button>'; }
+    html+='</div></div>';
+  });
+  return html+'</div></section>';
+}
+
+function rCT(){
+  var html='<section class="screen"><div class="inner">'+topBar(S.vong,'🗺️ Chương trình 0–36 tháng','5 giai đoạn · 12 chặng (3 tháng) · 72 vòng (2 tuần) · 1.008 ngày')+
+   '<div class="legend"><span><i style="--c:var(--red)"></i>Vòng bé đang học</span><span><i style="--c:var(--green)"></i>Đã nộp nhật ký</span><span><i style="--c:var(--line)"></i>Chưa tới</span></div>';
+  CT.GD.forEach(function(gd){
+    html+='<div class="gd-sec" style="--gc:'+gd.color+'"><div class="gd-head"><img src="'+BABY[gd.be]+'" alt=""><div><h3>Giai đoạn '+gd.id+' · '+gd.ten+'</h3><p>'+gd.tu+'–'+gd.den+' tháng · vòng '+gd.from+'–'+gd.to+' · ngoại ngữ mỗi tuần: '+
+      gd.nn.filter(function(x){return x==="en"||x==="both";}).length+' buổi tiếng Anh, '+gd.nn.filter(function(x){return x==="zh"||x==="both";}).length+' buổi tiếng Trung</p></div></div><div class="chang-grid">';
+    for(var c=Math.ceil(gd.from/6); c<=Math.ceil(gd.to/6); c++){
+      html+='<div class="chang"><b class="ct">Chặng '+c+'<small>'+changRange(c)+'</small></b><div class="vgrid">';
+      for(var v=1; v<=6; v++){ var g=(c-1)*6+v, I=CT.info(g);
+        html+='<button class="vt'+(g===S.vong?" cur":"")+(S.sent[g]?" ok":"")+'" data-gov="'+g+'" data-to="lich"><i>Vòng '+v+' · '+months(g)+' tháng</i><b>'+esc(I.vong.sub)+'</b><small>'+esc(I.theme.ten)+'</small></button>';
+      }
+      html+='</div></div>';
+    }
+    html+='</div></div>';
+  });
+  return html+'</div></section>';
+}
+
+function rTai(){
+  var g=view.g, I=CT.info(g), isCur=g===S.vong;
+  var html='<section class="screen"><div class="inner">'+topBar(g,'📥 Tải học liệu','Gói C'+String(I.chang).padStart(2,"0")+'-V'+I.vInChang+' · '+esc(I.vong.sub)+' · mở mỗi thứ Hai lúc 6:00')+vongNav(g,"tai")+'<div class="cols">';
+  [1,2].forEach(function(w){
+    var open = g<S.vong || (isCur&&(w===1||S.today>=8));
+    var code='C'+String(I.chang).padStart(2,"0")+'-V'+I.vInChang+'-T'+w;
+    html+='<div class="panel"><h3>Gói tuần '+w+' · '+code+'</h3><p class="sub">'+esc(I.vong.vi[w-1].t)+'</p>';
+    if(!open) html+='<div class="lock-msg">'+(g>S.vong?"Gói này mở khi bé tới vòng này.":"Gói tuần 2 tự mở vào thứ Hai tuần sau.")+'</div>';
+    html+='<div class="files">';
+    CT.files(g,w).forEach(function(f){
+      html+='<div class="file"><span class="ftype" style="--c:'+f[1]+'">'+f[0]+'</span><div><b>'+code+'_'+esc(f[2])+'</b><small>'+zh(f[3])+'</small></div>'+
+       (f[4]==="tts"&&open?'<button class="pill" data-speak="'+I.vong.vi[w-1].k+'" aria-label="Nghe thử">🔈</button>':'<button class="pill'+(open?" green":"")+'" '+(open?'data-dl="1"':'disabled')+'>Tải</button>')+'</div>';
+    });
+    html+='</div></div>';
+  });
+  return html+'</div></div></section>';
+}
+
+function rNhatKy(){
+  var g=view.g, I=CT.info(g), obs=g===39?SAMPLE_OBS:((I.det&&I.det.obs)||I.gd.obs), dia=S.diary[g]||(S.diary[g]={obs:{}});
+  var html='<section class="screen pink"><div class="inner">'+topBar(g,'📒 Nhật ký · '+esc(I.vong.sub),'Chặng '+I.chang+' · Vòng '+I.vInChang+' · khoảng 10 phút · hạn 21:00 Chủ nhật tuần 2');
+  if(S.sent[g]){
+    return html+'<div class="panel"><div class="big-ok"><b>Đã nộp nhật ký vòng này ✓</b><p>Cô gửi nhận xét riêng cho bé Bông trong 3 ngày làm việc. Vòng sau tiếp tục miễn phí.</p><button class="pill" id="unsend">Sửa nhật ký</button></div></div></div></section>';
+  }
+  var dd=daysDoneCount(g);
+  html+='<form class="cols" id="diary"><div class="panel"><h3>A–B · Hai tuần qua</h3>'+
+   '<div class="q"><span class="ql">Bé Bông · '+months(g)+' tháng · '+esc(I.vong.sub)+'</span></div>'+
+   '<div class="q"><span class="ql">Số ngày đã làm (web tự đếm từ ô tick)</span><div class="bar" aria-hidden="true"><i style="width:'+Math.round(dd/14*100)+'%"></i></div><span>'+dd+'/14 ngày</span></div>'+
+   '<div class="q"><label for="thich">Khối bé thích nhất</label><select id="thich"><option value="">Chọn…</option><option>Thơ, đồng dao, hát ru</option><option>Tư duy, vận động tinh</option><option>Bài hát tiếng Anh</option><option>Tiếng Trung</option><option>Truyện, sách buổi tối</option></select></div>'+
+   '<h3>C · Quan sát</h3><p class="sub">“Đang tập” hay “Chưa” đều là câu trả lời đúng. Không cần ép bé làm lại để trả lời.</p>';
+  obs.forEach(function(o,i){ var v=dia.obs[i]||"";
+    html+='<div class="q"><span class="ql"><span class="tag" style="--c:'+MTAG[o[0]][1]+'">'+MTAG[o[0]][0]+'</span>Bé có '+zh(o[1].charAt(0).toLowerCase()+o[1].slice(1))+'?</span><div class="chips" role="group">'+
+      [["co","Có rồi",""],["dang","Đang tập","mid"],["chua","Chưa","no"]].map(function(c){return '<button type="button" class="chip '+c[2]+'" data-obs="'+i+'" data-v="'+c[0]+'" aria-pressed="'+(v===c[0])+'">'+c[1]+'</button>';}).join("")+'</div></div>';
+  });
+  html+='</div><div class="panel"><h3>D–F · Mẹ kể thêm</h3>'+
+   '<div class="q"><label for="kk">Một khoảnh khắc mẹ nhớ nhất</label><textarea id="kk" placeholder="Ví dụ: Bông cười to khi mẹ ú òa sau rèm.">'+esc(dia.kk||"")+'</textarea><p class="note">Muốn gửi video ≤ 30 giây, mẹ gửi qua Zalo của cô. Video chỉ cô xem.</p></div>'+
+   '<div class="q"><label for="ngu">Bé ngủ trung bình mỗi ngày</label><select id="ngu"><option value="">Chọn…</option><option>Dưới 11 giờ</option><option>11–14 giờ</option><option>14–17 giờ</option><option>Trên 17 giờ</option></select></div>'+
+   '<div class="q"><label for="mh">Thời gian màn hình mỗi ngày</label><select id="mh"><option value="">Chọn…</option><option>0</option><option>Dưới 15 phút</option><option>15–30 phút</option><option>Trên 30 phút</option></select></div>'+
+   '<div class="q"><label for="kho">Mẹ vướng ở đâu, muốn hỏi cô gì?</label><textarea id="kho">'+esc(dia.kho||"")+'</textarea></div>'+
+   '<button class="pill red" type="submit">Nộp nhật ký</button><p class="note">Bản mẫu: bấm nộp chỉ lưu trên máy này, chưa gửi cho CES.</p></div></form></div></section>';
+  return html;
+}
+
+function rHuongDan(){
+  var s=S.set, I=CT.info(S.vong);
+  function opt(group,val,title,desc){ return '<button class="opt" data-set="'+group+'" data-v="'+val+'" aria-pressed="'+(s[group]===val)+'"><b>'+title+'</b><small>'+desc+'</small></button>'; }
+  var ages=''; for(var a=0;a<36;a++) ages+='<option value="'+a+'"'+(a===S.age?" selected":"")+'>'+a+' tháng</option>';
+  var words=I.vong.en.map(function(w){return '<div class="file" style="grid-template-columns:1fr"><b style="color:var(--en)">'+esc(w)+'</b></div>';}).join("")+
+    I.vong.zh.map(function(z){return '<div class="file" style="grid-template-columns:1fr 1fr 1fr"><b class="zh" style="color:var(--zh)">'+z[0]+'</b><span>'+esc(z[1])+'</span><span>'+esc(z[2])+'</span></div>';}).join("");
+  return '<section class="screen sky"><div class="inner">'+topBar(S.vong,'❓ Hướng dẫn','Tuổi của bé và phiên bản hợp với nhà mình · đổi lúc nào cũng được')+
+  '<div class="cols"><div class="panel"><h3>Bé được mấy tháng?</h3><p class="sub">Web xếp bé vào đúng vòng theo tháng tuổi. Bản mẫu: đổi tuổi để xem chương trình của tuổi khác.</p>'+
+   '<div class="q"><label for="age">Tháng tuổi</label><select id="age">'+ages+'</select></div>'+
+   '<h3>Phiên bản của mẹ</h3><p class="sub">Cả 3 lựa chọn dùng chung một gói học liệu; chỉ lịch và phiếu hướng dẫn thay đổi.</p>'+
+   '<div class="q"><span class="ql">Mỗi ngày mẹ có bao nhiêu thời gian?</span><div class="seg">'+opt("nhip","du","Nhịp đủ","30–40 phút/ngày, đủ 4 khung")+opt("nhip","ngan","Nhịp ngắn","15 phút ngày thường, chơi bù cuối tuần")+'</div></div>'+
+   '<div class="q"><span class="ql">Mẹ có nói được tiếng Anh hoặc tiếng Trung?</span><div class="seg">'+opt("nn","A","Bản A","Chưa nói được: bấm phát, làm động tác theo")+opt("nn","B","Bản B","Nói được: thêm câu ngắn để tự nói với con")+'</div></div>'+
+   '<div class="q"><span class="ql">Ban ngày ai chăm bé?</span><div class="seg">'+opt("cham","me","Mẹ","Mẹ làm cả 4 khung")+opt("cham","ongba","Ông bà / người giúp việc","Họ làm khung Chơi; mẹ giữ Sáng và Tối")+'</div></div>'+
+   '<button class="pill red" data-go="today">Xem việc hôm nay →</button></div>'+
+  '<div style="display:flex;flex-direction:column;gap:16px;min-width:0"><div class="panel" id="words"><h3>Từ Anh – Trung của vòng này</h3><p class="sub">'+esc(I.vong.sub)+'</p><div class="files">'+words+
+   '</div>'+(I.gd.id===1?'<p class="note">Giai đoạn 0–6 tháng chưa cần tiếng Trung. Tiếng Anh chỉ là bài ru, bật nhỏ khi bế bé.</p>':'')+'</div>'+
+  '<div class="panel" id="rule"><h3>Dùng miễn phí như thế nào?</h3><ol class="steps">'+
+   '<li><i style="--c:var(--green)">1</i><span>Mỗi 2 tuần là 1 vòng. Chủ nhật tuần 2, trước 21:00, mẹ nộp nhật ký (khoảng 10 phút).</span></li>'+
+   '<li><i style="--c:var(--green)">2</i><span>Nộp đúng hạn hoặc trong 3 ngày ân hạn: vòng sau tiếp tục miễn phí, cô gửi nhận xét riêng cho bé.</span></li>'+
+   '<li><i style="--c:var(--orange)">3</i><span>Quá ân hạn: ghi 1 lần lỡ và cô nhắc qua Zalo. Lỡ 2 lần trong 1 chặng thì gói tuần mới tạm dừng.</span></li>'+
+   '<li><i style="--c:var(--blue)">4</i><span>Khi đó mẹ mua chặng 3 tháng (6 vòng) để dùng tiếp. Gói đã tải và nhật ký cũ vẫn giữ nguyên.</span></li>'+
+  '</ol></div></div></div></div></section>';
+}
+
+/* ======================= ĐIỀU HƯỚNG ======================= */
+function syncSide(){
+  var I=CT.info(S.vong); document.getElementById("kidImg").src=BABY[I.gd.be]; document.getElementById("kidAge").textContent=S.age+" tháng";
+}
+function render(){
+  var r={home:rHome,today:rToday,lich:rLich,ct:rCT,tai:rTai,nhatky:rNhatKy,huongdan:rHuongDan}[view.name]||rHome;
+  app.innerHTML=r(); syncSide();
+  document.querySelectorAll(".side .sd-btn").forEach(function(b){ if(b.getAttribute("data-go")===view.name) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current"); });
+  if(view.name==="nhatky"&&!S.sent[view.g]){ var dia=S.diary[view.g]||{}; ["thich","ngu","mh"].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=dia[id]||""; }); }
+  if(view.anchor){ var a=document.getElementById(view.anchor); if(a) a.scrollIntoView({block:"start"}); view.anchor=null; } else window.scrollTo(0,0);
+}
+document.addEventListener("click",function(e){
+  var go=e.target.closest("[data-go]");
+  if(go){ view.name=go.getAttribute("data-go");
+    view.g=go.hasAttribute("data-g")?+go.getAttribute("data-g"):(["lich","tai","nhatky"].indexOf(view.name)>-1&&view.g?view.g:S.vong);
+    if(view.name==="today"){ view.day=go.hasAttribute("data-day")?+go.getAttribute("data-day"):S.today; if(!go.hasAttribute("data-g")) view.g=S.vong; }
+    view.anchor=go.getAttribute("data-anchor"); render(); return; }
+  var gv=e.target.closest("[data-gov]");
+  if(gv){ view.g=+gv.getAttribute("data-gov"); view.name=gv.getAttribute("data-to")||"lich"; render(); return; }
+  var vs=e.target.closest("[data-vstep]");
+  if(vs){ view.g=Math.min(72,Math.max(1,view.g+ +vs.getAttribute("data-vstep"))); view.name=vs.getAttribute("data-to")||"lich"; render(); return; }
+  var st=e.target.closest("[data-day-step]");
+  if(st){ view.day=Math.min(14,Math.max(1,view.day+ +st.getAttribute("data-day-step"))); render(); return; }
+  var tk=e.target.closest("[data-tick]");
+  if(tk){ var id=tk.getAttribute("data-tick"); S.done[id]=!S.done[id]; save(); render(); if(S.done[id]) toast(dayDone(view.g,view.day)?"Xong cả ngày "+view.day+"! Mẹ giỏi quá.":"Đã ghi nhận."); return; }
+  var sp=e.target.closest("[data-speak]");
+  if(sp){ var k=sp.getAttribute("data-speak"); if(LYR[k]) speak(LYR[k]); else toast("Bài này là thơ hoặc bài hát có tác giả; bản thật dùng file do cô CES thu."); return; }
+  if(e.target.closest("[data-dl]")){ toast("Bản mẫu: file thật sẽ có khi CES soạn xong gói tuần."); return; }
+  var ch=e.target.closest("[data-obs]");
+  if(ch){ var dia=S.diary[view.g]||(S.diary[view.g]={obs:{}}); dia.obs[ch.getAttribute("data-obs")]=ch.getAttribute("data-v"); save(); ch.parentNode.querySelectorAll(".chip").forEach(function(c){ c.setAttribute("aria-pressed", c===ch); }); return; }
+  var se=e.target.closest("[data-set]");
+  if(se){ S.set[se.getAttribute("data-set")]=se.getAttribute("data-v"); save(); render(); toast("Đã đổi: "+labelSet()); return; }
+  if(e.target.id==="unsend"){ S.sent[view.g]=false; save(); render(); }
+});
+document.addEventListener("change",function(e){
+  if(e.target.id==="age"){ S.age=+e.target.value; S.vong=Math.min(72,S.age*2+1); S.today=1; for(var gg=S.vong; gg<=72; gg++) delete S.sent[gg]; view.g=S.vong; save(); render();
+    var I=CT.info(S.vong); toast("Bé "+S.age+" tháng · chặng "+I.chang+", vòng "+I.vInChang+": "+I.vong.sub); }
+});
+document.addEventListener("input",function(e){
+  if(["kk","kho","thich","ngu","mh"].indexOf(e.target.id)>-1){ var dia=S.diary[view.g]||(S.diary[view.g]={obs:{}}); dia[e.target.id]=e.target.value; save(); }
+});
+document.addEventListener("submit",function(e){
+  if(e.target.id==="diary"){ e.preventDefault(); var I=CT.info(view.g), obs=view.g===39?SAMPLE_OBS:((I.det&&I.det.obs)||I.gd.obs), dia=S.diary[view.g]||{obs:{}}, n=Object.keys(dia.obs).length;
+    if(n<obs.length){ toast("Mẹ chọn giúp "+(obs.length-n)+" câu quan sát còn trống nhé."); return; }
+    S.sent[view.g]=true; save(); render(); toast("Đã nộp. Cô sẽ phản hồi trong 3 ngày làm việc."); }
+});
+function speak(text){
+  try{
+    if(!("speechSynthesis" in window)) throw 0;
+    speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(text); u.lang="vi-VN"; u.rate=.8;
+    var v=speechSynthesis.getVoices().filter(function(x){return /^vi/i.test(x.lang);})[0]; if(v) u.voice=v;
+    speechSynthesis.speak(u); toast(v?"Đang đọc bằng giọng máy. Bản thật do cô CES thu.":"Máy này chưa có giọng tiếng Việt; bản thật dùng file do cô CES thu.");
+  }catch(err){ toast("Trình duyệt không đọc được. Bản thật dùng file audio do cô CES thu."); }
+}
+render();
+})();
+</script>

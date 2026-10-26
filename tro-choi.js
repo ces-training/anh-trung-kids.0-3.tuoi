@@ -38,11 +38,13 @@ function pickVoice(lang){ var want=lang==="zh"?/^zh(-|_)?(CN|Hans)?/i:/^en(-|_)?
 function hasVoice(lang){ loadVoices(); return !!pickVoice(lang); }
 /* Máy không có giọng tiếng Anh/Trung: hiện bong bóng chữ (kèm pinyin) để mẹ đọc to giúp bé. */
 var PY={"在哪里？":"在哪里？ zài nǎlǐ?","谁不见了？":"谁不见了？ shéi bú jiàn le?","找一找！":"找一找！ zhǎo yi zhǎo!","太棒了！":"太棒了！ tài bàng le!","真棒！":"真棒！ zhēn bàng!","对了！":"对了！ duì le!","很好！":"很好！ hěn hǎo!","老师说，":"老师说 lǎoshī shuō, "};
-function bubble(text){ var ov=document.querySelector(".tc-ov"); if(!ov) return; var b=ov.querySelector(".tc-bub"); if(!b){ b=el("div","tc-bub"); ov.appendChild(b); }
+var LIVE=null;
+function bubble(text){ var ov=LIVE&&(LIVE.alive||LIVE.ending)?LIVE.ov:null; if(!ov) return; var b=ov.querySelector(".tc-bub"); if(!b){ b=el("div","tc-bub"); ov.appendChild(b); }
   b.textContent="🗣 "+text; b.classList.remove("on"); void b.offsetWidth; b.classList.add("on"); }
 function say(text, lang, rate, display){
   return new Promise(function(res){
     try{
+      if(!LIVE||!(LIVE.alive||LIVE.ending)) return res();
       if(!hasVoice(lang)){ var shown=display||PY[text]||(lang==="zh"?String(text).replace(/^老师说，/,"老师说 (lǎoshī shuō), "):text); bubble(shown); return setTimeout(res, 900+String(display||text).length*90); }
       speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(text);
       u.lang=lang==="zh"?"zh-CN":"en-US"; var v=pickVoice(lang); if(v) u.voice=v; u.rate=rate||(lang==="zh"?.8:.85);
@@ -114,6 +116,7 @@ function Frame(cfg){
   again.onclick=function(){ if(self.replay) self.replay(); };
   close.onclick=function(){ self.finish(true); };
   this.onDone=cfg.onDone||function(){};
+  LIVE=this;
 }
 Frame.prototype.setDots=function(n,i){ var h=""; for(var k=0;k<n;k++) h+='<i class="'+(k<i?"on":"")+'"></i>'; this.dots.innerHTML=h; };
 Frame.prototype.star=function(x,y){ this.stars++; this.ov.querySelector(".tc-stars b").textContent=this.stars; ding();
@@ -124,11 +127,11 @@ Frame.prototype.finish=function(quit){
   if(!this.alive) return; this.alive=false; try{ speechSynthesis.cancel(); }catch(e){}
   var self=this, secs=Math.round((Date.now()-this.t0)/1000);
   if(quit){ this.ov.remove(); this.onDone({stars:this.stars,total:this.total,secs:secs,quit:true}); return; }
-  this.clear(); this.dots.innerHTML="";
+  this.clear(); this.dots.innerHTML=""; this.ending=true;
   var end=el("div","tc-end",'<div class="tc-big">🏆</div><h3>Giỏi quá!</h3><p class="tc-say">⭐ '+this.stars+(this.total?' / '+this.total:'')+'</p>');
   var row=el("div","tc-row"), b1=el("button","tc-btn green","Xong ✓"); row.appendChild(b1); end.appendChild(row); this.main.appendChild(end);
   say(this.lang==="zh"?"太棒了！":"Great job!", this.lang);
-  b1.onclick=function(){ self.ov.remove(); self.onDone({stars:self.stars,total:self.total,secs:secs}); };
+  b1.onclick=function(){ self.ending=false; self.ov.remove(); self.onDone({stars:self.stars,total:self.total,secs:secs}); };
 };
 function cardHTML(it){ return esc(it.pic); }
 function sayItem(F,it){ return say(it.say, it.lang||F.lang, null, it.show||it.say); }
@@ -280,7 +283,7 @@ function gKaraoke(F,cfg){
     var line=el("div","tc-line",esc(before)+'<span class="gap">?</span>'+esc(after)); F.main.appendChild(line);
     F.main.appendChild(el("p","tc-note","Nghe cả câu, rồi nghe lại: đến chỗ trống bé nói từ còn thiếu."));
     var row=el("div","tc-row"), ok=el("button","tc-btn green","✓ Bé nói rồi"); row.appendChild(ok); F.main.appendChild(row);
-    F.replay=function(){ say(L.text,F.lang,.75).then(function(){ setTimeout(function(){ if(before.trim()) say(before,F.lang,.75); },600); }); };
+    F.replay=function(){ say(L.text,F.lang,.75).then(function(){ setTimeout(function(){ if(F.alive&&before.trim()) say(before,F.lang,.75); },600); }); };
     setTimeout(F.replay,250);
     ok.onclick=function(ev){ ok.disabled=true; line.querySelector(".gap").textContent=L.gap; F.star(ev.clientX-30,ev.clientY-60); say(L.text,F.lang,.8).then(function(){ setTimeout(next,500); }); }; }
   next();
@@ -301,7 +304,7 @@ function mix(cfgs,onDone){
   var i=0, total={stars:0,secs:0};
   (function next(){ if(i>=cfgs.length){ if(onDone) onDone(total); return; }
     var c=Object.assign({},cfgs[i]); c.title=(c.title||"")+" ("+(i+1)+"/"+cfgs.length+")"; i++;
-    c.onDone=function(r){ total.stars+=r.stars||0; total.secs+=r.secs||0; if(r.quit){ if(onDone) onDone(total); } else next(); };
+    c.onDone=function(r){ total.stars+=r.stars||0; total.secs+=r.secs||0; if(r.quit){ total.quit=true; if(onDone) onDone(total); } else next(); };
     open(c); })();
 }
 return {LIST:LIST, open:open, mix:mix, say:say, hasVoice:hasVoice};

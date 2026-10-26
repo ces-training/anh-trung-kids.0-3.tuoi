@@ -27,8 +27,21 @@ function loadTexts() {
   for (const f of ['khung-45.js', 'noi-dung.js', 'noi-dung-45.js', 'dan-gian-them.js', 'tho-ces.js', 'chuong-trinh.js', 'chuong-trinh-45.js'].filter(f => fs.existsSync(path.join(ROOT, f)))) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8').replace(/^\s*window\./gm, 'window.'), ctx, { filename: f });
   const CT = ctx.window.CT; for (let g = 1; g <= 72; g++) CT.days(g); if (ctx.window.CT45) for (let g = 97; g <= 144; g++) CT.days(g);
   const uniq = new Map(); for (const k of Object.keys(CT.LYR)) { const t = String(CT.LYR[k]).trim(); if (t) uniq.set(amKey(t), t); }
+  // Từ vựng Anh – Trung từng vòng (file am-thanh/tu-vung/<vòng>.mp3)
+  VOCAB = [];
+  for (const g of [...Array(72).keys()].map(i => i + 1).concat(ctx.window.CT45 ? [...Array(48).keys()].map(i => i + 97) : [])) {
+    let en = [], zh = [];
+    if (g >= 97) { const v = ctx.window.CT45.vocab(g); en = v.en.map(x => x[0]); zh = v.zh.map(z => z[0]); }
+    else { const I = CT.info(g); en = I.vong.en || []; zh = (I.vong.zh || []).map(z => z[0]); }
+    if (en.length + zh.length < 2) continue;
+    const parts = [];
+    if (en.length) parts.push(en.map(w => `${w}. ${w}. ${w}.`).join('\n'));
+    if (zh.length) parts.push(zh.map(h => `${h}。${h}。${h}。`).join('\n'));
+    VOCAB.push({ g, text: parts.join('\n\n') });
+  }
   return uniq;
 }
+let VOCAB = [];
 
 async function call(method, url, body, tries = 6) {
   for (let i = 1; i <= tries; i++) {
@@ -69,10 +82,10 @@ function toMp3(b64, mime, out) {
   fs.unlinkSync(tmp);
 }
 
-async function speak(text, voice) {
+async function speak(text, voice, style) {
   const body = {
     model: CFG.model,
-    input: [{ type: 'user_input', content: [{ type: 'text', text, annotations: [{ type: 'speech_metadata', style: CFG.phong_cach }] }] }],
+    input: [{ type: 'user_input', content: [{ type: 'text', text, annotations: [{ type: 'speech_metadata', style: style || CFG.phong_cach }] }] }],
     response_format: { type: 'audio' },
     generation_config: { speech_config: [{ voice }] }
   };
@@ -127,6 +140,13 @@ async function main() {
         catch (e) { fail++; log(`${key} ${h} LỖI: ${e.message}`); if (/Hết lượt|quota|RESOURCE_EXHAUSTED/i.test(e.message)) { log('Dừng vì hết hạn mức; chạy lại sẽ làm tiếp phần còn thiếu.'); stop = true; break; } }
         await sleep(2500);
       }
+    }
+    // Sau thơ: file từ vựng Anh – Trung (giọng có sẵn của Gemini, đọc chậm, mỗi từ 3 lần)
+    if (!stop) for (const v of VOCAB) {
+      const out = path.join(ROOT, `am-thanh/tu-vung/${v.g}.mp3`); if (fs.existsSync(out)) continue;
+      try { const a = await speak(v.text, CFG.giong_tu_vung || 'Leda', 'Đọc thật chậm, rõ từng từ cho trẻ mẫu giáo; tiếng Anh giọng Mỹ chuẩn, tiếng Trung giọng phổ thông chuẩn; nghỉ 1 giây giữa các từ.'); toMp3(a.data, a.mime, out); made++; log(`tu-vung ${v.g} ✓`); }
+      catch (e) { fail++; log(`tu-vung ${v.g} LỖI: ${e.message}`); if (/Hết lượt|quota|RESOURCE_EXHAUSTED/i.test(e.message)) { log('Dừng vì hết hạn mức; chạy lại sẽ làm tiếp.'); break; } }
+      await sleep(2500);
     }
     const have = {}; for (const key of Object.keys(CFG.giong)) { const d = path.join(ROOT, 'am-thanh', key); have[key] = fs.existsSync(d) ? fs.readdirSync(d).filter(f => f.endsWith('.mp3')).map(f => f.slice(0, 8)) : []; }
     fs.writeFileSync(path.join(ROOT, 'am-thanh/danh-sach.json'), JSON.stringify({ giong: Object.fromEntries(Object.entries(CFG.giong).map(([k, g]) => [k, g.ten])), co: have }));

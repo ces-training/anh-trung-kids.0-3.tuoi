@@ -117,12 +117,19 @@ function info(g){
     gd:gd, under18:false, det:D, is45:true, fmt:[weekFmt(g,1),weekFmt(g,2)]};
 }
 function files(g,w){
-  var I=info(g), f=weekFmt(g,w), v=vocab(g);
-  return [["PDF","var(--red)","00_HuongDan.pdf","Kế hoạch 7 ngày · "+f.ten+", ô tick “đã làm”"],
-    ["PDF","var(--purple)","01_TheTu_AnhTrung.pdf","Thẻ từ hai mặt Anh – Trung: "+v.en.slice(0,4).map(function(x){ return x[0]; }).join(", ")+"…"],
-    ["PDF","var(--blue)","02_DanhSachVideo.pdf","Video của tuần, thời lượng, câu hỏi dừng video"],
-    ["PDF","var(--green)","03_Sticker_ChuDe.pdf","Trang sticker chủ đề “"+I.theme.ten+"”"],
-    ["MP3","var(--yellow-deep)","04_TuVung_AnhTrung.mp3","Từ vựng đọc chậm Anh – Trung"]];
+  var I=info(g), f=weekFmt(g,w), v=vocab(g), D=det(g), wk=D&&D.weeks[w-1], toi=(wk&&wk.toi_vi||[]).map(function(x){ return x.t; });
+  var list=[["PDF","var(--red)","00_HuongDan.pdf","Kế hoạch 7 ngày · "+f.ten+", ô tick “đã làm”"],
+    ["PDF","var(--purple)","01_TheTu_AnhTrung.pdf","Thẻ từ Anh – Trung để cắt: "+v.en.slice(0,4).map(function(x){ return x[0]; }).join(", ")+"…"],
+    ["PDF","var(--blue)","02_DanhSachVideo.pdf","Video của tuần, mã QR, câu hỏi dừng video"],
+    ["PDF","var(--red)","05_PhieuBaiTap.pdf","Phiếu bài tập: nối bóng, nét đứt, đếm, tìm hình khác, xếp thứ tự"],
+    ["PDF","var(--orange)","06_NhiemVuDoiThuc.pdf","Thẻ nhiệm vụ đời thực 7 ngày + nhắc an toàn"],
+    ["PDF","var(--green)","03_Sticker_ChuDe.pdf","Sticker chủ đề “"+I.theme.ten+"” + bảng ngôi sao 14 ngày"],
+    ["PDF","var(--red)","07_ThoTruyen_Toi.pdf","Tối tiếng Việt: "+(toi.join(" · ")||"truyện cổ tích, đồng dao")],
+    ["MP3","var(--green)","A1_Tho_Toi.mp3","Đồng dao, ca dao buổi tối (giọng Gemini 3 miền)"],
+    ["MP3","var(--yellow-deep)","A3_TuVung_AnhTrung.mp3","Từ vựng đọc chậm Anh – Trung"]];
+  if(wk&&wk.book_vi) list.splice(7,0,["BOOK","var(--purple)","Sach_tuan.pdf","Sách gợi ý: "+wk.book_vi.t+(wk.book_vi.author?" – "+wk.book_vi.author:"")]);
+  if(w===2) list.push(["PDF","var(--pink)","08_NhatKy.pdf","Mẫu nhật ký vòng (bản in)"]);
+  return list;
 }
 return {GD:GD45, FROM:FROM, TO:TO, has:has, info:info, days:days, files:files, gameCfg:gameCfg, gamesOf:gamesOf, vocab:vocab, weekFmt:weekFmt, level:level, R:R};
 })();

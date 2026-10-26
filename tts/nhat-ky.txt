@@ -1,21 +1,91 @@
-2026-10-26T03:13:42 Chế độ: mau. Số bài có lời để đọc: 45.
-2026-10-26T03:13:42 Tạo giọng bac số 1…
-2026-10-26T03:14:04   đọc thử "Cái bống" bằng bac số 1
-2026-10-26T03:14:12 Tạo giọng bac số 2…
-2026-10-26T03:14:28   đọc thử "Cái bống" bằng bac số 2
-2026-10-26T03:14:37 Tạo giọng nam số 1…
-2026-10-26T03:14:51   đọc thử "Cái bống" bằng nam số 1
-2026-10-26T03:15:00 Tạo giọng nam số 2…
-2026-10-26T03:15:14   thử lại không kèm gender: 400: {
-  "error": {
-    "code": 400,
-    "message": "Generated voice prompt was flagged by safety policies.",
-    "status": "INVALID_ARGUMENT"
-  }
-}
-
-2026-10-26T03:15:34   đọc thử "Cái bống" bằng nam số 2
-2026-10-26T03:15:43 Tạo giọng trung số 1…
-2026-10-26T03:16:29   đọc thử "Cái bống" bằng trung số 1
-2026-10-26T03:16:39 Tạo giọng trung số 2…
-2026-10-26T03:17:02   đọc thử "Cái bống" bằng trung số 2
+2026-10-26T03:22:48 Chế độ: tat-ca. Số bài có lời để đọc: 45.
+2026-10-26T03:22:53 bac d8e0894b ✓ Ầu ơ ví dầu cầu ván đóng đinh
+2026-10-26T03:23:02 bac 0010cc3a ✓ Chi chi chành chành
+2026-10-26T03:23:11 bac f884d894 ✓ Tập tầm vông
+2026-10-26T03:23:18 bac d869869b ✓ Kéo cưa lừa xẻ
+2026-10-26T03:23:30 bac ef415a4b ✓ Nu na nu nống
+2026-10-26T03:23:40 bac 8f438f61 ✓ Con mèo mà trèo cây cau
+2026-10-26T03:23:49 bac b1a51a00 ✓ Cái bống là cái bống bang
+2026-10-26T03:23:59 bac 99ea5d8f ✓ Con gà cục tác lá chanh
+2026-10-26T03:24:07 bac cc3fa177 ✓ Con kiến mà leo cành đa
+2026-10-26T03:24:47 bac 98521606 ✓ Con vỏi con voi
+2026-10-26T03:24:59 bac ab28355d ✓ Bà còng đi chợ trời mưa
+2026-10-26T03:25:10 bac 06475562 ✓ Dung dăng dung dẻ
+2026-10-26T03:25:17 bac 0d3deff7 ✓ Anh đi anh nhớ quê nhà
+2026-10-26T03:25:24 bac 4ed54b78 ✓ Ta về ta tắm ao ta
+2026-10-26T03:25:31 bac 94395572 ✓ Ruộng đồng mặc sức chim bay,
+2026-10-26T03:25:38 bac ba02fded ✓ Thăng Long Hà Nội đô thành
+2026-10-26T03:25:45 bac a5369e92 ✓ Đi mô cũng nhớ quê mình,
+2026-10-26T03:25:52 bac 3600658c ✓ Cần Thơ gạo trắng nước trong
+2026-10-26T03:26:00 bac 8b23ff0d ✓ Ai ơi về miệt Tháp Mười
+2026-10-26T03:26:07 bac a3838d7b ✓ Rì rà rì rà
+2026-10-26T03:26:18 bac 1a374107 ✓ Con gà cục tác cục te
+2026-10-26T03:26:28 bac cbb1ecf2 ✓ Quặc quặc, quạc quạc
+2026-10-26T03:26:34 bac 84873353 ✓ Một nhà hai cửa như nhau
+2026-10-26T03:26:41 bac f591fa25 ✓ Lưng trước bụng sau
+2026-10-26T03:26:50 bac 8b142b18 ✓ Lấp la lấp lánh
+2026-10-26T03:27:00 bac 7e72d9ba ✓ Ếch ở dưới ao
+2026-10-26T03:27:08 bac f86a760c ✓ Tôi thường làm bạn
+2026-10-26T03:27:15 bac 465ea7a6 ✓ Chỉ ăn cỏ non
+2026-10-26T03:27:23 bac 36f21780 ✓ Da cóc mà bọc trứng gà
+2026-10-26T03:27:30 bac 80dd0958 ✓ Quả gì nhiều mắt
+2026-10-26T03:27:37 bac a51af25c ✓ Quả tròn to, da xanh xanh
+2026-10-26T03:27:48 bac 6189f6e1 LỖI: 400: {"error":{"message":"Request blocked for an unspecified policy reason. Please modify your input and retry.","code":"content_blocked"}}
+2026-10-26T03:27:56 bac 283761ed ✓ Con gì chân ngắn
+2026-10-26T03:28:05 bac d81ae4b3 ✓ Con gà cục tác lá chanh
+2026-10-26T03:28:11 bac 2393ac1e ✓ Thân em xưa ở bụi tre
+2026-10-26T03:28:22 bac 4f4a82ff ✓ Con bò ngủ gốc cây đa
+2026-10-26T03:28:33 bac 9099fbec ✓ Con vỏi con voi
+2026-10-26T03:28:42 bac 50830b58 ✓ Con mèo nằm bếp co ro
+2026-10-26T03:28:50 bac 7de7195b ✓ Cái gì bằng lá
+2026-10-26T03:28:57 bac 9d7aa40d ✓ Con gì ăn cỏ
+2026-10-26T03:29:05 bac 2fbf3009 ✓ Cổ cao cao, cẳng cao cao
+2026-10-26T03:29:21 bac 2de27d12 ✓ Con cua mà có hai càng
+2026-10-26T03:29:28 bac 27f7cbaa ✓ Củ gì da cam
+2026-10-26T03:29:35 bac 9f8a85b0 ✓ Lấp la lấp lánh
+2026-10-26T03:29:42 bac 70e7eb20 ✓ Có chân mà chẳng biết đi
+2026-10-26T03:29:50 nam d8e0894b ✓ Ầu ơ ví dầu cầu ván đóng đinh
+2026-10-26T03:29:59 nam 0010cc3a ✓ Chi chi chành chành
+2026-10-26T03:30:08 nam f884d894 ✓ Tập tầm vông
+2026-10-26T03:30:16 nam d869869b ✓ Kéo cưa lừa xẻ
+2026-10-26T03:30:29 nam ef415a4b ✓ Nu na nu nống
+2026-10-26T03:30:39 nam 8f438f61 ✓ Con mèo mà trèo cây cau
+2026-10-26T03:30:48 nam b1a51a00 ✓ Cái bống là cái bống bang
+2026-10-26T03:30:59 nam 99ea5d8f ✓ Con gà cục tác lá chanh
+2026-10-26T03:31:08 nam cc3fa177 ✓ Con kiến mà leo cành đa
+2026-10-26T03:31:18 nam 98521606 ✓ Con vỏi con voi
+2026-10-26T03:31:30 nam ab28355d ✓ Bà còng đi chợ trời mưa
+2026-10-26T03:31:41 nam 06475562 ✓ Dung dăng dung dẻ
+2026-10-26T03:31:49 nam 0d3deff7 ✓ Anh đi anh nhớ quê nhà
+2026-10-26T03:31:55 nam 4ed54b78 ✓ Ta về ta tắm ao ta
+2026-10-26T03:32:03 nam 94395572 ✓ Ruộng đồng mặc sức chim bay,
+2026-10-26T03:32:10 nam ba02fded ✓ Thăng Long Hà Nội đô thành
+2026-10-26T03:32:19 nam a5369e92 ✓ Đi mô cũng nhớ quê mình,
+2026-10-26T03:32:26 nam 3600658c ✓ Cần Thơ gạo trắng nước trong
+2026-10-26T03:32:33 nam 8b23ff0d ✓ Ai ơi về miệt Tháp Mười
+2026-10-26T03:32:41 nam a3838d7b ✓ Rì rà rì rà
+2026-10-26T03:32:52 nam 1a374107 ✓ Con gà cục tác cục te
+2026-10-26T03:33:03 nam cbb1ecf2 ✓ Quặc quặc, quạc quạc
+2026-10-26T03:33:09 nam 84873353 ✓ Một nhà hai cửa như nhau
+2026-10-26T03:33:12   429, chờ 20 giây rồi thử lại (1/6)
+2026-10-26T03:33:37 nam f591fa25 ✓ Lưng trước bụng sau
+2026-10-26T03:33:46 nam 8b142b18 ✓ Lấp la lấp lánh
+2026-10-26T03:33:48   429, chờ 20 giây rồi thử lại (1/6)
+2026-10-26T03:34:09   429, chờ 40 giây rồi thử lại (2/6)
+2026-10-26T03:34:49   429, chờ 60 giây rồi thử lại (3/6)
+2026-10-26T03:35:49   429, chờ 80 giây rồi thử lại (4/6)
+2026-10-26T03:37:10   429, chờ 100 giây rồi thử lại (5/6)
+2026-10-26T03:38:50   429, chờ 120 giây rồi thử lại (6/6)
+2026-10-26T03:40:50 nam 7e72d9ba LỖI: Hết lượt thử lại (giới hạn tốc độ). Chạy lại sau.
+2026-10-26T03:40:50 Dừng vì hết hạn mức; chạy lại sẽ làm tiếp phần còn thiếu.
+2026-10-26T03:40:50   429, chờ 20 giây rồi thử lại (1/6)
+2026-10-26T03:41:15 trung d8e0894b ✓ Ầu ơ ví dầu cầu ván đóng đinh
+2026-10-26T03:41:18   429, chờ 20 giây rồi thử lại (1/6)
+2026-10-26T03:41:38   429, chờ 40 giây rồi thử lại (2/6)
+2026-10-26T03:42:19   429, chờ 60 giây rồi thử lại (3/6)
+2026-10-26T03:43:19   429, chờ 80 giây rồi thử lại (4/6)
+2026-10-26T03:44:39   429, chờ 100 giây rồi thử lại (5/6)
+2026-10-26T03:46:20   429, chờ 120 giây rồi thử lại (6/6)
+2026-10-26T03:48:20 trung 0010cc3a LỖI: Hết lượt thử lại (giới hạn tốc độ). Chạy lại sau.
+2026-10-26T03:48:20 Dừng vì hết hạn mức; chạy lại sẽ làm tiếp phần còn thiếu.
+2026-10-26T03:48:20 Xong: tạo mới 70, lỗi 3. Mỗi giọng có: bac 44/45, nam 25/45, trung 1/45

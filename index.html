@@ -630,13 +630,15 @@ function speakMay(text,msg){
   }catch(err){ toast("Trình duyệt không đọc được. Mẹ thử lại sau nhé."); }
 }
 function speak(text){
-  var g=S.set.giong||"bac", src="am-thanh/"+g+"/"+amKey(text)+".mp3";
+  var g=S.set.giong||"bac", key=amKey(text), order=[g].concat(["bac","nam","trung"].filter(function(x){return x!==g;}));
   try{ if("speechSynthesis" in window) speechSynthesis.cancel(); }catch(e){}
   if(AM){ AM.pause(); AM.onerror=null; }
-  AM=new Audio(src); var started=false;
-  AM.onplaying=function(){ started=true; };
-  AM.onerror=function(){ if(!started) speakMay(text,"Giọng "+(GIONG[g]||"")+" đang được chuẩn bị; tạm đọc bằng giọng máy."); };
-  var p=AM.play(); if(p&&p.then) p.then(function(){ toast("🔈 Giọng "+(GIONG[g]||"")); }).catch(function(e){ if(e&&e.name==="NotAllowedError") toast("Mẹ bấm lại một lần nữa để nghe nhé."); });
+  (function tryNext(i){
+    if(i>=order.length){ speakMay(text,"Giọng "+(GIONG[g]||"")+" đang được chuẩn bị; tạm đọc bằng giọng máy."); return; }
+    var v=order[i], a=new Audio("am-thanh/"+v+"/"+key+".mp3"); AM=a;
+    a.onerror=function(){ if(AM===a) tryNext(i+1); };
+    var p=a.play(); if(p&&p.then) p.then(function(){ toast(i===0?"🔈 Giọng "+GIONG[v]:"Giọng "+GIONG[g]+" của bài này đang được tạo; tạm nghe giọng "+GIONG[v]+"."); }).catch(function(e){ if(e&&e.name==="NotAllowedError") toast("Mẹ bấm lại một lần nữa để nghe nhé."); });
+  })(0);
 }
 render();
 })();

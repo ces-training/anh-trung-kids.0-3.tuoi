@@ -24,8 +24,8 @@ export function amKey(t) { t = String(t).trim(); let h = 0x811c9dc5; for (let i 
 
 function loadTexts() {
   const ctx = { window: {}, console }; ctx.window.window = ctx.window; vm.createContext(ctx);
-  for (const f of ['noi-dung.js', 'dan-gian-them.js', 'tho-ces.js', 'chuong-trinh.js'].filter(f => fs.existsSync(path.join(ROOT, f)))) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8').replace(/^\s*window\./gm, 'window.'), ctx, { filename: f });
-  const CT = ctx.window.CT; for (let g = 1; g <= 72; g++) CT.days(g);
+  for (const f of ['khung-45.js', 'noi-dung.js', 'noi-dung-45.js', 'dan-gian-them.js', 'tho-ces.js', 'chuong-trinh.js', 'chuong-trinh-45.js'].filter(f => fs.existsSync(path.join(ROOT, f)))) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8').replace(/^\s*window\./gm, 'window.'), ctx, { filename: f });
+  const CT = ctx.window.CT; for (let g = 1; g <= 72; g++) CT.days(g); if (ctx.window.CT45) for (let g = 97; g <= 144; g++) CT.days(g);
   const uniq = new Map(); for (const k of Object.keys(CT.LYR)) { const t = String(CT.LYR[k]).trim(); if (t) uniq.set(amKey(t), t); }
   return uniq;
 }

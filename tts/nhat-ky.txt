@@ -1,130 +1,119 @@
-2026-10-26T07:53:34 Chế độ: tat-ca. Số bài có lời để đọc: 96.
-2026-10-26T07:53:41 bac 2ec4e42b ✓ Công cha như núi Thái Sơn
-2026-10-26T07:53:49 bac 0c0702dd ✓ Đố ai đếm được lá rừng
-2026-10-26T07:53:56 bac 8e05c5ac ✓ Mẹ già như chuối ba hương
-2026-10-26T07:54:02 bac 573d09c2 ✓ Gió mùa thu mẹ ru con ngủ
-2026-10-26T07:54:09 bac 5021d904 ✓ Lên non mới biết non cao
-2026-10-26T07:54:16 bac b6e6ea3d ✓ Ơn cha nặng lắm ai ơi
-2026-10-26T07:54:23 bac 89c76d83 ✓ Nuôi con chẳng quản chi thân
-2026-10-26T07:54:31 bac 71621209 ✓ Ru em, em théc cho muồi
-2026-10-26T07:54:37 bac c0228150 ✓ Gió đưa gió đẩy, về rẫy ăn còng
-2026-10-26T07:54:45 bac faeb5c4e ✓ Ru con con ngủ cho lành
-2026-10-26T07:54:52 bac 75e5fbb9 ✓ Nhong nhong ngựa ông đã về
-2026-10-26T07:55:02 bac 8066d65f ✓ Bồ các là bác chim ri
-2026-10-26T07:55:10 bac 84480816 ✓ Kỳ đà là cha cắc ké
-2026-10-26T07:55:22 bac f5e5c090 ✓ Con công hay múa
-2026-10-26T07:55:29 bac fad4faae ✓ Anh em như thể tay chân
-2026-10-26T07:55:39 bac 60608900 ✓ Lúa ngô là cô đậu nành
-2026-10-26T07:55:47 bac 6189f6e1 LỖI: 400: {"error":{"message":"Request blocked for an unspecified policy reason. Please modify your input and retry.","code":"content_blocked"}}
-2026-10-26T07:55:54 bac 0b1beea8 ✓ Ngó lên nuộc lạt mái nhà
-2026-10-26T07:56:05 bac 0dccd9c0 ✓ Đi cầu đi quán
-2026-10-26T07:56:12 bac e5850918 ✓ Con người có tổ có tông
-2026-10-26T07:56:19 bac 3b6222cc ✓ Ăn quả nhớ kẻ trồng cây
-2026-10-26T07:56:26 bac 360d15ec ✓ Bầu ơi thương lấy bí cùng
-2026-10-26T07:56:32 bac 2883bd82 ✓ Một cây làm chẳng nên non
-2026-10-26T07:56:44 bac 10dd5069 ✓ Ông sảo ông sao
-2026-10-26T07:56:50 bac fe178ffe ✓ Chuồn chuồn bay thấp thì mưa
-2026-10-26T07:57:00 bac 8584d420 ✓ Lạy trời mưa xuống
-2026-10-26T07:57:09 bac 8545d690 ✓ Trăng bao nhiêu tuổi trăng già
-2026-10-26T07:57:21 bac 58eb1e07 ✓ Gánh gánh gồng gồng
-2026-10-26T07:57:29 bac c3930860 ✓ Lộn cầu vồng
-2026-10-26T07:57:35 bac 455b21bc ✓ Lúa chiêm lấp ló đầu bờ
-2026-10-26T07:57:42 bac 17e295a9 ✓ Ai ơi chớ bỏ ruộng hoang
-2026-10-26T07:57:49 bac 9cb69ef0 ✓ Đồng Tháp Mười cò bay thẳng cánh
-2026-10-26T07:57:59 bac daed3f6d ✓ Cái cò cái vạc cái nông
-2026-10-26T07:58:09 bac 89829f3a ✓ Trâu ơi ta bảo trâu này
-2026-10-26T07:58:18 bac ac7f8076 ✓ Rủ nhau đi cấy đi cày
-2026-10-26T07:58:27 bac 0798a425 ✓ Làng tôi có lũy tre xanh
-2026-10-26T07:58:36 bac 83327801 ✓ Ba bà đi bán lợn con
-2026-10-26T07:58:48 bac 4972a978 ✓ Thằng Bờm có cái quạt mo
-2026-10-26T07:58:54 bac d50fa96c ✓ Da cóc mà bọc bột lọc
-2026-10-26T07:59:02 bac 73478aa4 ✓ Quả gì nhiều mắt
-2026-10-26T07:59:13 bac cf46d1ed ✓ Thằng Cuội ngồi gốc cây đa
-2026-10-26T07:59:20 bac 4b69e9a7 ✓ Bằng cái vung, vùng xuống ao
-2026-10-26T07:59:26 bac eb8d4bc8 ✓ Thịt mỡ, dưa hành, câu đối đỏ
-2026-10-26T07:59:35 bac 46f0f170 ✓ Tháng giêng là tháng ăn chơi
-2026-10-26T07:59:44 bac 916de9ca ✓ Trong đầm gì đẹp bằng sen
-2026-10-26T07:59:51 bac 13ed75c2 ✓ Đường vô xứ Nghệ quanh quanh
-2026-10-26T07:59:58 bac 5786f871 ✓ Nhà Bè nước chảy chia hai
-2026-10-26T08:00:05 bac e1adb6cd ✓ Nhiễu điều phủ lấy giá gương
-2026-10-26T08:00:11 bac 40a29ecc ✓ Dù ai đi ngược về xuôi
-2026-10-26T08:00:18 bac 70252007 ✓ Không sơn mà đỏ
-2026-10-26T08:00:25 bac 788ad9fc ✓ Chẳng lợp mà thành mái
-2026-10-26T08:00:31 bac 45457e0e ✓ Năm ông cùng ở một nhà
-2026-10-26T08:00:40 nam 2ec4e42b ✓ Công cha như núi Thái Sơn
-2026-10-26T08:00:50 nam 0c0702dd ✓ Đố ai đếm được lá rừng
-2026-10-26T08:00:57 nam 8e05c5ac ✓ Mẹ già như chuối ba hương
-2026-10-26T08:01:05 nam 573d09c2 ✓ Gió mùa thu mẹ ru con ngủ
-2026-10-26T08:01:12 nam 5021d904 ✓ Lên non mới biết non cao
-2026-10-26T08:01:19 nam b6e6ea3d ✓ Ơn cha nặng lắm ai ơi
-2026-10-26T08:01:26 nam 89c76d83 ✓ Nuôi con chẳng quản chi thân
-2026-10-26T08:01:35 nam 71621209 ✓ Ru em, em théc cho muồi
-2026-10-26T08:01:43 nam c0228150 ✓ Gió đưa gió đẩy, về rẫy ăn còng
-2026-10-26T08:01:52 nam faeb5c4e ✓ Ru con con ngủ cho lành
-2026-10-26T08:01:59 nam 75e5fbb9 ✓ Nhong nhong ngựa ông đã về
-2026-10-26T08:02:10 nam 8066d65f ✓ Bồ các là bác chim ri
-2026-10-26T08:02:18 nam 84480816 ✓ Kỳ đà là cha cắc ké
-2026-10-26T08:02:30 nam f5e5c090 ✓ Con công hay múa
-2026-10-26T08:02:37 nam fad4faae ✓ Anh em như thể tay chân
-2026-10-26T08:02:47 nam 7e72d9ba ✓ Ếch ở dưới ao
-2026-10-26T08:02:55 nam f86a760c ✓ Tôi thường làm bạn
-2026-10-26T08:03:03 nam 465ea7a6 ✓ Chỉ ăn cỏ non
-2026-10-26T08:03:11 nam 36f21780 ✓ Da cóc mà bọc trứng gà
-2026-10-26T08:03:17 nam 80dd0958 ✓ Quả gì nhiều mắt
-2026-10-26T08:03:28 nam 60608900 ✓ Lúa ngô là cô đậu nành
-2026-10-26T08:03:35 nam a51af25c ✓ Quả tròn to, da xanh xanh
-2026-10-26T08:03:47 nam 6189f6e1 ✓ Bê là bê con
-2026-10-26T08:03:54 nam 283761ed ✓ Con gì chân ngắn
-2026-10-26T08:04:03 nam d81ae4b3 ✓ Con gà cục tác lá chanh
-2026-10-26T08:04:11 nam 0b1beea8 ✓ Ngó lên nuộc lạt mái nhà
-2026-10-26T08:04:25 nam 0dccd9c0 ✓ Đi cầu đi quán
-2026-10-26T08:04:32 nam e5850918 ✓ Con người có tổ có tông
-2026-10-26T08:04:39 nam 3b6222cc ✓ Ăn quả nhớ kẻ trồng cây
-2026-10-26T08:04:46 nam 2393ac1e ✓ Thân em xưa ở bụi tre
-2026-10-26T08:04:53 nam 360d15ec ✓ Bầu ơi thương lấy bí cùng
-2026-10-26T08:05:00 nam 2883bd82 ✓ Một cây làm chẳng nên non
-2026-10-26T08:05:12 nam 10dd5069 ✓ Ông sảo ông sao
-2026-10-26T08:05:18 nam fe178ffe ✓ Chuồn chuồn bay thấp thì mưa
-2026-10-26T08:05:30 nam 4f4a82ff ✓ Con bò ngủ gốc cây đa
-2026-10-26T08:05:41 nam 8584d420 ✓ Lạy trời mưa xuống
-2026-10-26T08:05:51 nam 8545d690 ✓ Trăng bao nhiêu tuổi trăng già
-2026-10-26T08:06:04 nam 58eb1e07 ✓ Gánh gánh gồng gồng
-2026-10-26T08:06:13 nam c3930860 ✓ Lộn cầu vồng
-2026-10-26T08:06:24 nam 9099fbec ✓ Con vỏi con voi
-2026-10-26T08:06:33 nam 50830b58 ✓ Con mèo nằm bếp co ro
-2026-10-26T08:06:41 nam 7de7195b ✓ Cái gì bằng lá
-2026-10-26T08:06:47 nam 455b21bc ✓ Lúa chiêm lấp ló đầu bờ
-2026-10-26T08:06:55 nam 17e295a9 ✓ Ai ơi chớ bỏ ruộng hoang
-2026-10-26T08:07:03 nam 9d7aa40d ✓ Con gì ăn cỏ
-2026-10-26T08:07:11 nam 9cb69ef0 ✓ Đồng Tháp Mười cò bay thẳng cánh
-2026-10-26T08:07:22 nam daed3f6d ✓ Cái cò cái vạc cái nông
-2026-10-26T08:07:28 nam 2fbf3009 ✓ Cổ cao cao, cẳng cao cao
-2026-10-26T08:07:31   429, chờ 20 giây rồi thử lại (1/6)
-2026-10-26T08:07:51   429, chờ 40 giây rồi thử lại (2/6)
-2026-10-26T08:08:31   429, chờ 60 giây rồi thử lại (3/6)
-2026-10-26T08:09:46 nam 2de27d12 ✓ Con cua mà có hai càng
-2026-10-26T08:09:49   429, chờ 20 giây rồi thử lại (1/6)
-2026-10-26T08:10:09   429, chờ 40 giây rồi thử lại (2/6)
-2026-10-26T08:10:49   429, chờ 60 giây rồi thử lại (3/6)
-2026-10-26T08:11:49   429, chờ 80 giây rồi thử lại (4/6)
-2026-10-26T08:13:19 nam 89829f3a ✓ Trâu ơi ta bảo trâu này
-2026-10-26T08:13:21   429, chờ 20 giây rồi thử lại (1/6)
-2026-10-26T08:13:41   429, chờ 40 giây rồi thử lại (2/6)
-2026-10-26T08:14:28 nam ac7f8076 ✓ Rủ nhau đi cấy đi cày
-2026-10-26T08:14:31   429, chờ 20 giây rồi thử lại (1/6)
-2026-10-26T08:14:51   429, chờ 40 giây rồi thử lại (2/6)
-2026-10-26T08:15:31   429, chờ 60 giây rồi thử lại (3/6)
-2026-10-26T08:16:31   429, chờ 80 giây rồi thử lại (4/6)
-2026-10-26T08:17:52   429, chờ 100 giây rồi thử lại (5/6)
-2026-10-26T08:19:32   429, chờ 120 giây rồi thử lại (6/6)
-2026-10-26T08:21:32 nam 0798a425 LỖI: Hết lượt thử lại (giới hạn tốc độ). Chạy lại sau.
-2026-10-26T08:21:32 Dừng vì hết hạn mức; chạy lại sẽ làm tiếp phần còn thiếu.
-2026-10-26T08:21:32   429, chờ 20 giây rồi thử lại (1/6)
-2026-10-26T08:21:52   429, chờ 40 giây rồi thử lại (2/6)
-2026-10-26T08:22:32   429, chờ 60 giây rồi thử lại (3/6)
-2026-10-26T08:23:33   429, chờ 80 giây rồi thử lại (4/6)
-2026-10-26T08:24:53   429, chờ 100 giây rồi thử lại (5/6)
-2026-10-26T08:26:33   429, chờ 120 giây rồi thử lại (6/6)
-2026-10-26T08:28:33 trung 0010cc3a LỖI: Hết lượt thử lại (giới hạn tốc độ). Chạy lại sau.
-2026-10-26T08:28:33 Dừng vì hết hạn mức; chạy lại sẽ làm tiếp phần còn thiếu.
-2026-10-26T08:28:33 Xong: tạo mới 102, lỗi 3. Mỗi giọng có: bac 95/96, nam 76/96, trung 1/96
+2026-10-27T08:43:41 Chế độ: tat-ca. Số bài có lời để đọc: 109.
+2026-10-27T08:43:48 trung 0010cc3a ✓ Chi chi chành chành
+2026-10-27T08:43:57 trung f884d894 ✓ Tập tầm vông
+2026-10-27T08:44:05 trung d869869b ✓ Kéo cưa lừa xẻ
+2026-10-27T08:44:17 trung ef415a4b ✓ Nu na nu nống
+2026-10-27T08:44:26 trung 8f438f61 ✓ Con mèo mà trèo cây cau
+2026-10-27T08:44:36 trung b1a51a00 ✓ Cái bống là cái bống bang
+2026-10-27T08:44:46 trung 99ea5d8f ✓ Con gà cục tác lá chanh
+2026-10-27T08:44:56 trung cc3fa177 ✓ Con kiến mà leo cành đa
+2026-10-27T08:45:05 trung 98521606 ✓ Con vỏi con voi
+2026-10-27T08:45:18 trung ab28355d ✓ Bà còng đi chợ trời mưa
+2026-10-27T08:45:28 trung 06475562 ✓ Dung dăng dung dẻ
+2026-10-27T08:45:39 trung 2ec4e42b ✓ Công cha như núi Thái Sơn
+2026-10-27T08:45:50 trung 0c0702dd ✓ Đố ai đếm được lá rừng
+2026-10-27T08:45:57 trung 8e05c5ac ✓ Mẹ già như chuối ba hương
+2026-10-27T08:46:04 trung 0d3deff7 ✓ Anh đi anh nhớ quê nhà
+2026-10-27T08:46:12 trung 573d09c2 ✓ Gió mùa thu mẹ ru con ngủ
+2026-10-27T08:46:20 trung 5021d904 ✓ Lên non mới biết non cao
+2026-10-27T08:46:27 trung b6e6ea3d ✓ Ơn cha nặng lắm ai ơi
+2026-10-27T08:46:35 trung 4ed54b78 ✓ Ta về ta tắm ao ta
+2026-10-27T08:46:42 trung 89c76d83 ✓ Nuôi con chẳng quản chi thân
+2026-10-27T08:46:50 trung 94395572 ✓ Ruộng đồng mặc sức chim bay,
+2026-10-27T08:47:00 trung 71621209 ✓ Ru em, em théc cho muồi
+2026-10-27T08:47:07 trung c0228150 ✓ Gió đưa gió đẩy, về rẫy ăn còng
+2026-10-27T08:47:15 trung ba02fded ✓ Thăng Long Hà Nội đô thành
+2026-10-27T08:47:22 trung a5369e92 ✓ Đi mô cũng nhớ quê mình,
+2026-10-27T08:47:30 trung 3600658c ✓ Cần Thơ gạo trắng nước trong
+2026-10-27T08:47:39 trung faeb5c4e ✓ Ru con con ngủ cho lành
+2026-10-27T08:47:47 trung 8b23ff0d ✓ Ai ơi về miệt Tháp Mười
+2026-10-27T08:47:55 trung a3838d7b ✓ Rì rà rì rà
+2026-10-27T08:48:02 trung 75e5fbb9 ✓ Nhong nhong ngựa ông đã về
+2026-10-27T08:48:13 trung 8066d65f ✓ Bồ các là bác chim ri
+2026-10-27T08:48:25 trung 1a374107 ✓ Con gà cục tác cục te
+2026-10-27T08:48:35 trung cbb1ecf2 ✓ Quặc quặc, quạc quạc
+2026-10-27T08:48:44 trung 84480816 ✓ Kỳ đà là cha cắc ké
+2026-10-27T08:48:56 trung f5e5c090 ✓ Con công hay múa
+2026-10-27T08:49:03 trung 84873353 ✓ Một nhà hai cửa như nhau
+2026-10-27T08:49:10 trung fad4faae ✓ Anh em như thể tay chân
+2026-10-27T08:49:17 trung f591fa25 ✓ Lưng trước bụng sau
+2026-10-27T08:49:25 trung 8b142b18 ✓ Lấp la lấp lánh
+2026-10-27T08:49:36 trung 7e72d9ba ✓ Ếch ở dưới ao
+2026-10-27T08:49:44 trung f86a760c ✓ Tôi thường làm bạn
+2026-10-27T08:49:51 trung 465ea7a6 ✓ Chỉ ăn cỏ non
+2026-10-27T08:49:59 trung 36f21780 ✓ Da cóc mà bọc trứng gà
+2026-10-27T08:50:06 trung 80dd0958 ✓ Quả gì nhiều mắt
+2026-10-27T08:50:17 trung 60608900 ✓ Lúa ngô là cô đậu nành
+2026-10-27T08:50:24 trung a51af25c ✓ Quả tròn to, da xanh xanh
+2026-10-27T08:50:36 bac 6189f6e1 LỖI: 400: {"error":{"message":"Request blocked for an unspecified policy reason. Please modify your input and retry.","code":"content_blocked"}}
+2026-10-27T08:50:49 trung 6189f6e1 ✓ Bê là bê con
+2026-10-27T08:50:57 trung 283761ed ✓ Con gì chân ngắn
+2026-10-27T08:51:06 trung d81ae4b3 ✓ Con gà cục tác lá chanh
+2026-10-27T08:51:13 trung 0b1beea8 ✓ Ngó lên nuộc lạt mái nhà
+2026-10-27T08:51:27 trung 0dccd9c0 ✓ Đi cầu đi quán
+2026-10-27T08:51:34 trung e5850918 ✓ Con người có tổ có tông
+2026-10-27T08:51:42 trung 3b6222cc ✓ Ăn quả nhớ kẻ trồng cây
+2026-10-27T08:51:49 trung 2393ac1e ✓ Thân em xưa ở bụi tre
+2026-10-27T08:51:56 trung 360d15ec ✓ Bầu ơi thương lấy bí cùng
+2026-10-27T08:52:04 trung 2883bd82 ✓ Một cây làm chẳng nên non
+2026-10-27T08:52:15 trung 10dd5069 ✓ Ông sảo ông sao
+2026-10-27T08:52:22 trung fe178ffe ✓ Chuồn chuồn bay thấp thì mưa
+2026-10-27T08:52:34 trung 4f4a82ff ✓ Con bò ngủ gốc cây đa
+2026-10-27T08:52:45 trung 8584d420 ✓ Lạy trời mưa xuống
+2026-10-27T08:52:54 trung 8545d690 ✓ Trăng bao nhiêu tuổi trăng già
+2026-10-27T08:53:07 trung 58eb1e07 ✓ Gánh gánh gồng gồng
+2026-10-27T08:53:16 trung c3930860 ✓ Lộn cầu vồng
+2026-10-27T08:53:27 trung 9099fbec ✓ Con vỏi con voi
+2026-10-27T08:53:37 trung 50830b58 ✓ Con mèo nằm bếp co ro
+2026-10-27T08:53:44 trung 7de7195b ✓ Cái gì bằng lá
+2026-10-27T08:53:52 trung 455b21bc ✓ Lúa chiêm lấp ló đầu bờ
+2026-10-27T08:53:59 trung 17e295a9 ✓ Ai ơi chớ bỏ ruộng hoang
+2026-10-27T08:54:07 trung 9d7aa40d ✓ Con gì ăn cỏ
+2026-10-27T08:54:14 trung 9cb69ef0 ✓ Đồng Tháp Mười cò bay thẳng cánh
+2026-10-27T08:54:26 trung daed3f6d ✓ Cái cò cái vạc cái nông
+2026-10-27T08:54:34 trung 2fbf3009 ✓ Cổ cao cao, cẳng cao cao
+2026-10-27T08:54:50 trung 2de27d12 ✓ Con cua mà có hai càng
+2026-10-27T08:55:02 trung 89829f3a ✓ Trâu ơi ta bảo trâu này
+2026-10-27T08:55:12 trung ac7f8076 ✓ Rủ nhau đi cấy đi cày
+2026-10-27T08:55:21 nam 0798a425 ✓ Làng tôi có lũy tre xanh
+2026-10-27T08:55:31 trung 0798a425 ✓ Làng tôi có lũy tre xanh
+2026-10-27T08:55:40 nam 83327801 ✓ Ba bà đi bán lợn con
+2026-10-27T08:55:49 trung 83327801 ✓ Ba bà đi bán lợn con
+2026-10-27T08:56:04 nam 4972a978 ✓ Thằng Bờm có cái quạt mo
+2026-10-27T08:56:19 trung 4972a978 ✓ Thằng Bờm có cái quạt mo
+2026-10-27T08:56:26 nam 27f7cbaa ✓ Củ gì da cam
+2026-10-27T08:56:32 trung 27f7cbaa ✓ Củ gì da cam
+2026-10-27T08:56:39 nam d50fa96c ✓ Da cóc mà bọc bột lọc
+2026-10-27T08:56:45 trung d50fa96c ✓ Da cóc mà bọc bột lọc
+2026-10-27T08:56:52 nam 73478aa4 ✓ Quả gì nhiều mắt
+2026-10-27T08:57:00 trung 73478aa4 ✓ Quả gì nhiều mắt
+2026-10-27T08:57:07 nam 9f8a85b0 ✓ Lấp la lấp lánh
+2026-10-27T08:57:15 trung 9f8a85b0 ✓ Lấp la lấp lánh
+2026-10-27T08:57:26 nam cf46d1ed ✓ Thằng Cuội ngồi gốc cây đa
+2026-10-27T08:57:38 trung cf46d1ed ✓ Thằng Cuội ngồi gốc cây đa
+2026-10-27T08:57:44 nam 4b69e9a7 ✓ Bằng cái vung, vùng xuống ao
+2026-10-27T08:57:51 trung 4b69e9a7 ✓ Bằng cái vung, vùng xuống ao
+2026-10-27T08:57:58 nam eb8d4bc8 ✓ Thịt mỡ, dưa hành, câu đối đỏ
+2026-10-27T08:58:05 trung eb8d4bc8 ✓ Thịt mỡ, dưa hành, câu đối đỏ
+2026-10-27T08:58:14 nam 46f0f170 ✓ Tháng giêng là tháng ăn chơi
+2026-10-27T08:58:17   429, chờ 20 giây rồi thử lại (1/6)
+2026-10-27T08:58:37   429, chờ 40 giây rồi thử lại (2/6)
+2026-10-27T08:59:24 trung 46f0f170 ✓ Tháng giêng là tháng ăn chơi
+2026-10-27T08:59:34 nam 916de9ca ✓ Trong đầm gì đẹp bằng sen
+2026-10-27T08:59:44 trung 916de9ca ✓ Trong đầm gì đẹp bằng sen
+2026-10-27T08:59:51 nam 13ed75c2 ✓ Đường vô xứ Nghệ quanh quanh
+2026-10-27T08:59:54   429, chờ 20 giây rồi thử lại (1/6)
+2026-10-27T09:00:19 trung 13ed75c2 ✓ Đường vô xứ Nghệ quanh quanh
+2026-10-27T09:00:21   429, chờ 20 giây rồi thử lại (1/6)
+2026-10-27T09:00:41   429, chờ 40 giây rồi thử lại (2/6)
+2026-10-27T09:01:21   429, chờ 60 giây rồi thử lại (3/6)
+2026-10-27T09:02:26 nam 5786f871 ✓ Nhà Bè nước chảy chia hai
+2026-10-27T09:02:29   429, chờ 20 giây rồi thử lại (1/6)
+2026-10-27T09:02:49   429, chờ 40 giây rồi thử lại (2/6)
+2026-10-27T09:03:29   429, chờ 60 giây rồi thử lại (3/6)
+2026-10-27T09:04:30   429, chờ 80 giây rồi thử lại (4/6)
+2026-10-27T09:05:50   429, chờ 100 giây rồi thử lại (5/6)
+2026-10-27T09:07:30   429, chờ 120 giây rồi thử lại (6/6)
+2026-10-27T09:09:30 trung 5786f871 LỖI: Hết lượt thử lại (giới hạn tốc độ). Chạy lại sau.
+2026-10-27T09:09:30 Dừng vì hết hạn mức; chạy lại sẽ làm tiếp phần còn thiếu.
+2026-10-27T09:09:30 Xong: tạo mới 102, lỗi 2. Mỗi giọng có: bac 95/109, nam 90/109, trung 89/109

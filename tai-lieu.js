@@ -224,7 +224,178 @@ function bSticker(ctx){
   return [page(ctx,"Sticker chủ đề “"+(ctx.I.theme.ten||"")+"”",subOf(ctx),note("Cắt từng sticker. Mỗi ngày bé làm đủ việc, bé tự chọn 1 sticker dán vào bảng bên dưới.","✂️")+'<div class="tl-st">'+pics.map(function(p){ return '<div>'+p.pic+'</div>'; }).join("")+'</div>'+h3("Bảng ngôi sao 14 ngày","🌟")+'<div class="tl-chart">'+chart+'</div>')];
 }
 
-var BUILD={"07_Tho":bTho,"08_NhatKy":bNhatKy,"00":bHuongDan,"01_Tho":bTho,"01_TheTu":bAnhTrung,"02_TheTranh":bTheTranh,"02_TuDuy":bTuDuy,"02_DanhSach":bLink,"03_VanDong":bVanDong,"03_Sticker":bSticker,"04_AnhTrung":bAnhTrung,"05_Link":bLink,"05_Phieu":bTuDuy,"06_NhatKy":bNhatKy,"06_Nhiem":bVanDong,"Sach":bSach};
+/* =====================================================================
+   PHIẾU BÀI TẬP VƯỜN ƯƠM — tự soạn từ bộ từ có hình của vòng (phieu-tu.js)
+   Tuần 1: tô chữ / đi theo nét · đếm · nối tranh
+   Tuần 2: nối bóng · tìm và đếm · tìm hình khác (+ xếp thứ tự nếu vòng có)
+   Ba mức: "s" 2–3 tuổi (24–47 tháng) · 4 tuổi · 5 tuổi (thêm ô chữ Hán, viết số, câu)
+   Chữ nét đứt và bóng đen vẽ bằng canvas để bản In và bản PDF giống nhau.
+   ===================================================================== */
+var FW="Andika,'Be Vietnam Pro',system-ui,sans-serif";
+var FE="'Noto Color Emoji','Apple Color Emoji','Segoe UI Emoji',sans-serif";
+CSS+=
+'.tp-ask{display:flex;align-items:center;gap:14px;margin:0 0 10px}.tp-ask .ic{width:52px;height:52px;flex:none;border-radius:16px;background:#FFF4CC;display:flex;align-items:center;justify-content:center;font-size:28px}'+
+'.tp-ask b{flex:1;min-width:0;font-family:'+FD+';font-size:26px;font-weight:800;color:#2F6FD6;line-height:1.1}.tp-ask b .z{color:#E3262E;font-family:'+FZ+';font-weight:700}.tp-ask b small{font-family:'+FB+';font-size:14px;font-weight:600;color:#7A6A58}'+
+'.tp-name{flex:none;font-size:13px;font-weight:600;color:#7A6A58;line-height:2}.tp-name i{display:inline-block;width:150px;border-bottom:2px dotted #D9C79C;vertical-align:-4px}'+
+'.tp-wrap{display:flex;flex-direction:column;height:898px}.tp-wrap>.tp-main{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px}'+
+'.tp-self{display:flex;justify-content:flex-end;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#7A6A58;margin-top:8px}.tp-self span{font-size:24px;color:#FFC72C;letter-spacing:2px}'+
+'.tp-e{font-family:'+FE+';line-height:1}'+
+'.tp-lb{text-align:center;line-height:1.12}.tp-lb .en{font-family:'+FW+';font-weight:700;color:#2F6FD6;font-size:18px}.tp-lb .zh{font-family:'+FZ+';font-weight:700;color:#E3262E;font-size:17px}.tp-lb .py{font-size:11.5px;color:#7A6A58}.tp-lb .vi{font-size:12px;color:#7A6A58;font-weight:600}'+
+'.tp-tr{display:grid;grid-template-columns:118px minmax(0,1fr);gap:14px;align-items:center;border:3px solid #F0E2C0;border-radius:18px;background:#FFFCF3;padding:8px 14px}'+
+'.tp-pic{display:flex;flex-direction:column;align-items:center;gap:4px}.tp-pic .tp-e{font-size:62px}'+
+'.tp-tw{display:flex;flex-direction:column;gap:6px;min-width:0}.tp-tw img{display:block;max-width:100%}'+
+'.tp-hz{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.tp-hz .bx{width:58px;height:58px;position:relative;border:2px solid #E3262E;background:#fff;border-radius:4px}'+
+'.tp-hz .bx:before,.tp-hz .bx:after{content:"";position:absolute;background:#F4C2C4}.tp-hz .bx:before{left:50%;top:0;bottom:0;width:1px}.tp-hz .bx:after{top:50%;left:0;right:0;height:1px}'+
+'.tp-hz .bx span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'+FZ+';font-size:44px;color:#D7CDBF;line-height:1;z-index:1}'+
+'.tp-hz .py{font-size:15px;color:#7A6A58;font-weight:600;margin-left:6px}.tp-hz .rd{font-family:'+FZ+';font-size:34px;font-weight:700;color:#E3262E}'+
+'.tp-line{display:grid;grid-template-columns:96px minmax(0,1fr) 120px;align-items:center;gap:8px;border:3px solid #F0E2C0;border-radius:18px;background:#FFFCF3;padding:14px 12px}.tp-line .tp-e{font-size:60px;text-align:center}.tp-line svg{width:100%;height:auto;display:block}'+
+'.tp-ct{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:center;border:3px solid #F0E2C0;border-radius:18px;background:#FFFCF3;padding:14px 16px}'+
+'.tp-ct .its{display:flex;flex-wrap:wrap;gap:4px 8px}.tp-ct .its .tp-e{font-size:40px}.tp-ct.big .its .tp-e{font-size:54px}'+
+'.tp-ct .nums{display:flex;gap:10px}.tp-ct .nums span{width:50px;height:50px;border:3px solid #E9A900;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'+FD+';font-size:26px;font-weight:800}'+
+'.tp-wb{width:70px;height:58px;border:3px solid #E9A900;border-radius:14px;background:#fff}'+
+'.tp-sen{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 22px;font-size:19px;font-weight:600;color:#3A2A1A;border-top:2px dotted #F0E2C0;padding-top:6px}.tp-sen .en{font-family:'+FW+'}.tp-sen .zh{font-family:'+FZ+'}.tp-sen i{display:inline-block;width:46px;border-bottom:2px solid #9C8A73;margin:0 4px}'+
+'.tp-mt{flex:1;display:grid;grid-template-columns:1fr 1fr;column-gap:150px;align-content:space-evenly}'+
+'.tp-mt .c{display:flex;align-items:center;gap:14px;min-height:110px}.tp-mt .l{justify-content:flex-end}.tp-mt .r{justify-content:flex-start}'+
+'.tp-mt .tp-e{font-size:68px}.tp-dot{width:20px;height:20px;border-radius:50%;background:#3A2A1A;flex:none;box-shadow:0 0 0 5px #FFE7A6}'+
+'.tp-mt .wd{font-family:'+FW+';font-weight:700;color:#2F6FD6;font-size:30px;line-height:1.05}.tp-mt .wd .z{display:block;font-family:'+FZ+';color:#E3262E;font-size:26px}.tp-mt .wd .p{display:block;font-family:'+FB+';font-weight:600;font-size:12px;color:#7A6A58}'+
+'.tp-spy{position:relative;flex:1;min-height:0;border:3px solid #F0E2C0;border-radius:22px;background:#FFFCF3;overflow:hidden}.tp-spy .tp-e{position:absolute}'+
+'.tp-ta{display:grid;gap:10px;margin-top:10px}.tp-ta>div{display:flex;align-items:center;gap:10px;border:3px solid #F0E2C0;border-radius:16px;background:#fff;padding:6px 10px}.tp-ta .tp-e{font-size:36px}.tp-ta .tp-lb{text-align:left;flex:1;min-width:0}.tp-ta .tp-wb{width:58px;height:50px;margin-left:auto}'+
+'.tp-od{display:flex;justify-content:space-around;align-items:center;border:3px solid #F0E2C0;border-radius:18px;background:#FFFCF3;padding:8px 10px}.tp-od .tp-e{font-size:58px}'+
+'.tl-eco .tp-tr,.tl-eco .tp-ct,.tl-eco .tp-line,.tl-eco .tp-od,.tl-eco .tp-spy{background:#fff}';
+
+function prng(seed){ var a=(seed*2654435761)>>>0; return function(){ a=(a+0x6D2B79F5)>>>0; var t=a; t=Math.imul(t^t>>>15,1|t); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function rshuf(a,r){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(r()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function tpItem(x){ return {pic:x[0],en:x[1],zh:x[2],py:x[3],vi:x[4],mw:x[5]||"",t:x[6]==="t",pl:x[7]||""}; }
+function plural(it){ if(it.pl) return it.pl; var w=it.en; if(/(s|sh|ch|x)$/i.test(w)) return w+"es"; if(/[^aeiou]y$/i.test(w)) return w.slice(0,-1)+"ies"; return w+"s"; }
+function band(ctx){ var m=+ctx.I.thang||0; return m<48?"s":m<60?4:5; }
+function tpE(p,sz,extra){ return '<span class="tp-e"'+(sz?' style="font-size:'+sz+'px'+(extra||"")+'"':'')+'>'+p+'</span>'; }
+function tpLb(it,o){ o=o||{}; return '<div class="tp-lb">'+(o.noEn?'':'<div class="en">'+esc(it.en)+'</div>')+'<div class="zh">'+esc(it.zh)+'</div><div class="py">'+esc(it.py)+'</div>'+(o.vi===false?'':'<div class="vi">'+esc(it.vi)+'</div>')+'</div>'; }
+function cvImg(kind,t,w,h,fs){ return '<img class="tp-cv" alt="'+esc(t)+'" data-cv="'+kind+'" data-t="'+esc(t)+'" data-fs="'+(fs||0)+'" width="'+w+'" height="'+h+'" style="width:'+w+'px;height:'+h+'px">'; }
+var ASK={
+  line:["✏️",'Trace the line · <span class="z">描线</span> <small>miáo xiàn</small>'],
+  trace:["✏️",'Trace · <span class="z">描一描</span> <small>miáo yi miáo</small>'],
+  count:["🔢",'How many? · <span class="z">有几个？</span> <small>yǒu jǐ gè</small>'],
+  match:["🔗",'Match · <span class="z">连一连</span> <small>lián yi lián</small>'],
+  shadow:["🌑",'Find the shadow · <span class="z">找影子</span> <small>zhǎo yǐngzi</small>'],
+  spy:["🔍",'I spy · <span class="z">找一找</span> <small>zhǎo yi zhǎo</small>'],
+  odd:["❓",'Which one is different? · <span class="z">哪个不一样？</span> <small>nǎge bù yíyàng</small>']};
+function tpPage(ctx,no,title,kind,mom,main){
+  return page(ctx,"Phiếu "+no+" · "+title,subOf(ctx),
+    '<div class="tp-wrap"><div class="tp-ask"><span class="ic">'+ASK[kind][0]+'</span><b>'+ASK[kind][1]+'</b><span class="tp-name">Tên bé: <i></i><br>Ngày: <i style="width:110px"></i></span></div>'+
+    note(mom,"👩")+'<div class="tp-main">'+main+'</div><div class="tp-self">Bé tự chấm <span>☆☆☆</span></div></div>');
+}
+/* ---- từng loại phiếu ---- */
+function pLine(ctx,P,r){
+  var m=+ctx.I.thang, L=rshuf(P,r).slice(0,4), w=520, h=110;
+  var D=m<30?['M10 55 L510 55','M10 55 Q135 15 260 55 T510 55','M10 55 L510 55','M10 75 Q260 5 510 75']:
+    ['M10 55 L72 20 L135 90 L197 20 L260 90 L322 20 L385 90 L447 20 L510 55','M10 55 C90 -15 170 125 260 55 S430 -15 510 55','M10 90 L10 25 L135 25 L135 90 L260 90 L260 25 L385 25 L385 90 L510 90','M10 55 Q72 5 135 55 T260 55 T385 55 T510 55'];
+  D=rshuf(D,r); var cols=["#2F6FD6","#E3262E","#3BB273","#E9A900"];
+  return L.map(function(it,i){ return '<div class="tp-line">'+tpE(it.pic)+'<svg viewBox="0 0 520 110" width="'+w+'" height="'+h+'"><circle cx="10" cy="'+D[i].split(" ")[1]+'" r="8" fill="'+cols[i]+'"/><path d="'+D[i]+'" fill="none" stroke="'+cols[i]+'" stroke-opacity=".6" stroke-width="7" stroke-dasharray="2 14" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="tp-pic">'+tpE(it.pic,52)+tpLb(it)+'</div></div>'; }).join("");
+}
+function pTrace(ctx,P,r,b){
+  var L=rshuf(P,r).filter(function(it){ return it.en.length<=14; }).slice(0,4), fs=b===4?62:54;
+  return L.map(function(it){
+    var hz;
+    if(b===5){ var ch=Array.from(it.zh), boxes=ch.map(function(c){ return '<span class="bx"><span>'+esc(c)+'</span></span>'; }).join("");
+      if(ch.length<=3) boxes+=ch.map(function(){ return '<span class="bx"></span>'; }).join("");
+      hz='<div class="tp-hz">'+boxes+'<span class="py">'+esc(it.py)+'</span></div>'; }
+    else hz='<div class="tp-hz"><span class="rd">'+esc(it.zh)+'</span><span class="py">'+esc(it.py)+'</span></div>';
+    return '<div class="tp-tr"><div class="tp-pic">'+tpE(it.pic)+'<div class="tp-lb"><div class="vi">'+esc(it.vi)+'</div></div></div><div class="tp-tw">'+cvImg("tw",it.en,520,b===4?104:92,fs)+hz+'</div></div>';
+  }).join("");
+}
+function pCount(ctx,P,r,b){
+  var pics=P.filter(function(it){ return !it.t; }), rows=b==="s"?3:5, max=b==="s"?(+ctx.I.thang<30?3:4):b===4?(ctx.g===104?10:6):10;
+  if(b===5) pics=pics.filter(function(it){ return it.mw; }).concat(pics.filter(function(it){ return !it.mw; }));
+  var L=b===5?pics.slice(0,rows):rshuf(pics,r).slice(0,rows); while(L.length<rows) L.push(pics[L.length%pics.length]);
+  if(b===5) L=rshuf(L,r);
+  var pool=rshuf(Array.from({length:max},function(_,i){ return i+1; }),r);
+  return L.map(function(it,i){
+    var n=pool[i%pool.length], right;
+    if(b===5) right='<span class="tp-wb"></span>';
+    else { var o=[n], k=0; while(o.length<3&&k<40){ var c=1+Math.floor(r()*Math.max(max,3)); if(o.indexOf(c)<0) o.push(c); k++; } o.sort(function(x,y){return x-y;});
+      right='<span class="nums">'+o.map(function(x){ return '<span>'+x+'</span>'; }).join("")+'</span>'; }
+    var sen=(b===5&&it.mw)?'<div class="tp-sen"><span class="en">I see <i></i> '+esc(plural(it))+'.</span><span class="zh">有 <i></i> '+esc(it.mw+it.zh)+'。</span></div>':'';
+    return '<div class="tp-ct'+(b==="s"?" big":"")+'"><div class="its">'+new Array(n+1).join(tpE(it.pic))+'</div>'+right+sen+'</div>';
+  }).join("");
+}
+function pMatch(ctx,P,r,b,shadow){
+  var pics=P.filter(function(it){ return !it.t; }), n=b==="s"?3:b===4?4:5, L=rshuf(pics,r).slice(0,n), R=rshuf(L,r), s="";
+  for(var i=0;i<n;i++){
+    var left=shadow?'<div class="tp-pic">'+tpE(L[i].pic,62)+(b==="s"?'':tpLb(L[i],{vi:false}))+'</div>':tpE(L[i].pic);
+    var right=shadow?cvImg("sil",R[i].pic,84,84):(b==="s"?tpE(R[i].pic):'<span class="wd">'+esc(R[i].en)+'<span class="z">'+esc(R[i].zh)+'</span><span class="p">'+esc(R[i].py)+'</span></span>');
+    s+='<div class="c l">'+left+'<span class="tp-dot"></span></div><div class="c r"><span class="tp-dot"></span>'+right+'</div>';
+  }
+  return '<div class="tp-mt">'+s+'</div>';
+}
+function pSpy(ctx,P,r,b){
+  var pics=P.filter(function(it){ return !it.t; }), types=b==="s"?2:b===4?3:4, hi=b==="s"?4:b===4?6:8, sz=b==="s"?54:b===4?44:40;
+  var T=rshuf(pics,r).slice(0,types), cols=b==="s"?6:8, rows=b==="s"?4:6, cells=rshuf(Array.from({length:cols*rows},function(_,i){ return i; }),r), k=0, its="";
+  T.forEach(function(it){ var c=2+Math.floor(r()*(hi-1)); for(var i=0;i<c;i++){ var cell=cells[k++], cx=cell%cols, cy=Math.floor(cell/cols);
+    var x=(cx+.1+r()*.45)/cols*100, y=(cy+.08+r()*.4)/rows*100, rot=Math.round(r()*40-20);
+    its+='<span class="tp-e" style="left:'+x.toFixed(1)+'%;top:'+y.toFixed(1)+'%;font-size:'+sz+'px;transform:rotate('+rot+'deg)">'+it.pic+'</span>'; } });
+  var ta='<div class="tp-ta" style="grid-template-columns:repeat('+(types===4?2:types)+',1fr)">'+T.map(function(it){ return '<div>'+tpE(it.pic)+(b==="s"?'<div class="tp-lb"><div class="vi">'+esc(it.vi)+'</div></div>':tpLb(it,{vi:false}))+'<span class="tp-wb"></span></div>'; }).join("")+'</div>';
+  return '<div class="tp-spy">'+its+'</div>'+ta;
+}
+function pOdd(ctx,P,r,b){
+  var pics=P.filter(function(it){ return !it.t; }), rows=b==="s"?3:b===4?4:5, per=b==="s"?3:b===4?4:5, out="";
+  for(var i=0;i<rows;i++){ var A=pics[(i*2)%pics.length], B=pics[(i*2+1)%pics.length]; if(A===B) B=pics[(i+1)%pics.length];
+    var pos=Math.floor(r()*per), row=[]; for(var j=0;j<per;j++) row.push(j===pos?B:A);
+    out+='<div class="tp-od">'+row.map(function(x){ return tpE(x.pic); }).join("")+'</div>'; }
+  return out;
+}
+var MOM={
+  line:"Bé cầm bút sáp to, đi theo nét chấm từ tranh bên trái sang tranh bên phải. Mẹ gọi tên tranh bằng tiếng Việt, rồi tiếng Anh, tiếng Trung.",
+  trace4:"Bé tô chữ tiếng Anh theo nét đứt, rồi viết lại trên phần dòng còn trống nếu thích. Mẹ đọc to từ tiếng Anh, tiếng Trung để bé nhắc theo.",
+  trace5:"Bé tô chữ tiếng Anh theo nét đứt và tự viết lại trên dòng trống. Ô chữ Hán: tô chữ mờ trước, rồi viết thử ở ô trống bên cạnh.",
+  counts:"Bé chạm từng hình, đếm to cùng mẹ (một, hai, ba · one, two, three · 一、二、三), rồi khoanh số đúng.",
+  count4:"Bé chạm từng hình và đếm to bằng tiếng Anh hoặc tiếng Trung, rồi khoanh tròn số đúng.",
+  count5:"Bé đếm, viết số vào ô, rồi điền số vào câu và đọc to cả câu tiếng Anh, tiếng Trung.",
+  matchs:"Bé nối hai hình giống nhau bằng bút sáp. Nối xong, mẹ hỏi tên hình bằng tiếng Việt, rồi nói lại bằng tiếng Anh.",
+  match:"Bé nối mỗi tranh với chữ đúng. Bé chưa đọc được thì mẹ đọc chữ, bé tìm tranh.",
+  shadow:"Bé nối mỗi hình với cái bóng đen giống nó, rồi nói tên hình bằng tiếng Anh hoặc tiếng Trung.",
+  spys:"Bé tìm từng loại hình trong khung, đếm cùng mẹ, rồi vẽ số chấm vào ô bên dưới.",
+  spy:"Bé tìm từng loại hình, gạch nhẹ mỗi hình khi đã đếm, rồi ghi số vào ô bên dưới.",
+  odd:"Mỗi hàng có một hình khác các hình còn lại. Bé khoanh tròn hình đó và nói tên nó."};
+function bPhieu(ctx){
+  var P=(window.PHIEU_TU[ctx.g]||[]).map(tpItem), b=band(ctx), r=prng(ctx.g*10+ctx.w), m=+ctx.I.thang, out=[];
+  if(ctx.w===1){
+    out.push(b==="s"?tpPage(ctx,1,"Đi theo nét","line",MOM.line,pLine(ctx,P,r)):tpPage(ctx,1,"Tô chữ","trace",b===4?MOM.trace4:MOM.trace5,pTrace(ctx,P,r,b)));
+    if(b!=="s"||m>=25) out.push(tpPage(ctx,2,"Đếm","count",b==="s"?MOM.counts:b===4?MOM.count4:MOM.count5,pCount(ctx,P,r,b)));
+    out.push(tpPage(ctx,out.length+1,b==="s"?"Nối hình giống nhau":"Nối tranh với chữ","match",b==="s"?MOM.matchs:MOM.match,pMatch(ctx,P,r,b)));
+  } else {
+    out.push(tpPage(ctx,4,"Nối bóng","shadow",MOM.shadow,pMatch(ctx,P,r,b,true)));
+    out.push(tpPage(ctx,5,"Tìm và đếm","spy",b==="s"?MOM.spys:MOM.spy,pSpy(ctx,P,r,b)));
+    if(b!=="s"||m>=30) out.push(tpPage(ctx,6,"Tìm hình khác","odd",MOM.odd,pOdd(ctx,P,r,b)));
+    if(ctx.is45&&ctx.vocab&&ctx.vocab.seq&&ctx.vocab.seq.length>=3){ var old=bTuDuy(ctx); out.push(old[old.length-1].replace(/Phiếu \d+: Xếp thứ tự/,"Phiếu "+(out.length+4)+" · Xếp thứ tự")); }
+  }
+  return out;
+}
+/* canvas: chữ nét đứt trên dòng kẻ, bóng đen của hình */
+function drawTrace(img){
+  var W=+img.getAttribute("width"), H=+img.getAttribute("height"), fs=+img.dataset.fs||56, t=img.dataset.t, k=2;
+  var c=document.createElement("canvas"); c.width=W*k; c.height=H*k; var g=c.getContext("2d"); g.scale(k,k);
+  g.font="700 "+fs+"px "+FW; while(g.measureText(t).width>W*0.62&&fs>30){ fs-=2; g.font="700 "+fs+"px "+FW; }
+  var base=H*0.70, top=base-fs*0.72, mid=base-fs*0.48, low=base+fs*0.24;
+  g.lineWidth=1.4; g.strokeStyle="#D9C79C"; g.setLineDash([]); [top,low].forEach(function(y){ g.beginPath(); g.moveTo(0,y); g.lineTo(W,y); g.stroke(); });
+  g.setLineDash([6,6]); g.beginPath(); g.moveTo(0,mid); g.lineTo(W,mid); g.stroke();
+  g.setLineDash([]); g.lineWidth=2.2; g.strokeStyle="#E3262E"; g.globalAlpha=.55; g.beginPath(); g.moveTo(0,base); g.lineTo(W,base); g.stroke(); g.globalAlpha=1;
+  g.setLineDash([fs*0.06,fs*0.07]); g.lineCap="round"; g.lineJoin="round"; g.lineWidth=Math.max(2,fs*0.045); g.strokeStyle="#8A7864"; g.strokeText(t,10,base);
+  g.setLineDash([]); g.fillStyle="#3BB273"; g.beginPath(); g.arc(10,base-fs*0.85,4.5,0,7); g.fill();
+  img.src=c.toDataURL("image/png");
+}
+function drawSil(img){
+  var W=+img.getAttribute("width"), k=2, s=W*0.82, c=document.createElement("canvas"); c.width=c.height=W*k; var g=c.getContext("2d"); g.scale(k,k);
+  g.font=s+"px "+FE; g.textAlign="center"; g.textBaseline="middle"; g.fillText(img.dataset.t,W/2,W/2+s*0.06);
+  g.globalCompositeOperation="source-in"; g.fillStyle="#3A2A1A"; g.fillRect(0,0,W,W);
+  img.src=c.toDataURL("image/png");
+}
+function fillCanvas(root){
+  var imgs=[].slice.call(root.querySelectorAll("img.tp-cv:not([src])")); if(!imgs.length) return Promise.resolve();
+  var fl=document.fonts&&document.fonts.load?Promise.all([document.fonts.load("700 56px Andika"),document.fonts.load("60px 'Noto Color Emoji'")]).catch(function(){}):Promise.resolve();
+  return fl.then(function(){ imgs.forEach(function(im){ try{ if(im.dataset.cv==="tw") drawTrace(im); else drawSil(im); }catch(e){} }); });
+}
+function bTuDuyMoi(ctx){ return (window.PHIEU_TU&&window.PHIEU_TU[ctx.g]&&+ctx.I.thang>=24)?bPhieu(ctx):bTuDuy(ctx); }
+var BUILD={"07_Tho":bTho,"08_NhatKy":bNhatKy,"00":bHuongDan,"01_Tho":bTho,"01_TheTu":bAnhTrung,"02_TheTranh":bTheTranh,"02_TuDuy":bTuDuyMoi,"02_DanhSach":bLink,"03_VanDong":bVanDong,"03_Sticker":bSticker,"04_AnhTrung":bAnhTrung,"05_Link":bLink,"05_Phieu":bTuDuyMoi,"06_NhatKy":bNhatKy,"06_Nhiem":bVanDong,"Sach":bSach};
 function builderFor(file){ var k=Object.keys(BUILD).filter(function(x){ return file.indexOf(x)===0; }).sort(function(a,b){ return b.length-a.length; })[0]; return k?BUILD[k]:null; }
 
 function fillQR(root){
@@ -273,7 +444,7 @@ function open(ctx){
   document.body.appendChild(ov);
   var zoom=ov.querySelector(".tl-zoom"), done=false; function fit(){ var s=Math.min(1,(window.innerWidth-16)/794); zoom.style.transform="scale("+s+")"; zoom.style.height=(zoom.scrollHeight*s)+"px"; }
   fit(); window.addEventListener("resize",fit);
-  var prep=ready().then(function(){ paginate(zoom); pages=zoom.innerHTML; done=true; fit(); return fillQR(zoom); }).then(fit);
+  var prep=ready().then(function(){ return fillCanvas(zoom); }).then(function(){ paginate(zoom); pages=zoom.innerHTML; done=true; fit(); return fillQR(zoom); }).then(fit);
   ov._ready=prep;
   var fname=(ctx.code+"_"+ctx.file).replace(/\.pdf$/i,"")+".pdf";
   function docHTML(){ return '<div class="tl-doc'+(eco?' tl-eco':'')+'">'+pages+'</div>'; }

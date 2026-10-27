@@ -292,7 +292,7 @@ function detFiles(g,w,D){
   var wk=D.weeks[w-1], small=g<=24, pr=(D.printables||[]).map(function(p){return p.name;}).slice(0,3).join(", ");
   var list=[["PDF","var(--red)","00_HuongDan.pdf","Kế hoạch 7 ngày: "+wk.title+", ô tick “đã làm”"],
     ["PDF","var(--red)","01_Tho.pdf",wk.vi.map(function(v){return v.t+(v.author?" ("+v.author+")":"");}).join(" · ")],
-    ["PDF","var(--red)",small?"02_TheTranh.pdf":"02_TuDuy.pdf",pr||(small?"Thẻ tranh cho mẹ giơ":"Phiếu chơi của tuần")],
+    ["PDF","var(--red)",small?"02_TheTranh.pdf":"02_TuDuy.pdf",(g>=49&&window.PHIEU_TU&&window.PHIEU_TU[g])?((w===1?"Phiếu Vườn ươm: đi theo nét, đếm, nối hình giống nhau":"Phiếu Vườn ươm: nối bóng, tìm và đếm, tìm hình khác")+(pr?" · Tham khảo thêm: "+pr:"")):(pr||(small?"Thẻ tranh cho mẹ giơ":"Phiếu chơi của tuần"))],
     ["PDF","var(--red)","03_VanDongTinh.pdf","Ảnh mẫu, đồ cần chuẩn bị, nhắc an toàn"],
     ["PDF","var(--red)","04_AnhTrung.pdf",(D.en.words||[]).join(", ")+((D.zh&&D.zh.words&&D.zh.words.length)?" · "+D.zh.words.map(function(z){return z[0];}).join(", "):"")],
     ["MP3","var(--green)","A1_Tho_Cham.mp3","Cô đọc chậm "+wk.vi[0].t+", có chỗ ngừng để bé điền",wk.vi[0].lyr?"tts":null],

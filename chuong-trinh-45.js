@@ -121,7 +121,7 @@ function files(g,w){
   var list=[["PDF","var(--red)","00_HuongDan.pdf","Kế hoạch 7 ngày · "+f.ten+", ô tick “đã làm”"],
     ["PDF","var(--purple)","01_TheTu_AnhTrung.pdf","Thẻ từ Anh – Trung để cắt: "+v.en.slice(0,4).map(function(x){ return x[0]; }).join(", ")+"…"],
     ["PDF","var(--blue)","02_DanhSachVideo.pdf","Video của tuần, mã QR, câu hỏi dừng video"],
-    ["PDF","var(--red)","05_PhieuBaiTap.pdf","Phiếu bài tập: nối bóng, nét đứt, đếm, tìm hình khác, xếp thứ tự"],
+    ["PDF","var(--red)","05_PhieuBaiTap.pdf",(w===1?"Phiếu Vườn ươm tuần 1: tô chữ"+(I.thang>=60?" và chữ Hán":"")+", đếm, nối tranh với chữ":"Phiếu Vườn ươm tuần 2: nối bóng, tìm và đếm, tìm hình khác")],
     ["PDF","var(--orange)","06_NhiemVuDoiThuc.pdf","Thẻ nhiệm vụ đời thực 7 ngày + nhắc an toàn"],
     ["PDF","var(--green)","03_Sticker_ChuDe.pdf","Sticker chủ đề “"+I.theme.ten+"” + bảng ngôi sao 14 ngày"],
     ["PDF","var(--red)","07_ThoTruyen_Toi.pdf","Tối tiếng Việt: "+(toi.join(" · ")||"truyện cổ tích, đồng dao")],

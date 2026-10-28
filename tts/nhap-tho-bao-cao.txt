@@ -1,4 +1,4 @@
-Lấy lúc 2026-10-27T08:43:41.571Z
+Lấy lúc 2026-10-28T08:17:43.261Z
 Lên web: 0 bài
 Chưa có lời: 5 bài
 T001 Đôi bàn tay nhỏ: có lời nhưng chưa tích "Đã có phép dùng"
@@ -25,12 +25,12 @@ T021 Mẹ dạy bé tập nói: có lời nhưng chưa tích "Đã có phép dù
 T023 Con cá vàng: có lời nhưng chưa tích "Đã có phép dùng"
 T024 Soi gương: có lời nhưng chưa tích "Đã có phép dùng"
 T025 Bàn chân của bé: có lời nhưng chưa tích "Đã có phép dùng"
-T027 Bê đòi bú: có lời nhưng chưa tích "Đã có phép dùng"
+T027 Con mèo mà trèo cây cau: có lời nhưng chưa tích "Đã có phép dùng"
 T028 Ngủ rồi: có lời nhưng chưa tích "Đã có phép dùng"
 T029 Trong đêm bé ngủ: có lời nhưng chưa tích "Đã có phép dùng"
 T031 Bê hỏi mẹ: có lời nhưng chưa tích "Đã có phép dùng"
 T032 Đu đủ: có lời nhưng chưa tích "Đã có phép dùng"
-T033 Sáo ăn na: có lời nhưng chưa tích "Đã có phép dùng"
+T033 Nu na nu nống: có lời nhưng chưa tích "Đã có phép dùng"
 T034 Củ cà-rốt: có lời nhưng chưa tích "Đã có phép dùng"
 T035 Đàn ong vàng chăm chỉ: có lời nhưng chưa tích "Đã có phép dùng"
 T036 Bắp cải xanh: có lời nhưng chưa tích "Đã có phép dùng"
@@ -67,7 +67,7 @@ T068 Mùa xuân: có lời nhưng chưa tích "Đã có phép dùng"
 T069 Ảnh Bác: có lời nhưng chưa tích "Đã có phép dùng"
 T070 Về quê: có lời nhưng chưa tích "Đã có phép dùng"
 T071 Em yêu nhà em: có lời nhưng chưa tích "Đã có phép dùng"
-T072 Kêu: có lời nhưng chưa tích "Đã có phép dùng"
+T072 Chi chi chành chành: có lời nhưng chưa tích "Đã có phép dùng"
 T073 Mèo và tro bếp: có lời nhưng chưa tích "Đã có phép dùng"
 T074 Bà và cháu: có lời nhưng chưa tích "Đã có phép dùng"
 T075 Ngựa con: có lời nhưng chưa tích "Đã có phép dùng"

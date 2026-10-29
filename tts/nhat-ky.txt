@@ -1,112 +1,77 @@
-2026-10-28T08:17:43 Chế độ: tat-ca. Số bài có lời để đọc: 109.
-2026-10-28T08:17:49 bac 6189f6e1 LỖI: 400: {"error":{"message":"Request blocked for an unspecified policy reason. Please modify your input and retry.","code":"content_blocked"}}
-2026-10-28T08:17:57 trung 5786f871 ✓ Nhà Bè nước chảy chia hai
-2026-10-28T08:18:03 nam e1adb6cd ✓ Nhiễu điều phủ lấy giá gương
-2026-10-28T08:18:10 trung e1adb6cd ✓ Nhiễu điều phủ lấy giá gương
-2026-10-28T08:18:17 nam 40a29ecc ✓ Dù ai đi ngược về xuôi
-2026-10-28T08:18:25 trung 40a29ecc ✓ Dù ai đi ngược về xuôi
-2026-10-28T08:18:31 nam 70252007 ✓ Không sơn mà đỏ
-2026-10-28T08:18:38 trung 70252007 ✓ Không sơn mà đỏ
-2026-10-28T08:18:45 nam 788ad9fc ✓ Chẳng lợp mà thành mái
-2026-10-28T08:18:51 trung 788ad9fc ✓ Chẳng lợp mà thành mái
-2026-10-28T08:18:59 nam 70e7eb20 ✓ Có chân mà chẳng biết đi
-2026-10-28T08:19:06 trung 70e7eb20 ✓ Có chân mà chẳng biết đi
-2026-10-28T08:19:13 nam 45457e0e ✓ Năm ông cùng ở một nhà
-2026-10-28T08:19:20 trung 45457e0e ✓ Năm ông cùng ở một nhà
-2026-10-28T08:19:26 bac 49e8238f ✓ Chẳng phải ảnh, chẳng phải hình
-2026-10-28T08:19:33 nam 49e8238f ✓ Chẳng phải ảnh, chẳng phải hình
-2026-10-28T08:19:40 trung 49e8238f ✓ Chẳng phải ảnh, chẳng phải hình
-2026-10-28T08:19:48 bac 8d42fe23 ✓ Thường nằm đầu hè
-2026-10-28T08:19:55 nam 8d42fe23 ✓ Thường nằm đầu hè
-2026-10-28T08:20:03 trung 8d42fe23 ✓ Thường nằm đầu hè
-2026-10-28T08:20:10 bac a43395c5 ✓ Con gì hai mắt trong veo
-2026-10-28T08:20:17 nam a43395c5 ✓ Con gì hai mắt trong veo
-2026-10-28T08:20:24 trung a43395c5 ✓ Con gì hai mắt trong veo
-2026-10-28T08:20:32 bac 67dfb54c ✓ Con gì đuôi ngắn tai dài
-2026-10-28T08:20:39 nam 67dfb54c ✓ Con gì đuôi ngắn tai dài
-2026-10-28T08:20:47 trung 67dfb54c ✓ Con gì đuôi ngắn tai dài
-2026-10-28T08:20:53 bac dbc3774e ✓ Miệng kêu ụt ịt
-2026-10-28T08:21:00 nam dbc3774e ✓ Miệng kêu ụt ịt
-2026-10-28T08:21:07 trung dbc3774e ✓ Miệng kêu ụt ịt
-2026-10-28T08:21:14 bac 20afc9ca ✓ Con gì mào đỏ
-2026-10-28T08:21:21 nam 20afc9ca ✓ Con gì mào đỏ
-2026-10-28T08:21:29 trung 20afc9ca ✓ Con gì mào đỏ
-2026-10-28T08:21:37 bac 0c7404ea ✓ Cầm chiếc cán bật lên
-2026-10-28T08:21:45 nam 0c7404ea ✓ Cầm chiếc cán bật lên
-2026-10-28T08:21:54 trung 0c7404ea ✓ Cầm chiếc cán bật lên
-2026-10-28T08:22:02 bac ee53847f ✓ Bốn cột tứ trụ
-2026-10-28T08:22:10 nam ee53847f ✓ Bốn cột tứ trụ
-2026-10-28T08:22:19 trung ee53847f ✓ Bốn cột tứ trụ
-2026-10-28T08:22:25 bac d33e59ae ✓ Con gì đuôi ngắn tai dài
-2026-10-28T08:22:33 nam d33e59ae ✓ Con gì đuôi ngắn tai dài
-2026-10-28T08:22:40 trung d33e59ae ✓ Con gì đuôi ngắn tai dài
-2026-10-28T08:22:47 bac a27ed623 ✓ Con gì đẹp nhất loài chim
-2026-10-28T08:22:54 nam a27ed623 ✓ Con gì đẹp nhất loài chim
-2026-10-28T08:23:00 trung a27ed623 ✓ Con gì đẹp nhất loài chim
-2026-10-28T08:23:09 bac 698e31c3 ✓ Con kiến mà leo cành đa
-2026-10-28T08:23:18 nam 698e31c3 ✓ Con kiến mà leo cành đa
-2026-10-28T08:23:27 trung 698e31c3 ✓ Con kiến mà leo cành đa
-2026-10-28T08:23:33 bac 21f3c37c ✓ Nâu vàng đen đỏ
-2026-10-28T08:23:40 nam 21f3c37c ✓ Nâu vàng đen đỏ
-2026-10-28T08:23:47 trung 21f3c37c ✓ Nâu vàng đen đỏ
-2026-10-28T08:23:54 bac 84e3e7de ✓ Con gì quang quác
-2026-10-28T08:24:01 nam 84e3e7de ✓ Con gì quang quác
-2026-10-28T08:24:09 trung 84e3e7de ✓ Con gì quang quác
-2026-10-28T08:24:16 tu-vung 1 ✓
-2026-10-28T08:24:24 tu-vung 2 ✓
-2026-10-28T08:24:31 tu-vung 3 ✓
-2026-10-28T08:24:38 tu-vung 4 ✓
-2026-10-28T08:24:46 tu-vung 5 ✓
-2026-10-28T08:24:53 tu-vung 6 ✓
-2026-10-28T08:25:00 tu-vung 7 ✓
-2026-10-28T08:25:08 tu-vung 8 ✓
-2026-10-28T08:25:15 tu-vung 9 ✓
-2026-10-28T08:25:22 tu-vung 10 ✓
-2026-10-28T08:25:29 tu-vung 11 ✓
-2026-10-28T08:25:36 tu-vung 12 ✓
-2026-10-28T08:25:45 tu-vung 13 ✓
-2026-10-28T08:25:54 tu-vung 14 ✓
-2026-10-28T08:26:03 tu-vung 15 ✓
-2026-10-28T08:26:13 tu-vung 16 ✓
-2026-10-28T08:26:23 tu-vung 17 ✓
-2026-10-28T08:26:34 tu-vung 18 ✓
-2026-10-28T08:26:42 tu-vung 19 ✓
-2026-10-28T08:26:51 tu-vung 20 ✓
-2026-10-28T08:27:00 tu-vung 21 ✓
-2026-10-28T08:27:10 tu-vung 22 ✓
-2026-10-28T08:27:20 tu-vung 23 ✓
-2026-10-28T08:27:29 tu-vung 24 ✓
-2026-10-28T08:27:43 tu-vung 25 ✓
-2026-10-28T08:27:54 tu-vung 26 ✓
-2026-10-28T08:28:06 tu-vung 27 ✓
-2026-10-28T08:28:18 tu-vung 28 ✓
-2026-10-28T08:28:29 tu-vung 29 ✓
-2026-10-28T08:28:40 tu-vung 30 ✓
-2026-10-28T08:28:53 tu-vung 31 ✓
-2026-10-28T08:29:06 tu-vung 32 ✓
-2026-10-28T08:29:17 tu-vung 33 ✓
-2026-10-28T08:29:23 tu-vung 34 ✓
-2026-10-28T08:29:34 tu-vung 35 ✓
-2026-10-28T08:29:44 tu-vung 36 ✓
-2026-10-28T08:29:54 tu-vung 37 ✓
-2026-10-28T08:30:05 tu-vung 38 ✓
-2026-10-28T08:30:16 tu-vung 39 ✓
-2026-10-28T08:30:25 tu-vung 40 ✓
-2026-10-28T08:30:36 tu-vung 41 ✓
-2026-10-28T08:30:46 tu-vung 42 ✓
-2026-10-28T08:30:57 tu-vung 43 ✓
-2026-10-28T08:31:00   429, chờ 20 giây rồi thử lại (1/6)
-2026-10-28T08:31:20   429, chờ 40 giây rồi thử lại (2/6)
-2026-10-28T08:32:07 tu-vung 44 ✓
-2026-10-28T08:32:17 tu-vung 45 ✓
-2026-10-28T08:32:19   429, chờ 20 giây rồi thử lại (1/6)
-2026-10-28T08:32:49 tu-vung 46 ✓
-2026-10-28T08:32:51   429, chờ 20 giây rồi thử lại (1/6)
-2026-10-28T08:33:11   429, chờ 40 giây rồi thử lại (2/6)
-2026-10-28T08:33:52   429, chờ 60 giây rồi thử lại (3/6)
-2026-10-28T08:34:52   429, chờ 80 giây rồi thử lại (4/6)
-2026-10-28T08:36:12   429, chờ 100 giây rồi thử lại (5/6)
-2026-10-28T08:37:52   429, chờ 120 giây rồi thử lại (6/6)
-2026-10-28T08:39:52 tu-vung 47 LỖI: Hết lượt thử lại (giới hạn tốc độ). Chạy lại sau.
-2026-10-28T08:39:52 Dừng vì hết hạn mức; chạy lại sẽ làm tiếp.
-2026-10-28T08:39:52 Xong: tạo mới 98, lỗi 2. Mỗi giọng có: bac 108/109, nam 109/109, trung 109/109
+2026-10-29T08:19:04 Chế độ: tat-ca. Số bài có lời để đọc: 109.
+2026-10-29T08:19:08 bac 6189f6e1 LỖI: 400: {"error":{"message":"Request blocked for an unspecified policy reason. Please modify your input and retry.","code":"content_blocked"}}
+2026-10-29T08:19:17 tu-vung 47 ✓
+2026-10-29T08:19:28 tu-vung 48 ✓
+2026-10-29T08:19:39 tu-vung 49 ✓
+2026-10-29T08:19:52 tu-vung 50 ✓
+2026-10-29T08:20:03 tu-vung 51 ✓
+2026-10-29T08:20:14 tu-vung 52 ✓
+2026-10-29T08:20:25 tu-vung 53 ✓
+2026-10-29T08:20:37 tu-vung 54 ✓
+2026-10-29T08:20:48 tu-vung 55 ✓
+2026-10-29T08:20:59 tu-vung 56 ✓
+2026-10-29T08:21:13 tu-vung 57 ✓
+2026-10-29T08:21:23 tu-vung 58 ✓
+2026-10-29T08:21:34 tu-vung 59 ✓
+2026-10-29T08:21:45 tu-vung 60 ✓
+2026-10-29T08:21:59 tu-vung 61 ✓
+2026-10-29T08:22:13 tu-vung 62 ✓
+2026-10-29T08:22:29 tu-vung 63 ✓
+2026-10-29T08:22:42 tu-vung 64 ✓
+2026-10-29T08:22:54 tu-vung 65 ✓
+2026-10-29T08:23:08 tu-vung 66 ✓
+2026-10-29T08:23:24 tu-vung 67 ✓
+2026-10-29T08:23:39 tu-vung 68 ✓
+2026-10-29T08:23:53 tu-vung 69 ✓
+2026-10-29T08:24:06 tu-vung 70 ✓
+2026-10-29T08:24:19 tu-vung 71 ✓
+2026-10-29T08:24:35 tu-vung 72 ✓
+2026-10-29T08:24:58 tu-vung 97 ✓
+2026-10-29T08:25:18 tu-vung 98 ✓
+2026-10-29T08:25:46 tu-vung 99 ✓
+2026-10-29T08:26:10 tu-vung 100 ✓
+2026-10-29T08:26:35 tu-vung 101 ✓
+2026-10-29T08:26:57 tu-vung 102 ✓
+2026-10-29T08:27:25 tu-vung 103 ✓
+2026-10-29T08:27:48 tu-vung 104 ✓
+2026-10-29T08:28:14 tu-vung 105 ✓
+2026-10-29T08:28:38 tu-vung 106 ✓
+2026-10-29T08:29:05 tu-vung 107 ✓
+2026-10-29T08:30:48 tu-vung 108 ✓
+2026-10-29T08:31:13 tu-vung 109 ✓
+2026-10-29T08:31:37 tu-vung 110 ✓
+2026-10-29T08:32:02 tu-vung 111 ✓
+2026-10-29T08:32:31 tu-vung 112 ✓
+2026-10-29T08:32:56 tu-vung 113 ✓
+2026-10-29T08:33:21 tu-vung 114 ✓
+2026-10-29T08:33:43 tu-vung 115 ✓
+2026-10-29T08:34:09 tu-vung 116 ✓
+2026-10-29T08:34:31 tu-vung 117 ✓
+2026-10-29T08:34:55 tu-vung 118 ✓
+2026-10-29T08:35:20 tu-vung 119 ✓
+2026-10-29T08:35:48 tu-vung 120 ✓
+2026-10-29T08:36:10 tu-vung 121 ✓
+2026-10-29T08:36:34 tu-vung 122 ✓
+2026-10-29T08:36:58 tu-vung 123 ✓
+2026-10-29T08:37:23 tu-vung 124 ✓
+2026-10-29T08:37:50 tu-vung 125 ✓
+2026-10-29T08:38:16 tu-vung 126 ✓
+2026-10-29T08:38:41 tu-vung 127 ✓
+2026-10-29T08:39:05 tu-vung 128 ✓
+2026-10-29T08:39:29 tu-vung 129 ✓
+2026-10-29T08:39:50 tu-vung 130 ✓
+2026-10-29T08:40:14 tu-vung 131 ✓
+2026-10-29T08:40:38 tu-vung 132 ✓
+2026-10-29T08:41:05 tu-vung 133 ✓
+2026-10-29T08:41:29 tu-vung 134 ✓
+2026-10-29T08:41:54 tu-vung 135 ✓
+2026-10-29T08:42:16 tu-vung 136 ✓
+2026-10-29T08:42:39 tu-vung 137 ✓
+2026-10-29T08:43:04 tu-vung 138 ✓
+2026-10-29T08:43:31 tu-vung 139 ✓
+2026-10-29T08:43:55 tu-vung 140 ✓
+2026-10-29T08:44:19 tu-vung 141 ✓
+2026-10-29T08:44:45 tu-vung 142 ✓
+2026-10-29T08:45:08 tu-vung 143 ✓
+2026-10-29T08:45:35 tu-vung 144 ✓
+2026-10-29T08:45:37 Xong: tạo mới 74, lỗi 1. Mỗi giọng có: bac 108/109, nam 109/109, trung 109/109

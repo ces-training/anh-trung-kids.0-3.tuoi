@@ -1,3 +1,3 @@
-2026-10-30T08:18:46 Chế độ: tat-ca. Số bài có lời để đọc: 109.
-2026-10-30T08:18:49 bac 6189f6e1 LỖI: 400: {"error":{"message":"Request blocked for an unspecified policy reason. Please modify your input and retry.","code":"content_blocked"}}
-2026-10-30T08:18:52 Xong: tạo mới 0, lỗi 1. Mỗi giọng có: bac 108/109, nam 109/109, trung 109/109
+2026-10-31T08:10:38 Chế độ: tat-ca. Số bài có lời để đọc: 109.
+2026-10-31T08:10:43 bac 6189f6e1 LỖI: 400: {"error":{"message":"Request blocked for an unspecified policy reason. Please modify your input and retry.","code":"content_blocked"}}
+2026-10-31T08:10:45 Xong: tạo mới 0, lỗi 1. Mỗi giọng có: bac 108/109, nam 109/109, trung 109/109

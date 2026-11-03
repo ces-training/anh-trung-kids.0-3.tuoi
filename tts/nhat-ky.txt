@@ -1,3 +1,20 @@
-2026-11-02T08:37:44 Chế độ: tat-ca. Số bài có lời để đọc: 109.
-2026-11-02T08:37:47 bac 6189f6e1 LỖI: 400: {"error":{"message":"Request blocked for an unspecified policy reason. Please modify your input and retry.","code":"content_blocked"}}
-2026-11-02T08:37:50 Xong: tạo mới 0, lỗi 1. Mỗi giọng có: bac 108/109, nam 109/109, trung 109/109
+2026-11-03T08:30:10 Chế độ: tat-ca. Số bài có lời để đọc: 109.
+2026-11-03T08:30:11 bac 6189f6e1 LỖI: 401: [{
+  "error": {
+    "code": 401,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "UNAUTHENTICATED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "ACCESS_TOKEN_TYPE_UNSUPPORTED",
+        "metadata": {
+          "method": "google.learning.gemini.api.interactions.v1beta.InteractionsService.CreateInteractionHttp",
+          "service": "generativelanguage.googleapis.com"
+        }
+      }
+    ]
+  }
+}
+]
+2026-11-03T08:30:13 Xong: tạo mới 0, lỗi 1. Mỗi giọng có: bac 108/109, nam 109/109, trung 109/109

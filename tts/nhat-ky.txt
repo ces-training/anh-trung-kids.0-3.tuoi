@@ -1,5 +1,5 @@
-2026-11-03T08:30:10 Chế độ: tat-ca. Số bài có lời để đọc: 109.
-2026-11-03T08:30:11 bac 6189f6e1 LỖI: 401: [{
+2026-11-04T08:30:21 Chế độ: tat-ca. Số bài có lời để đọc: 109.
+2026-11-04T08:30:21 bac 6189f6e1 LỖI: 401: [{
   "error": {
     "code": 401,
     "message": "API key not valid. Please pass a valid API key.",
@@ -17,4 +17,4 @@
   }
 }
 ]
-2026-11-03T08:30:13 Xong: tạo mới 0, lỗi 1. Mỗi giọng có: bac 108/109, nam 109/109, trung 109/109
+2026-11-04T08:30:24 Xong: tạo mới 0, lỗi 1. Mỗi giọng có: bac 108/109, nam 109/109, trung 109/109

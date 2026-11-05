@@ -1,12 +1,16 @@
-2026-11-05T15:35:50 Chế độ: nghe-ngam. Số bài có lời để đọc: 184.
-2026-11-05T15:36:05 nghe-ngam 50-en ✓
-2026-11-05T15:36:07   429, chờ 20 giây rồi thử lại (1/6)
-2026-11-05T15:36:28   429, chờ 40 giây rồi thử lại (2/6)
-2026-11-05T15:37:08   429, chờ 60 giây rồi thử lại (3/6)
-2026-11-05T15:38:21 nghe-ngam 50-zh ✓
-2026-11-05T15:38:24 nghe-ngam 50: 9 phút, lặp 4 lần, 2 bài tiếng Việt
-2026-11-05T15:38:54 nghe-ngam 121-en ✓
-2026-11-05T15:38:57   429, chờ 20 giây rồi thử lại (1/6)
-2026-11-05T15:39:43 nghe-ngam 121-zh ✓
-2026-11-05T15:39:46 nghe-ngam 121: 9 phút, lặp 2 lần, 4 bài tiếng Việt
-2026-11-05T15:39:46 Nghe ngấm xong: tạo mới 4, lỗi 0.
+2026-11-05T15:56:21 Chế độ: tat-ca. Số bài có lời để đọc: 184.
+2026-11-05T15:56:21   429, chờ 20 giây rồi thử lại (1/6)
+2026-11-05T15:56:47 bac 014a7163 ✓ Mẹ đi làm
+2026-11-05T15:56:50   429, chờ 20 giây rồi thử lại (1/6)
+2026-11-05T15:57:10   429, chờ 40 giây rồi thử lại (2/6)
+2026-11-05T15:57:50   429, chờ 60 giây rồi thử lại (3/6)
+2026-11-05T15:58:51 nam 014a7163 LỖI: 402: [{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+]
+2026-11-05T15:58:51 Dừng vì hết hạn mức; chạy lại sẽ làm tiếp phần còn thiếu.
+2026-11-05T15:58:51 Xong: tạo mới 1, lỗi 1. Mỗi giọng có: bac 109/184, nam 109/184, trung 109/184

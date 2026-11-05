@@ -1,5 +1,23 @@
-2026-11-05T08:33:00 Chế độ: tat-ca. Số bài có lời để đọc: 109.
-2026-11-05T08:33:00 bac 6189f6e1 LỖI: 401: [{
+2026-11-05T13:25:20 Chế độ: nghe-ngam. Số bài có lời để đọc: 184.
+2026-11-05T13:25:20 nghe-ngam 50-en LỖI: 401: [{
+  "error": {
+    "code": 401,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "UNAUTHENTICATED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "ACCESS_TOKEN_TYPE_UNSUPPORTED",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com",
+          "method": "google.learning.gemini.api.interactions.v1beta.InteractionsService.CreateInteractionHttp"
+        }
+      }
+    ]
+  }
+}
+]
+2026-11-05T13:25:23 nghe-ngam 50-zh LỖI: 401: [{
   "error": {
     "code": 401,
     "message": "API key not valid. Please pass a valid API key.",
@@ -17,4 +35,42 @@
   }
 }
 ]
-2026-11-05T08:33:03 Xong: tạo mới 0, lỗi 1. Mỗi giọng có: bac 108/109, nam 109/109, trung 109/109
+2026-11-05T13:25:26 nghe-ngam 50: 6 phút, lặp 8 lần, 2 bài tiếng Việt
+2026-11-05T13:25:26 nghe-ngam 121-en LỖI: 401: [{
+  "error": {
+    "code": 401,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "UNAUTHENTICATED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "ACCESS_TOKEN_TYPE_UNSUPPORTED",
+        "metadata": {
+          "method": "google.learning.gemini.api.interactions.v1beta.InteractionsService.CreateInteractionHttp",
+          "service": "generativelanguage.googleapis.com"
+        }
+      }
+    ]
+  }
+}
+]
+2026-11-05T13:25:28 nghe-ngam 121-zh LỖI: 401: [{
+  "error": {
+    "code": 401,
+    "message": "API key not valid. Please pass a valid API key.",
+    "status": "UNAUTHENTICATED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "ACCESS_TOKEN_TYPE_UNSUPPORTED",
+        "metadata": {
+          "service": "generativelanguage.googleapis.com",
+          "method": "google.learning.gemini.api.interactions.v1beta.InteractionsService.CreateInteractionHttp"
+        }
+      }
+    ]
+  }
+}
+]
+2026-11-05T13:25:31 nghe-ngam 121: 6 phút, lặp 8 lần, 4 bài tiếng Việt
+2026-11-05T13:25:31 Nghe ngấm xong: tạo mới 0, lỗi 4.

@@ -1,76 +1,12 @@
-2026-11-05T13:25:20 Chế độ: nghe-ngam. Số bài có lời để đọc: 184.
-2026-11-05T13:25:20 nghe-ngam 50-en LỖI: 401: [{
-  "error": {
-    "code": 401,
-    "message": "API key not valid. Please pass a valid API key.",
-    "status": "UNAUTHENTICATED",
-    "details": [
-      {
-        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
-        "reason": "ACCESS_TOKEN_TYPE_UNSUPPORTED",
-        "metadata": {
-          "service": "generativelanguage.googleapis.com",
-          "method": "google.learning.gemini.api.interactions.v1beta.InteractionsService.CreateInteractionHttp"
-        }
-      }
-    ]
-  }
-}
-]
-2026-11-05T13:25:23 nghe-ngam 50-zh LỖI: 401: [{
-  "error": {
-    "code": 401,
-    "message": "API key not valid. Please pass a valid API key.",
-    "status": "UNAUTHENTICATED",
-    "details": [
-      {
-        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
-        "reason": "ACCESS_TOKEN_TYPE_UNSUPPORTED",
-        "metadata": {
-          "method": "google.learning.gemini.api.interactions.v1beta.InteractionsService.CreateInteractionHttp",
-          "service": "generativelanguage.googleapis.com"
-        }
-      }
-    ]
-  }
-}
-]
-2026-11-05T13:25:26 nghe-ngam 50: 6 phút, lặp 8 lần, 2 bài tiếng Việt
-2026-11-05T13:25:26 nghe-ngam 121-en LỖI: 401: [{
-  "error": {
-    "code": 401,
-    "message": "API key not valid. Please pass a valid API key.",
-    "status": "UNAUTHENTICATED",
-    "details": [
-      {
-        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
-        "reason": "ACCESS_TOKEN_TYPE_UNSUPPORTED",
-        "metadata": {
-          "method": "google.learning.gemini.api.interactions.v1beta.InteractionsService.CreateInteractionHttp",
-          "service": "generativelanguage.googleapis.com"
-        }
-      }
-    ]
-  }
-}
-]
-2026-11-05T13:25:28 nghe-ngam 121-zh LỖI: 401: [{
-  "error": {
-    "code": 401,
-    "message": "API key not valid. Please pass a valid API key.",
-    "status": "UNAUTHENTICATED",
-    "details": [
-      {
-        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
-        "reason": "ACCESS_TOKEN_TYPE_UNSUPPORTED",
-        "metadata": {
-          "service": "generativelanguage.googleapis.com",
-          "method": "google.learning.gemini.api.interactions.v1beta.InteractionsService.CreateInteractionHttp"
-        }
-      }
-    ]
-  }
-}
-]
-2026-11-05T13:25:31 nghe-ngam 121: 6 phút, lặp 8 lần, 4 bài tiếng Việt
-2026-11-05T13:25:31 Nghe ngấm xong: tạo mới 0, lỗi 4.
+2026-11-05T15:35:50 Chế độ: nghe-ngam. Số bài có lời để đọc: 184.
+2026-11-05T15:36:05 nghe-ngam 50-en ✓
+2026-11-05T15:36:07   429, chờ 20 giây rồi thử lại (1/6)
+2026-11-05T15:36:28   429, chờ 40 giây rồi thử lại (2/6)
+2026-11-05T15:37:08   429, chờ 60 giây rồi thử lại (3/6)
+2026-11-05T15:38:21 nghe-ngam 50-zh ✓
+2026-11-05T15:38:24 nghe-ngam 50: 9 phút, lặp 4 lần, 2 bài tiếng Việt
+2026-11-05T15:38:54 nghe-ngam 121-en ✓
+2026-11-05T15:38:57   429, chờ 20 giây rồi thử lại (1/6)
+2026-11-05T15:39:43 nghe-ngam 121-zh ✓
+2026-11-05T15:39:46 nghe-ngam 121: 9 phút, lặp 2 lần, 4 bài tiếng Việt
+2026-11-05T15:39:46 Nghe ngấm xong: tạo mới 4, lỗi 0.

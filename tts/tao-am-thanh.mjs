@@ -2,8 +2,10 @@
 // Chạy trong GitHub Actions (khoá GEMINI_API_KEY nằm trong Secrets, không lộ ra web).
 //   node tts/tao-am-thanh.mjs mau      -> tạo 2 giọng ứng viên cho mỗi miền + bản đọc thử "Cái bống"
 //   node tts/tao-am-thanh.mjs tat-ca   -> đọc toàn bộ lời đồng dao/ca dao bằng giọng đã chọn của 3 miền
+//   node tts/tao-am-thanh.mjs nghe-ngam -> chỉ tạo file nghe ngấm (vòng ghi trong giong.json → nghe_ngam.vong)
 //   node tts/tao-am-thanh.mjs kiem-tra -> không gọi API, chỉ in danh sách bài và mã file
 import fs from 'node:fs'; import path from 'node:path'; import vm from 'node:vm'; import { execFileSync } from 'node:child_process';
+import { taoNgheNgam } from './nghe-ngam.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const CFG = JSON.parse(fs.readFileSync(path.join(ROOT, 'tts/giong.json'), 'utf8'));
@@ -72,13 +74,13 @@ function findAudio(o) {
   return best;
 }
 
-function toMp3(b64, mime, out) {
+function toMp3(b64, mime, out, extra = []) {
   const buf = Buffer.from(b64, 'base64'); const tmp = out + '.tmp';
   fs.mkdirSync(path.dirname(out), { recursive: true }); fs.writeFileSync(tmp, buf);
   const isWav = buf.slice(0, 4).toString() === 'RIFF';
   const rate = (/rate=(\d+)/.exec(mime) || [])[1] || '24000';
   const inArgs = isWav ? ['-i', tmp] : ['-f', 's16le', '-ar', rate, '-ac', '1', '-i', tmp];
-  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', ...inArgs, '-ac', '1', '-ar', '24000', '-b:a', '48k', out]);
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', ...inArgs, '-ac', '1', '-ar', '24000', '-b:a', '48k', ...extra, out]);
   fs.unlinkSync(tmp);
 }
 
@@ -102,6 +104,12 @@ async function createVoice(key, i, desc) {
   const id = (JSON.stringify(j).match(/voice_[A-Za-z0-9_-]+/) || [])[0];
   if (!id) throw new Error('Không đọc được mã giọng: ' + JSON.stringify(j).slice(0, 400));
   return { id, sample: findAudio(j) };
+}
+
+function ngheNgam() {
+  const N = CFG.nghe_ngam || {}; const vongs = (N.vong || []).map(Number).filter(Boolean);
+  if (!vongs.length) return Promise.resolve({ made: 0, fail: 0 });
+  return taoNgheNgam({ speak, toMp3, log, sleep, giong: Object.keys(CFG.giong), vongs, voice: N.giong || {} });
 }
 
 async function main() {
@@ -128,6 +136,8 @@ async function main() {
     return;
   }
 
+  if (mode === 'nghe-ngam') { const r = await ngheNgam(); log(`Nghe ngấm xong: tạo mới ${r.made}, lỗi ${r.fail}.`); return; }
+
   if (mode === 'tat-ca') {
     let made = 0, fail = 0;
     // Làm xen kẽ: mỗi bài lần lượt cả 3 giọng, để giọng nào cũng có dần, không giọng nào bị dồn cuối.
@@ -148,6 +158,8 @@ async function main() {
       catch (e) { fail++; log(`tu-vung ${v.g} LỖI: ${e.message}`); if (/Hết lượt|quota|RESOURCE_EXHAUSTED/i.test(e.message)) { log('Dừng vì hết hạn mức; chạy lại sẽ làm tiếp.'); break; } }
       await sleep(2500);
     }
+    // Sau từ vựng: file nghe ngấm cho các vòng ghi trong giong.json → nghe_ngam.vong
+    if (!stop) { const r = await ngheNgam(); made += r.made; fail += r.fail; }
     const have = {}; for (const key of Object.keys(CFG.giong)) { const d = path.join(ROOT, 'am-thanh', key); have[key] = fs.existsSync(d) ? fs.readdirSync(d).filter(f => f.endsWith('.mp3')).map(f => f.slice(0, 8)) : []; }
     fs.writeFileSync(path.join(ROOT, 'am-thanh/danh-sach.json'), JSON.stringify({ giong: Object.fromEntries(Object.entries(CFG.giong).map(([k, g]) => [k, g.ten])), co: have }));
     log(`Xong: tạo mới ${made}, lỗi ${fail}. Mỗi giọng có: ` + Object.entries(have).map(([k, v]) => `${k} ${v.length}/${texts.size}`).join(', '));

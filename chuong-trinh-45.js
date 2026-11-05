@@ -128,6 +128,7 @@ function files(g,w){
     ["MP3","var(--green)","A1_Tho_Toi.mp3","Đồng dao, ca dao buổi tối (giọng Gemini 3 miền)"],
     ["MP3","var(--yellow-deep)","A3_TuVung_AnhTrung.mp3","Từ vựng đọc chậm Anh – Trung"]];
   if(wk&&wk.book_vi) list.splice(7,0,["BOOK","var(--purple)","Sach_tuan.pdf","Sách gợi ý: "+wk.book_vi.t+(wk.book_vi.author?" – "+wk.book_vi.author:"")]);
+  if((window.CT_NGHE_NGAM||[]).indexOf(g)>-1) list.push(["MP3","var(--green)","A4_NgheNgam.mp3","Nghe ngấm ~10 phút: Anh – Việt – Trung xen kẽ, bật lặp khi bé chơi"]);
   if(w===2) list.push(["PDF","var(--pink)","08_NhatKy.pdf","Mẫu nhật ký vòng (bản in)"]);
   return list;
 }

@@ -297,11 +297,13 @@ textarea{min-height:76px;resize:vertical}
 <script src="tho-ces.js" charset="utf-8"></script>
 <script src="khung-45.js" charset="utf-8"></script>
 <script src="noi-dung-45.js" charset="utf-8"></script>
+<script src="nghe-ngam.js" charset="utf-8"></script>
 <script src="chuong-trinh.js" charset="utf-8"></script>
 <script src="chuong-trinh-45.js" charset="utf-8"></script>
 <script src="tro-choi.js" charset="utf-8"></script>
 <script src="phieu-tu.js" charset="utf-8"></script>
 <script src="tai-lieu.js" charset="utf-8"></script>
+<script src="nghe-ngam-tron.js" charset="utf-8"></script>
 <script>
 (function(){
 var CT=window.CT, LYR=CT.LYR, LYRA=CT.LYRA||{}, YT=CT.YT;
@@ -445,6 +447,9 @@ function openFile(g,w,file){
   var c=taiCtx(g,w,file);
   if(/\.mp3$/i.test(file)){
     var gi=S.set.giong||"bac", src=function(t){ return t?"am-thanh/"+gi+"/"+amKey(t)+".mp3":""; };
+    if(/NgheNgam/.test(file)){ toast("Đang ghép file nghe ngấm…");
+      NNTRON.build(g,gi).then(function(r){ TAILIEU.audio({title:c.code+"_NgheNgam",file:c.code+"_NgheNgam",items:[{t:"Nghe ngấm · khoảng "+r.phut+" phút · tiếng Việt giọng "+(GIONG[gi]||""),src:r.url,ok:true,loop:true},{t:"Cách nghe",src:"",note:"Bật nhỏ làm nền khi bé chơi, tắm, ăn; không bắt bé ngồi nghe. Nghe được câu nào, mẹ nói lại câu đó cùng bé."}]}); })
+        .catch(function(){ TAILIEU.audio({title:c.code+"_NgheNgam",items:[{t:"File nghe ngấm",src:""}]}); }); return; }
     if(/^A3|TuVung/.test(file)){ var V=TAILIEU.vocabList(c); TAILIEU.audio({title:c.code+"_"+file,file:c.code+"_TuVung",items:[{t:"Từ vựng Anh – Trung của tuần (giọng thật)",src:"am-thanh/tu-vung/"+g+".mp3"}],words:V}); return; }
     var its=c.poems.concat(c.extras).filter(function(p){ return p.lyr; }).map(function(p){ return {t:p.t+" · giọng "+(GIONG[gi]||""),src:src(p.lyr)}; });
     if(/^A1/.test(file)&&!c.is45) its=its.slice(0,1);

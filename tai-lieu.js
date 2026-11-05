@@ -475,8 +475,8 @@ function audio(opt){ /* opt={title, items:[{t, src, note}], words:{en:[],zh:[]},
   document.body.appendChild(ov); var list=ov.querySelector(".tl-list");
   ov.addEventListener("click",function(e){ var a=e.target.closest("[data-a]"); if(a&&a.getAttribute("data-a")==="x"){ try{ speechSynthesis.cancel(); }catch(er){} ov.remove(); } var w=e.target.closest("[data-w]"); if(w) speakWord(w.getAttribute("data-w"), w.getAttribute("data-l")); });
   var items=opt.items||[];
-  Promise.all(items.map(function(it){ return it.src?head(it.src):Promise.resolve(false); })).then(function(ok){
-    var html=''; items.forEach(function(it,i){ html+='<div class="tl-au"><b>'+esc(it.t)+'</b>'+(ok[i]?'<audio controls preload="none" src="'+esc(it.src)+'"></audio><a href="'+esc(it.src)+'" download="'+esc((opt.file||"audio")+"_"+(i+1)+".mp3")+'">⬇️ Tải file MP3</a>':'<span class="tl-muted">'+esc(it.note||"File giọng đọc đang được tạo, mẹ quay lại sau 1–2 ngày.")+'</span>')+'</div>'; });
+  Promise.all(items.map(function(it){ return it.ok?Promise.resolve(true):it.src?head(it.src):Promise.resolve(false); })).then(function(ok){
+    var html=''; items.forEach(function(it,i){ html+='<div class="tl-au"><b>'+esc(it.t)+'</b>'+(ok[i]?'<audio controls'+(it.loop?' loop':'')+' preload="none" src="'+esc(it.src)+'"></audio><a href="'+esc(it.src)+'" download="'+esc((opt.file||"audio")+"_"+(i+1)+".mp3")+'">⬇️ Tải file MP3</a>':'<span class="tl-muted">'+esc(it.note||"File giọng đọc đang được tạo, mẹ quay lại sau 1–2 ngày.")+'</span>')+'</div>'; });
     if(opt.words){ var W=opt.words; html+='<div class="tl-au"><b>Từ vựng của tuần · bấm để nghe</b><div class="tl-words">'+
       (W.en||[]).map(function(x){ return '<button data-w="'+esc(x.w)+'" data-l="en">'+esc(x.pic)+' '+esc(x.w)+'</button>'; }).join("")+
       (W.zh||[]).map(function(z){ return '<button data-w="'+esc(z.h)+'" data-l="zh">'+esc(z.pic)+' '+esc(z.h)+' <small>'+esc(z.py)+'</small></button>'; }).join("")+'</div><span class="tl-muted">Đọc bằng giọng có sẵn trên máy. Bản MP3 giọng thật sẽ có ở mục trên khi tạo xong.</span></div>'; }

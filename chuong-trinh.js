@@ -297,9 +297,10 @@ function detFiles(g,w,D){
     ["PDF","var(--red)","04_AnhTrung.pdf",(D.en.words||[]).join(", ")+((D.zh&&D.zh.words&&D.zh.words.length)?" · "+D.zh.words.map(function(z){return z[0];}).join(", "):"")],
     ["MP3","var(--green)","A1_Tho_Cham.mp3","Cô đọc chậm "+wk.vi[0].t+", có chỗ ngừng để bé điền",wk.vi[0].lyr?"tts":null],
     ["MP3","var(--green)","A2_HatRu_DongDao.mp3","Hát ru + đồng dao của tuần"],
-    ["MP3","var(--green)","A3_TuVung_AnhTrung.mp3","Mỗi từ 3 lần + 1 câu, giọng người thật"],
+    ["MP3","var(--green)","A3_TuVung_AnhTrung.mp3","Mỗi từ 3 lần + 1 câu, giọng đọc AI (Gemini)"],
     ["LINK","var(--blue)","05_Link.pdf","Bài hát: "+(D.en.songs||[]).map(function(x){return x.t;}).concat(((D.zh&&D.zh.songs)||[]).map(function(x){return x.t;})).join(" · ")]];
   if(wk.book&&wk.book.vi) list.splice(2,0,["BOOK","var(--purple)","Sach_tuan.pdf","Sách gợi ý: "+wk.book.vi.t+(wk.book.vi.author?" – "+wk.book.vi.author:"")+(wk.book.en?" · "+wk.book.en.t+(wk.book.en.author?" – "+wk.book.en.author:""):"")]);
+  if((window.CT_NGHE_NGAM||[]).indexOf(g)>-1) list.push(["MP3","var(--green)","A4_NgheNgam.mp3","Nghe ngấm ~10 phút: Anh – Việt – Trung xen kẽ, bật lặp khi bé chơi"]);
   if(w===2) list.push(["PDF","var(--pink)","06_NhatKy.pdf","Mẫu nhật ký vòng (bản in)"]);
   return list;
 }
@@ -315,9 +316,10 @@ function files(g,w){
     ["PDF","var(--red)","04_AnhTrung.pdf",vo.en.join(", ")+(vo.zh.length?" · "+vo.zh.map(function(z){return z[0];}).join(", "):"")],
     ["MP3","var(--green)","A1_Tho_Cham.mp3","Cô đọc chậm, có chỗ ngừng để bé điền",vi.k?"tts":null],
     ["MP3","var(--green)","A2_HatRu_DongDao.mp3","Hát ru + đồng dao của tuần"],
-    ["MP3","var(--green)","A3_TuVung_AnhTrung.mp3","Mỗi từ 3 lần + 1 câu, giọng người thật"],
+    ["MP3","var(--green)","A3_TuVung_AnhTrung.mp3","Mỗi từ 3 lần + 1 câu, giọng đọc AI (Gemini)"],
     ["LINK","var(--blue)","05_Link.pdf","Bài hát của tuần: "+th.en.s+(th.zh.s?" · "+th.zh.s:"")]
   ];
+  if((window.CT_NGHE_NGAM||[]).indexOf(g)>-1) list.push(["MP3","var(--green)","A4_NgheNgam.mp3","Nghe ngấm ~10 phút: Anh – Việt – Trung xen kẽ, bật lặp khi bé chơi"]);
   if(w===2) list.push(["PDF","var(--pink)","06_NhatKy.pdf","Mẫu nhật ký vòng (bản in)"]);
   return list;
 }

@@ -26,5 +26,16 @@
         "Giọng nữ miền Trung (Quảng Nam – Đà Nẵng hoặc Nghệ Tĩnh nhẹ), mộc mạc, hiền hậu, như bà, như mẹ ở quê đọc đồng dao. A rustic, kind Central Vietnamese female voice, soft regional accent, unhurried."
       ]
     }
+  },
+  "nghe_ngam": {
+    "vong": [
+      50,
+      121
+    ],
+    "giong": {
+      "en": "Leda",
+      "zh": "Leda"
+    },
+    "ghi_chu": "Thêm số vòng vào 'vong' để tạo file nghe ngấm cho vòng đó."
   }
 }

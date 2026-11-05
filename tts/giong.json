@@ -36,6 +36,7 @@
       "en": "Leda",
       "zh": "Leda"
     },
-    "ghi_chu": "Thêm số vòng vào 'vong' để tạo file nghe ngấm cho vòng đó."
+    "ghi_chu": "Thêm số vòng vào 'vong' để tạo file nghe ngấm cho vòng đó. 'toc_do': 1 = tốc độ gốc của Gemini, 0.8 = chậm hơn 20% (không tốn thêm lượt gọi).",
+    "toc_do": 0.8
   }
 }

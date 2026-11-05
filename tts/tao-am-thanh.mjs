@@ -109,7 +109,7 @@ async function createVoice(key, i, desc) {
 function ngheNgam() {
   const N = CFG.nghe_ngam || {}; const vongs = (N.vong || []).map(Number).filter(Boolean);
   if (!vongs.length) return Promise.resolve({ made: 0, fail: 0 });
-  return taoNgheNgam({ speak, toMp3, log, sleep, giong: Object.keys(CFG.giong), vongs, voice: N.giong || {} });
+  return taoNgheNgam({ speak, toMp3, log, sleep, giong: Object.keys(CFG.giong), vongs, voice: N.giong || {}, tocDo: +N.toc_do || 1 });
 }
 
 async function main() {

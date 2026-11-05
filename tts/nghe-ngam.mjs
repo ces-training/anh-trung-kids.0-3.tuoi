@@ -95,13 +95,16 @@ export function manifest(k, giong, MUC = 600) {
 }
 
 // Tạo 2 đoạn Gemini (Anh, Trung) cho các vòng trong danh sách, rồi ghi file thứ tự.
-export async function taoNgheNgam({ speak, toMp3, log, sleep, giong, vongs, voice }) {
+// Tốc độ đọc: Gemini đọc hơi nhanh với trẻ nhỏ, nên làm chậm bằng ffmpeg (atempo giữ nguyên cao độ giọng).
+export const cham = (t = 1) => (t && t !== 1 ? ['-filter:a', `atempo=${t}`] : []);
+
+export async function taoNgheNgam({ speak, toMp3, log, sleep, giong, vongs, voice, tocDo = 1 }) {
   const W = loadCtx(); let made = 0, fail = 0, stop = false;
   for (const g of vongs) { if (stop) break;
     const k = kichBan(W, g);
     for (const l of ['en', 'zh']) {
       if (!k[l]) continue; const out = path.join(DIR, `${g}-${l}.mp3`); if (fs.existsSync(out)) continue;
-      try { const a = await speak(k[l], voice[l] || 'Leda', STYLE[l]); toMp3(a.data, a.mime, out, ['-write_xing', '0', '-id3v2_version', '0']); made++; log(`nghe-ngam ${g}-${l} ✓`); }
+      try { const a = await speak(k[l], voice[l] || 'Leda', STYLE[l]); toMp3(a.data, a.mime, out, [...cham(tocDo), '-write_xing', '0', '-id3v2_version', '0']); made++; log(`nghe-ngam ${g}-${l} ✓`); }
       catch (e) { fail++; log(`nghe-ngam ${g}-${l} LỖI: ${e.message}`); if (/Hết lượt|quota|RESOURCE_EXHAUSTED/i.test(e.message)) { log('Dừng vì hết hạn mức; chạy lại sẽ làm tiếp.'); stop = true; break; } }
       await sleep(2500);
     }

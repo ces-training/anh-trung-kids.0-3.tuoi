@@ -10,7 +10,7 @@ on:
     branches: [main]
     paths: ["tts/lenh.txt"]
   schedule:
-    - cron: "30 7 * * *"
+    - cron: "30 8 * * *"
 
 permissions:
   contents: write

@@ -105,6 +105,8 @@ export async function taoNgheNgam({ speak, toMp3, log, sleep, giong, vongs, voic
       catch (e) { fail++; log(`nghe-ngam ${g}-${l} LỖI: ${e.message}`); if (/Hết lượt|quota|RESOURCE_EXHAUSTED/i.test(e.message)) { log('Dừng vì hết hạn mức; chạy lại sẽ làm tiếp.'); stop = true; break; } }
       await sleep(2500);
     }
+    const thieu = ['en', 'zh'].filter(l => k[l] && !fs.existsSync(path.join(DIR, `${g}-${l}.mp3`)));
+    if (thieu.length) { try { fs.unlinkSync(path.join(DIR, `${g}.json`)); } catch {} log(`nghe-ngam ${g}: chưa đủ đoạn (${thieu.join(', ')}), chưa đưa lên web`); continue; }
     const m = manifest(k, giong); log(`nghe-ngam ${g}: ${m.phut} phút, lặp ${m.lap} lần, ${m.vi.length} bài tiếng Việt`);
   }
   const co = fs.readdirSync(DIR).filter(f => /^\d+\.json$/.test(f)).map(f => +f.replace('.json', '')).sort((a, b) => a - b);

@@ -1,16 +1,113 @@
-2026-11-05T15:56:21 Chế độ: tat-ca. Số bài có lời để đọc: 184.
-2026-11-05T15:56:21   429, chờ 20 giây rồi thử lại (1/6)
-2026-11-05T15:56:47 bac 014a7163 ✓ Mẹ đi làm
-2026-11-05T15:56:50   429, chờ 20 giây rồi thử lại (1/6)
-2026-11-05T15:57:10   429, chờ 40 giây rồi thử lại (2/6)
-2026-11-05T15:57:50   429, chờ 60 giây rồi thử lại (3/6)
-2026-11-05T15:58:51 nam 014a7163 LỖI: 402: [{
-  "error": {
-    "code": 402,
-    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
-    "status": "RESOURCE_EXHAUSTED"
-  }
-}
-]
-2026-11-05T15:58:51 Dừng vì hết hạn mức; chạy lại sẽ làm tiếp phần còn thiếu.
-2026-11-05T15:58:51 Xong: tạo mới 1, lỗi 1. Mỗi giọng có: bac 109/184, nam 109/184, trung 109/184
+2026-11-06T10:08:43 Chế độ: tat-ca. Số bài có lời để đọc: 184.
+2026-11-06T10:08:50 nam 014a7163 ✓ Mẹ đi làm
+2026-11-06T10:09:01 trung 014a7163 ✓ Mẹ đi làm
+2026-11-06T10:09:10 bac 248e1470 ✓ Bố đi làm
+2026-11-06T10:09:19 nam 248e1470 ✓ Bố đi làm
+2026-11-06T10:09:29 trung 248e1470 ✓ Bố đi làm
+2026-11-06T10:09:38 bac 86316310 ✓ Bé đi học về
+2026-11-06T10:09:49 nam 86316310 ✓ Bé đi học về
+2026-11-06T10:09:59 trung 86316310 ✓ Bé đi học về
+2026-11-06T10:10:08 bac a9a4dcc0 ✓ Mẹ dạy bé tập nói
+2026-11-06T10:10:18 nam a9a4dcc0 ✓ Mẹ dạy bé tập nói
+2026-11-06T10:10:28 trung a9a4dcc0 ✓ Mẹ dạy bé tập nói
+2026-11-06T10:10:38 bac 5afdfe22 ✓ Bé này, bé ơi!
+2026-11-06T10:10:49 nam 5afdfe22 ✓ Bé này, bé ơi!
+2026-11-06T10:11:01 trung 5afdfe22 ✓ Bé này, bé ơi!
+2026-11-06T10:11:09 bac 12a8350d ✓ Con cá vàng
+2026-11-06T10:11:16 nam 12a8350d ✓ Con cá vàng
+2026-11-06T10:11:25 trung 12a8350d ✓ Con cá vàng
+2026-11-06T10:11:32 bac c478d277 ✓ Có ai đang khóc nhè
+2026-11-06T10:11:40 nam c478d277 ✓ Có ai đang khóc nhè
+2026-11-06T10:11:48 trung c478d277 ✓ Có ai đang khóc nhè
+2026-11-06T10:11:57 bac e9852933 ✓ Đôi bàn tay nhỏ
+2026-11-06T10:12:08 nam e9852933 ✓ Đôi bàn tay nhỏ
+2026-11-06T10:12:19 trung e9852933 ✓ Đôi bàn tay nhỏ
+2026-11-06T10:12:26 bac 0f2d4e6f ✓ Bàn chân của bé
+2026-11-06T10:12:34 nam 0f2d4e6f ✓ Bàn chân của bé
+2026-11-06T10:12:42 trung 0f2d4e6f ✓ Bàn chân của bé
+2026-11-06T10:12:52 bac db6ecc42 ✓ Mẹ, mẹ ơi, cô dạy
+2026-11-06T10:13:03 nam db6ecc42 ✓ Mẹ, mẹ ơi, cô dạy
+2026-11-06T10:13:14 trung db6ecc42 ✓ Mẹ, mẹ ơi, cô dạy
+2026-11-06T10:13:23 bac 6507dbe9 ✓ Con mèo mà trèo cây cau
+2026-11-06T10:13:32 nam 6507dbe9 ✓ Con mèo mà trèo cây cau
+2026-11-06T10:13:41 trung 6507dbe9 ✓ Con mèo mà trèo cây cau
+2026-11-06T10:13:48 bac 9b71cfbb ✓ Mẹ gà hỏi con:
+2026-11-06T10:13:55 nam 9b71cfbb ✓ Mẹ gà hỏi con:
+2026-11-06T10:14:02 trung 9b71cfbb ✓ Mẹ gà hỏi con:
+2026-11-06T10:14:13 bac 1fd264c0 ✓ Trong đêm Bé ngủ
+2026-11-06T10:14:26 nam 1fd264c0 ✓ Trong đêm Bé ngủ
+2026-11-06T10:14:39 trung 1fd264c0 ✓ Trong đêm Bé ngủ
+2026-11-06T10:14:45 bac 08a0ebdc ✓ Tro bếp làm đệm
+2026-11-06T10:14:53 nam 08a0ebdc ✓ Tro bếp làm đệm
+2026-11-06T10:15:01 trung 08a0ebdc ✓ Tro bếp làm đệm
+2026-11-06T10:15:09 bac 1e343856 ✓ Mẹ uống sữa lúc nào
+2026-11-06T10:15:18 nam 1e343856 ✓ Mẹ uống sữa lúc nào
+2026-11-06T10:15:28 trung 1e343856 ✓ Mẹ uống sữa lúc nào
+2026-11-06T10:15:40 bac 185ead17 ✓ Thân đầy dấu lá
+2026-11-06T10:15:53 nam 185ead17 ✓ Thân đầy dấu lá
+2026-11-06T10:16:07 trung 185ead17 ✓ Thân đầy dấu lá
+2026-11-06T10:16:18 bac f2942da3 ✓ Nu na nu nống,
+2026-11-06T10:16:30 nam f2942da3 ✓ Nu na nu nống,
+2026-11-06T10:16:44 trung f2942da3 ✓ Nu na nu nống,
+2026-11-06T10:16:53 bac 01bb7f02 ✓ Lá xanh
+2026-11-06T10:17:02 nam 01bb7f02 ✓ Lá xanh
+2026-11-06T10:17:12 trung 01bb7f02 ✓ Lá xanh
+2026-11-06T10:17:17 bac 6189f6e1 LỖI: 400: {"error":{"message":"Request blocked for an unspecified policy reason. Please modify your input and retry.","code":"content_blocked"}}
+2026-11-06T10:17:27 bac 16905963 ✓ Ong vàng chăm chỉ
+2026-11-06T10:17:37 nam 16905963 ✓ Ong vàng chăm chỉ
+2026-11-06T10:17:49 trung 16905963 ✓ Ong vàng chăm chỉ
+2026-11-06T10:17:57 bac 29df5836 ✓ Bắp cải xanh
+2026-11-06T10:18:05 nam 29df5836 ✓ Bắp cải xanh
+2026-11-06T10:18:14 trung 29df5836 ✓ Bắp cải xanh
+2026-11-06T10:18:23 bac 4cd7fdc6 ✓ Có cô rong xanh
+2026-11-06T10:18:34 nam 4cd7fdc6 ✓ Có cô rong xanh
+2026-11-06T10:18:45 trung 4cd7fdc6 ✓ Có cô rong xanh
+2026-11-06T10:18:52 bac 495f41e7 ✓ Bé ơi mau thức giấc
+2026-11-06T10:19:00 nam 495f41e7 ✓ Bé ơi mau thức giấc
+2026-11-06T10:19:08 trung 495f41e7 ✓ Bé ơi mau thức giấc
+2026-11-06T10:19:20 bac 9efe14e6 ✓ Gà con nhỏ xíu
+2026-11-06T10:19:34 nam 9efe14e6 ✓ Gà con nhỏ xíu
+2026-11-06T10:19:51 trung 9efe14e6 ✓ Gà con nhỏ xíu
+2026-11-06T10:19:59 bac 91fab539 ✓ Bé ơi! Mau thức dậy
+2026-11-06T10:20:07 nam 91fab539 ✓ Bé ơi! Mau thức dậy
+2026-11-06T10:20:15 trung 91fab539 ✓ Bé ơi! Mau thức dậy
+2026-11-06T10:20:29 bac eebc11de ✓ Chiều nay về nhà ngoại
+2026-11-06T10:20:45 nam eebc11de ✓ Chiều nay về nhà ngoại
+2026-11-06T10:21:01 trung eebc11de ✓ Chiều nay về nhà ngoại
+2026-11-06T10:21:09 bac 73c7bdea ✓ Ngựa cha đi móng sắt
+2026-11-06T10:21:17 nam 73c7bdea ✓ Ngựa cha đi móng sắt
+2026-11-06T10:21:25 trung 73c7bdea ✓ Ngựa cha đi móng sắt
+2026-11-06T10:21:35 bac e7c32d75 ✓ Bà cho cháu chiếc quạt
+2026-11-06T10:21:48 nam e7c32d75 ✓ Bà cho cháu chiếc quạt
+2026-11-06T10:22:00 trung e7c32d75 ✓ Bà cho cháu chiếc quạt
+2026-11-06T10:22:08 bac 061b45cc ✓ Đi về con chào mẹ
+2026-11-06T10:22:17 nam 061b45cc ✓ Đi về con chào mẹ
+2026-11-06T10:22:26 trung 061b45cc ✓ Đi về con chào mẹ
+2026-11-06T10:22:33 bac 669250db ✓ Miệng bi bô gọi cha
+2026-11-06T10:22:42 nam 669250db ✓ Miệng bi bô gọi cha
+2026-11-06T10:22:51 trung 669250db ✓ Miệng bi bô gọi cha
+2026-11-06T10:22:59 bac d31a25a1 ✓ Thỏ đây! Ai nói đấy?
+2026-11-06T10:23:07 nam d31a25a1 ✓ Thỏ đây! Ai nói đấy?
+2026-11-06T10:23:14 trung d31a25a1 ✓ Thỏ đây! Ai nói đấy?
+2026-11-06T10:23:22 bac db64efc2 ✓ Các cháu chơi với bạn
+2026-11-06T10:23:30 nam db64efc2 ✓ Các cháu chơi với bạn
+2026-11-06T10:23:39 trung db64efc2 ✓ Các cháu chơi với bạn
+2026-11-06T10:23:48 bac 1bd4953d ✓ Bạn mới đến trường
+2026-11-06T10:23:58 nam 1bd4953d ✓ Bạn mới đến trường
+2026-11-06T10:24:07 trung 1bd4953d ✓ Bạn mới đến trường
+2026-11-06T10:24:16 bac e7068841 ✓ Kẹo ngọt! kẹo ngọt!
+2026-11-06T10:24:19   429, chờ 20 giây rồi thử lại (1/6)
+2026-11-06T10:24:39   429, chờ 40 giây rồi thử lại (2/6)
+2026-11-06T10:25:19   429, chờ 60 giây rồi thử lại (3/6)
+2026-11-06T10:26:27 nam e7068841 ✓ Kẹo ngọt! kẹo ngọt!
+2026-11-06T10:26:38 trung e7068841 ✓ Kẹo ngọt! kẹo ngọt!
+2026-11-06T10:26:45 bac 8eb3244a ✓ Ô tô đẹp,
+2026-11-06T10:26:48   429, chờ 20 giây rồi thử lại (1/6)
+2026-11-06T10:27:08   429, chờ 40 giây rồi thử lại (2/6)
+2026-11-06T10:27:48   429, chờ 60 giây rồi thử lại (3/6)
+2026-11-06T10:28:48   429, chờ 80 giây rồi thử lại (4/6)
+2026-11-06T10:30:08   429, chờ 100 giây rồi thử lại (5/6)
+2026-11-06T10:31:49   429, chờ 120 giây rồi thử lại (6/6)
+2026-11-06T10:33:49 nam 8eb3244a LỖI: Hết lượt thử lại (giới hạn tốc độ). Chạy lại sau.
+2026-11-06T10:33:49 Dừng vì hết hạn mức; chạy lại sẽ làm tiếp phần còn thiếu.
+2026-11-06T10:33:49 Xong: tạo mới 99, lỗi 2. Mỗi giọng có: bac 142/184, nam 142/184, trung 142/184

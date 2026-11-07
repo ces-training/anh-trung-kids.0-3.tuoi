@@ -125,6 +125,7 @@ function bTho(ctx){
     var blk='<div class="tl-poem-t">📖 '+esc(p.t)+(p.author?' <span class="tl-muted">· '+esc(p.author)+'</span>':' <span class="tl-lang" style="--c:#3BB273">Dân gian</span>')+'</div>';
     if(p.lyr) blk+='<div class="tl-poem">'+esc(p.lyr)+'</div>'+(p.answer?'<p class="tl-muted">Đáp án: '+esc(p.answer)+'</p>':'')+(p.play?'<p class="tl-muted">Cách chơi: '+esc(p.play)+'</p>':'');
     else blk+='<p class="tl-muted" style="margin:4px 0 14px">Bài có tác giả: lời được CES bổ sung khi có phép sử dụng. Mẹ có thể tìm trong sách thơ thiếu nhi.</p>';
+    var yv=(window.YT_VI||{})[String(p.t||"").trim()]; if(yv) blk+='<p class="tl-muted">▶ Nghe trên YouTube'+(yv.m==="k"?' (cùng chủ đề, lời có thể khác)':'')+': <a href="'+esc(yv.u)+'">'+esc(yv.u)+'</a></p>';
     html+='<div>'+blk+'</div>';
   });
   return [page(ctx,"Thơ – đồng dao của tuần",subOf(ctx),note("Mẹ đọc chậm 2 lần. Lần sau dừng ở tiếng cuối mỗi câu cho bé đọc tiếp.","🗣")+html,{fam:1})];
@@ -201,7 +202,7 @@ function bAnhTrung(ctx){
 function bLink(ctx){
   var L=(ctx.songs||[]).filter(function(s){ return s&&s.t; }), html='';
   if(!L.length) html='<p>Tuần này không có video; mẹ hát hoặc mở file âm thanh.</p>';
-  L.forEach(function(s){ var zh=/Trung/.test(s.how||""); html+='<div class="tl-link"><div class="qr" data-qr="'+esc(s.u||"")+'"></div><div style="min-width:0">'+(s.how?'<span class="tl-lang" style="--c:'+(zh?'#E3262E':'#2F6FD6')+'">'+esc(s.how)+'</span><br>':'')+'<b>'+esc(s.t)+'</b>'+(s.ch?'<div class="tl-muted">'+esc(s.ch)+(s.min?' · '+s.min+' phút':'')+'</div>':'')+'<div class="tl-muted" style="word-break:break-all;font-size:11.5px">'+esc(s.u||"(file âm thanh trong gói)")+'</div></div></div>'; });
+  L.forEach(function(s){ var zh=/Trung/.test(s.how||""), vi=/Việt/.test(s.how||""); html+='<div class="tl-link"><div class="qr" data-qr="'+esc(s.u||"")+'"></div><div style="min-width:0">'+(s.how?'<span class="tl-lang" style="--c:'+(zh?'#E3262E':vi?'#3BB273':'#2F6FD6')+'">'+esc(s.how)+'</span><br>':'')+'<b>'+esc(s.t)+'</b>'+(s.ch?'<div class="tl-muted">'+esc(s.ch)+(s.min?' · '+s.min+' phút':'')+'</div>':'')+'<div class="tl-muted" style="word-break:break-all;font-size:11.5px">'+esc(s.u||"(file âm thanh trong gói)")+'</div></div></div>'; });
   return [page(ctx,"Video – bài hát của tuần",subOf(ctx),'<div class="tl-safe"><i>📱</i><span>Quét mã QR bằng camera điện thoại. Mở qua YouTube Kids, tắt tự phát video tiếp theo, mẹ xem cùng bé'+(ctx.I.thang<18?' (bé dưới 18 tháng: chỉ bật âm thanh)':', mỗi lần dưới 10 phút')+'.</span></div>'+html,{split:1})];
 }
 /* ---------- 06 Nhật ký ---------- */
@@ -476,7 +477,7 @@ function audio(opt){ /* opt={title, items:[{t, src, note}], words:{en:[],zh:[]},
   ov.addEventListener("click",function(e){ var a=e.target.closest("[data-a]"); if(a&&a.getAttribute("data-a")==="x"){ try{ speechSynthesis.cancel(); }catch(er){} ov.remove(); } var w=e.target.closest("[data-w]"); if(w) speakWord(w.getAttribute("data-w"), w.getAttribute("data-l")); });
   var items=opt.items||[];
   Promise.all(items.map(function(it){ return it.ok?Promise.resolve(true):it.src?head(it.src):Promise.resolve(false); })).then(function(ok){
-    var html=''; items.forEach(function(it,i){ html+='<div class="tl-au"><b>'+esc(it.t)+'</b>'+(ok[i]?'<audio controls'+(it.loop?' loop':'')+' preload="none" src="'+esc(it.src)+'"></audio><a href="'+esc(it.src)+'" download="'+esc((opt.file||"audio")+"_"+(i+1)+".mp3")+'">⬇️ Tải file MP3</a>':'<span class="tl-muted">'+esc(it.note||"File giọng đọc đang được tạo, mẹ quay lại sau 1–2 ngày.")+'</span>')+'</div>'; });
+    var html=''; items.forEach(function(it,i){ html+='<div class="tl-au"><b>'+esc(it.t)+'</b>'+(ok[i]?'<audio controls'+(it.loop?' loop':'')+' preload="none" src="'+esc(it.src)+'"></audio><a href="'+esc(it.src)+'" download="'+esc((opt.file||"audio")+"_"+(i+1)+".mp3")+'">⬇️ Tải file MP3</a>':(it.src||!it.yt?'<span class="tl-muted">'+esc(it.note||"File giọng đọc đang được tạo, mẹ quay lại sau 1–2 ngày.")+'</span>':''))+(it.yt?'<a href="'+esc(it.yt)+'" target="_blank" rel="noopener">▶ Nghe trên YouTube'+(it.ytk?' (cùng chủ đề, lời có thể khác)':'')+'</a>':'')+'</div>'; });
     if(opt.words){ var W=opt.words; html+='<div class="tl-au"><b>Từ vựng của tuần · bấm để nghe</b><div class="tl-words">'+
       (W.en||[]).map(function(x){ return '<button data-w="'+esc(x.w)+'" data-l="en">'+esc(x.pic)+' '+esc(x.w)+'</button>'; }).join("")+
       (W.zh||[]).map(function(z){ return '<button data-w="'+esc(z.h)+'" data-l="zh">'+esc(z.pic)+' '+esc(z.h)+' <small>'+esc(z.py)+'</small></button>'; }).join("")+'</div><span class="tl-muted">Đọc bằng giọng có sẵn trên máy. Bản MP3 giọng thật sẽ có ở mục trên khi tạo xong.</span></div>'; }

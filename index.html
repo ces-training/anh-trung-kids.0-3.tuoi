@@ -144,6 +144,8 @@ details.lyr{margin-top:6px;font-size:14px}
 details.lyr summary{cursor:pointer;font-weight:700;color:var(--green-dark)}
 details.lyr div{white-space:pre-line;padding:6px 10px;border-left:4px solid var(--green);margin-top:4px;background:#F6FBF4;border-radius:0 10px 10px 0}
 .note{font-size:13px;color:var(--muted);margin:0}
+.nn-admin{margin:12px 0 0;padding:10px 12px;border-radius:12px;background:var(--yellow-soft);font-weight:700;font-size:14px}
+.mini.yt{background:#FDE8E8;color:#B8141C}
 
 /* lịch 14 ngày */
 .week{display:flex;flex-direction:column;gap:10px}
@@ -298,6 +300,7 @@ textarea{min-height:76px;resize:vertical}
 <script src="khung-45.js" charset="utf-8"></script>
 <script src="noi-dung-45.js" charset="utf-8"></script>
 <script src="nghe-ngam.js" charset="utf-8"></script>
+<script src="yt-viet.js" charset="utf-8"></script>
 <script src="chuong-trinh.js" charset="utf-8"></script>
 <script src="chuong-trinh-45.js" charset="utf-8"></script>
 <script src="tro-choi.js" charset="utf-8"></script>
@@ -437,6 +440,7 @@ function taiCtx(g,w,file){
   else { var v=I.vong.vi[w-1]; poems.push({t:v.t,author:"",lyr:v.k?LYR[v.k]:""}); }
   var seen={}, extras=[]; wd.forEach(function(d){ (d.them||[]).forEach(function(x){ if(seen[x.k]) return; seen[x.k]=1; extras.push({t:x.t,author:x.author,lyr:LYR[x.k],play:x.play,answer:x.answer,k:x.k}); }); });
   var songs=[], su={}; function addS(x,how){ if(!x||!x.t) return; var key=x.u||x.t; if(su[key]) return; su[key]=1; songs.push({t:x.t,u:x.u||"",ch:x.ch||"",min:x.min||"",how:how||""}); }
+  poems.concat(extras).forEach(function(p){ var y=ytVi(p.t); if(y) addS({t:p.t+(y.m==="k"?" (cùng chủ đề)":""),u:y.u,ch:y.t},"Tiếng Việt"); });
   if(is45){ wd.forEach(function(d){ if(d.enVideo) addS(d.enVideo,"Tiếng Anh"); if(d.zhVideo) addS(d.zhVideo,"Tiếng Trung"); }); }
   else { wd.forEach(function(d){ if(d.nn&&d.nn.song) addS(d.nn.song, d.nn.l==="zh"?"Tiếng Trung":"Tiếng Anh"); }); if(D){ (D.en&&D.en.songs||[]).forEach(function(x){ addS(x,"Tiếng Anh"); }); (D.zh&&D.zh.songs||[]).forEach(function(x){ addS(x,"Tiếng Trung"); }); } }
   var books=[]; if(D&&D.weeks[w-1]){ var bk=D.weeks[w-1].book||{}; if(bk.vi) books.push({t:bk.vi.t,author:bk.vi.author,publisher:bk.vi.publisher,lang:"Sách tiếng Việt"}); if(bk.en) books.push({t:bk.en.t,author:bk.en.author,lang:"Sách tiếng Anh"}); if(D.weeks[w-1].book_vi) books.push({t:D.weeks[w-1].book_vi.t,author:D.weeks[w-1].book_vi.author,publisher:D.weeks[w-1].book_vi.publisher,lang:"Sách tiếng Việt"}); }
@@ -448,11 +452,13 @@ function openFile(g,w,file){
   if(/\.mp3$/i.test(file)){
     var gi=S.set.giong||"bac", src=function(t){ return t?"am-thanh/"+gi+"/"+amKey(t)+".mp3":""; };
     if(/NgheNgam/.test(file)){ toast("Đang ghép file nghe ngấm…");
-      NNTRON.build(g,gi).then(function(r){ TAILIEU.audio({title:c.code+"_NgheNgam",file:c.code+"_NgheNgam",items:[{t:"Nghe ngấm · khoảng "+r.phut+" phút · tiếng Việt giọng "+(GIONG[gi]||""),src:r.url,ok:true,loop:true},{t:"Cách nghe",src:"",note:"Bật nhỏ làm nền khi bé chơi, tắm, ăn; không bắt bé ngồi nghe. Nghe được câu nào, mẹ nói lại câu đó cùng bé."}]}); })
+      NNTRON.build(g,gi).then(function(r){ TAILIEU.audio({title:c.code+"_NgheNgam",file:c.code+"_NgheNgam",items:[{t:"Nghe ngấm · khoảng "+r.phut+" phút · tiếng Việt giọng "+(GIONG[gi]||""),src:r.url,ok:true,loop:true},{t:"Cách nghe",src:"",note:"Bật nhỏ làm nền khi bé chơi, tắm, ăn; không bắt bé ngồi nghe. Nghe được câu nào, mẹ nói lại câu đó cùng bé."},{t:"File nghe ngấm các tuần khác",src:"",note:NN_ADMIN}]}); })
         .catch(function(){ TAILIEU.audio({title:c.code+"_NgheNgam",items:[{t:"File nghe ngấm",src:""}]}); }); return; }
     if(/^A3|TuVung/.test(file)){ var V=TAILIEU.vocabList(c); TAILIEU.audio({title:c.code+"_"+file,file:c.code+"_TuVung",items:[{t:"Từ vựng Anh – Trung của tuần (giọng thật)",src:"am-thanh/tu-vung/"+g+".mp3"}],words:V}); return; }
-    var its=c.poems.concat(c.extras).filter(function(p){ return p.lyr; }).map(function(p){ return {t:p.t+" · giọng "+(GIONG[gi]||""),src:src(p.lyr)}; });
+    var its=c.poems.concat(c.extras).filter(function(p){ return p.lyr; }).map(function(p){ return {t:p.t+" · giọng "+(GIONG[gi]||""),src:src(p.lyr),yt:(ytVi(p.t)||{}).u||""}; });
     if(/^A1/.test(file)&&!c.is45) its=its.slice(0,1);
+    var ytOnly=c.poems.concat(c.extras).filter(function(p){ return !p.lyr&&ytVi(p.t); }).map(function(p){ var y=ytVi(p.t); return {t:p.t,src:"",yt:y.u,ytk:y.m==="k"}; });
+    if(!/^A1/.test(file)||!its.length) its=its.concat(ytOnly);
     TAILIEU.audio({title:c.code+"_"+file,file:c.code+"_"+file.replace(/\.mp3$/i,""),items:its.length?its:[{t:"Bài của tuần là thơ có tác giả hoặc bài hát: file âm thanh có khi CES nhập lời trong bảng thơ.",src:""}]});
     return; }
   if(!TAILIEU.open(c)) toast("Tài liệu này chưa có mẫu.");
@@ -524,12 +530,13 @@ function rToday(){
     if(t.song&&t.song.u) links+='<a class="mini" href="'+esc(t.song.u)+'" target="_blank" rel="noopener">▶ '+zh(t.song.t)+(/youtube\.com\/(channel|@)/.test(t.song.u)?' (tìm trên kênh)':'')+'</a>';
     else if(t.song&&t.song.t) links+='<span class="mini" style="background:var(--yellow-soft);color:var(--ink)">🎵 '+zh(t.song.t)+' (file trong gói)</span>';
     if((t.k==="sang"||t.k==="toi")&&t.lyrs&&t.lyrs.length) links+=t.lyrs.map(function(k){ return '<button class="mini" data-speak="'+k+'">🔈 '+(t.lyrs.length>1?esc(lyrTitle(k)):'Nghe thử')+' · '+(GIONG[S.set.giong]||GIONG.bac)+'</button>'; }).join("")+'<span class="vpick" role="group" aria-label="Chọn giọng đọc">'+["bac","nam","trung"].map(function(k){return '<button data-set="giong" data-v="'+k+'" aria-pressed="'+(S.set.giong===k)+'">'+GIONG[k]+'</button>';}).join("")+'</span>';
+    if(t.lang==="vi"||t.k==="sang"||t.k==="toi"){ var ytSeen=[]; (t.lyrs||[]).forEach(function(k){ var tt=lyrTitle(k); if(ytVi(tt)&&ytSeen.indexOf(tt)<0){ ytSeen.push(tt); links+=ytViLink(tt,true); } }); (t.them||[]).forEach(function(x){ ytSeen.push(x.t); }); ytViInText(t.txt,ytSeen).forEach(function(tt){ links+=ytViLink(tt,true); }); }
     if(t.video&&t.video.u) links+='<a class="mini" href="'+esc(t.video.u)+'" target="_blank" rel="noopener">▶ '+zh(t.video.t)+(t.video.min?' · '+t.video.min+' phút':'')+(/youtube\.com\/(channel|@|playlist)|\/videos$/.test(t.video.u)?' (tìm trên kênh)':'')+'</a>';
     if(t.game) links+='<button class="mini game" data-game="'+t.game.lang+'" data-g="'+g+'" data-day="'+n+'">🎮 '+esc(t.game.name)+'</button>';
     if(t.diary) links+='<button class="mini" data-go="nhatky" data-g="'+g+'">📒 Mở nhật ký</button>';
     if(links) html+='<div class="t-links">'+links+'</div>';
     if((t.k==="sang"||t.k==="toi")&&t.lyrs) t.lyrs.forEach(function(k){ html+='<details class="lyr"><summary>'+(t.lyrs.length>1?esc(lyrTitle(k))+' · ':'')+(LYRA[k]?'Lời thơ · '+esc(LYRA[k]):'Lời bài')+'</summary><div>'+esc(LYR[k])+'</div></details>'; });
-    if((t.k==="sang"||t.k==="toi")&&t.them&&t.them.length) t.them.forEach(function(x){ var lb={dong_dao:"Đồng dao",ca_dao:"Ca dao",hat_ru:"Hát ru",cau_do:"Câu đố",ve:"Vè"}[x.type]||"Thơ"; html+='<div class="them"><span>📖 Bài thêm của tuần · '+lb+': <b>'+esc(x.t)+'</b>'+(x.author?' · '+esc(x.author):'')+'</span><button class="mini" data-speak="'+x.k+'">🔈 Nghe</button>'+(x.play?'<small class="them-play">'+esc(x.play)+'</small>':'')+'<details class="lyr"><summary>Lời bài</summary><div>'+esc(LYR[x.k])+(x.answer?'<br><br><i>Đáp án: '+esc(x.answer)+'</i>':'')+'</div></details></div>'; });
+    if((t.k==="sang"||t.k==="toi")&&t.them&&t.them.length) t.them.forEach(function(x){ var lb={dong_dao:"Đồng dao",ca_dao:"Ca dao",hat_ru:"Hát ru",cau_do:"Câu đố",ve:"Vè"}[x.type]||"Thơ"; html+='<div class="them"><span>📖 Bài thêm của tuần · '+lb+': <b>'+esc(x.t)+'</b>'+(x.author?' · '+esc(x.author):'')+'</span><button class="mini" data-speak="'+x.k+'">🔈 Nghe</button>'+ytViLink(x.t)+(x.play?'<small class="them-play">'+esc(x.play)+'</small>':'')+'<details class="lyr"><summary>Lời bài</summary><div>'+esc(LYR[x.k])+(x.answer?'<br><br><i>Đáp án: '+esc(x.answer)+'</i>':'')+'</div></details></div>'; });
     html+='</div>'+(t.off?'<span></span>':'<button class="tick" data-tick="'+id+'" aria-pressed="'+done+'" aria-label="Đánh dấu đã làm: '+esc(t.name)+'">'+(done?"✓":"")+'</button>')+'</div>';
   });
   html+='</div><p class="note">'+(I.gd.id===1?"Đặt bé nằm ngửa khi ngủ; chỉ nằm sấp khi bé thức và có mẹ ngồi cạnh.":I.is45?"Mẹ xem video cùng bé, dừng video để hỏi và cho bé làm theo. Tổng màn hình (video + trò chơi) tối đa khoảng 45 phút/ngày, chia 2 buổi. Mở video qua YouTube Kids, tắt tự phát video tiếp theo.":"Luôn ngồi cạnh bé khi chơi; cất đồ nhỏ, đất nặn, dây ngay sau khi chơi.")+'</p></div></div></div></section>';
@@ -586,7 +593,7 @@ function rTai(){
       html+='<div class="file"><span class="ftype" style="--c:'+f[1]+'">'+f[0]+'</span><div><b>'+code+'_'+esc(f[2])+'</b><small>'+zh(f[3])+'</small></div>'+
        '<button class="pill'+(open?" green":"")+'" '+(open?'data-dl="'+esc(f[2])+'" data-g="'+g+'" data-w="'+w+'"':'disabled')+'>'+(f[0]==="MP3"?"Nghe · Tải":"Mở · Tải")+'</button>'+'</div>';
     });
-    html+='</div></div>';
+    html+='</div><p class="nn-admin">🎧 '+NN_ADMIN+'</p></div>';
   });
   return html+'</div></div></section>';
 }
@@ -696,6 +703,11 @@ document.addEventListener("submit",function(e){
     if(n<obs.length){ toast("Mẹ chọn giúp "+(obs.length-n)+" câu quan sát còn trống nhé."); return; }
     S.sent[view.g]=true; save(); render(); toast("Đã nộp. Cô sẽ phản hồi trong 3 ngày làm việc."); }
 });
+/* Link YouTube cho bài tiếng Việt chưa có file đọc (yt-viet.js) */
+function ytVi(t){ var Y=window.YT_VI||{}; return Y[String(t||"").trim()]||null; }
+function ytViLink(t,withTitle){ var y=ytVi(t); return y?'<a class="mini yt" href="'+esc(y.u)+'" target="_blank" rel="noopener">▶ '+(withTitle?esc(t)+' · ':'')+'YouTube'+(y.m==="k"?' (cùng chủ đề)':'')+'</a>':''; }
+function ytViInText(txt,skip){ var Y=window.YT_VI||{}, s=String(txt||""), out=[]; Object.keys(Y).forEach(function(k){ if(k.length>=4&&skip.indexOf(k)<0&&s.indexOf(k)>-1){ out.push(k); skip.push(k); } }); return out; }
+var NN_ADMIN="Liên hệ admin để lấy file nghe ngấm ở tất cả các tuần.";
 function amKey(t){ t=String(t).trim(); var h=0x811c9dc5; for(var i=0;i<t.length;i++){ h^=t.charCodeAt(i); h=Math.imul(h,0x01000193)>>>0; } return ("0000000"+h.toString(16)).slice(-8); }
 var AM=null;
 function speakMay(text,msg){
